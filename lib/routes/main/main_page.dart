@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/routes/main/Popup_page/new_task/add_new_task_page.dart';
 import 'package:todo_app/routes/main/Task_page/task_page.dart';
 
 import 'bottom_app_bar_item.dart';
@@ -26,7 +27,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         body: changeTab(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: (){},
+          onPressed: () => _showAddMenu(context),
           tooltip: "Centre FAB",
           child: Container(
             margin: EdgeInsets.all(15.0),
@@ -58,5 +59,86 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     else if (_tabselect == 2) return const Center(child: Text('Tab 3'),);
     else if (_tabselect == 3) return const Center(child: Text('Tab 4'),);
     else return const Center(child: Text('There is some bugs'));
+  }
+
+  _showAddMenu(context){
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: Duration(milliseconds: 300),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return Align(
+          alignment: Alignment.center,
+          child: AddMenu(),
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return SlideTransition(
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class AddMenuItem extends StatelessWidget {
+  const AddMenuItem({ Key? key, required this.text }) : super(key: key);
+  final text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 70,
+      child: Column(
+        children: [
+          Center(
+            child: TextButton(
+              child: Text(
+                '$text',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+              onPressed: (){
+                if (text == 'Add Task'){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewTaskPage()));
+                }
+              },
+            ),
+          ),
+          Divider(thickness: 1, color: Color.fromRGBO(228, 228, 228, 1,)),
+        ],
+      ),
+    );
+  }
+}
+
+class AddMenu extends StatelessWidget {
+  const AddMenu({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(height: 10),
+          AddMenuItem(text: 'Add Task',),
+          AddMenuItem(text: 'Add Quick Note',),
+          AddMenuItem(text: 'Add Check List',),
+        ],
+      ),
+      height: 220,
+      width: 260,
+      margin: EdgeInsets.only(bottom: 50, left: 12, right: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+      ),
+    );
   }
 }

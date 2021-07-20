@@ -37,26 +37,30 @@ var labelStyleAuthPages = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-var textDateStyle = TextStyle(
+var textLight154StyleW400S14 = TextStyle(
   color: Color.fromRGBO(154, 154, 154, 1),
   fontSize: 14,
   fontWeight: FontWeight.w400,
 );
 
-var textTaskTile = TextStyle(
+var textLight158StyleS16 = TextStyle(
+  color: Color.fromRGBO(158, 158, 158, 1),
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+);
+
+var textDarkStyleW400S16 = TextStyle(
   color: Color.fromRGBO(49, 49, 49, 1),
   fontSize: 16,
   fontWeight: FontWeight.w400,
 );
 
-
-var textTaskDateTimeNotDone = TextStyle(
-  color: Color.fromRGBO(154, 154, 154, 1),
-  fontSize: 16,
-  fontWeight: FontWeight.w400,
+var textDarkStyleS18 = TextStyle(
+  color: Color.fromRGBO(49, 49, 49, 1),
+  fontSize: 18,
 );
 
-var textTaskDateTimeDone = TextStyle(
+var textLineThroughStyle = TextStyle(
   color: Color.fromRGBO(158, 158, 158, 1),
   fontSize: 16,
   fontWeight: FontWeight.w400,

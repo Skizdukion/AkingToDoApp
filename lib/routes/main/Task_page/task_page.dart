@@ -103,6 +103,7 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
             onSelected: (int value){
               selectIndexInMenuPopup = value;
             },
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
           )
         ],
         shadowColor: Color.fromRGBO(227, 227, 227, 0.5),

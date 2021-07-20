@@ -34,8 +34,8 @@ class _TaskItemState extends State<TaskItem> {
             ),
             onPressed:() => changDoneState(),
           ),
-          title: Text(widget.task.title, style: textTaskTile),
-          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textTaskDateTimeNotDone,),
+          title: Text(widget.task.title, style: textDarkStyleW400S16),
+          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textLight154StyleW400S14,),
           shape: Border(
             right: BorderSide(width: 4.0, color: widget.task.barColor, style: BorderStyle.solid),
           ),
@@ -52,8 +52,8 @@ class _TaskItemState extends State<TaskItem> {
             ),
             onPressed:() => changDoneState(),
           ),
-          title: Text(widget.task.title, style: textTaskDateTimeDone),
-          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textTaskDateTimeDone,),
+          title: Text(widget.task.title, style: textLineThroughStyle),
+          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textLineThroughStyle,),
           shape: Border(
             right: BorderSide(width: 4.0, color: widget.task.barColor, style: BorderStyle.solid),
           ),

@@ -100,7 +100,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
           ),
         ),
         const SizedBox(height: 8.0),
-        Text(DateFormat('E, MMM d/yyyy').format(_selectedDay!).toUpperCase(), style: textDateStyle),
+        Text(DateFormat('E, MMM d/yyyy').format(_selectedDay!).toUpperCase(), style: textLight154StyleW400S14),
         const SizedBox(height: 8.0),
         Expanded(
           child: ValueListenableBuilder<List<TaskModel>>(

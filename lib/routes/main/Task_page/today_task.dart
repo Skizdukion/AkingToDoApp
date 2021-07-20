@@ -15,20 +15,32 @@ class TodayPage extends StatefulWidget {
 class _TodayPageState extends State<TodayPage> {
 
   TaskRepository _taskRepository = FakeTaskRepository();
+  late DateTime now;
+  late DateTime tommorrow;
+  late List<TaskModel> todayTask;
+  late List<TaskModel> tommorrowTask;
+  late String nowText;
+  late String tommorrowText;
+
+
+  @override
+  void initState() {
+    now = DateTime.now();
+    tommorrow = now.add(Duration(days: 1));
+    todayTask = _taskRepository.getTaskListForDay('userID', now);
+    tommorrowTask = _taskRepository.getTaskListForDay('userID', tommorrow);
+    nowText =('TODAY, ' + DateFormat('MMM d/yyyy').format(now)).toUpperCase();
+    tommorrowText =('TOMMORROW, ' + DateFormat('MMM d/yyyy').format(tommorrow)).toUpperCase();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    DateTime tommorrow = now.add(Duration(days: 1));
-    List<TaskModel> todayTask = _taskRepository.getTaskListForDay('userID', now);
-    List<TaskModel> tommorrowTask = _taskRepository.getTaskListForDay('userID', tommorrow);
-    String nowText =('TODAY, ' + DateFormat('MMM d/yyyy').format(now)).toUpperCase();
-    String tommorrowText =('TOMMORROW, ' + DateFormat('MMM d/yyyy').format(tommorrow)).toUpperCase();
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
       child: ListView(
         children: [
-          (todayTask.length != 0) ? Text(nowText, style: textDateStyle) : Text("THERE IS NOTHING TODAY", style: textDateStyle),
+          (todayTask.length != 0) ? Text(nowText, style: textLight154StyleW400S14) : Text("THERE IS NOTHING TODAY", style: textLight154StyleW400S14),
           SizedBox(height: 10,),
           ListView.builder(
             itemCount: todayTask.length,
@@ -39,7 +51,7 @@ class _TodayPageState extends State<TodayPage> {
             physics: const NeverScrollableScrollPhysics(),
           ),
           SizedBox(height: 10,),
-          (tommorrowTask.length != 0) ? Text(tommorrowText, style: textDateStyle) : Text("THERE IS NOTHING TOMMORROW", style: textDateStyle),
+          (tommorrowTask.length != 0) ? Text(tommorrowText, style: textLight154StyleW400S14) : Text("THERE IS NOTHING TOMMORROW", style: textLight154StyleW400S14),
           SizedBox(height: 10,),
           ListView.builder(
             itemCount: tommorrowTask.length,
