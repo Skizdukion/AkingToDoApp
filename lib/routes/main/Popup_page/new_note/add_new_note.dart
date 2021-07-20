@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:measure_size/measure_size.dart';
-import 'package:todo_app/routes/auth/forgot_password_page.dart';
-import 'package:todo_app/routes/main/Popup_page/new_task/add_member_col.dart';
+import 'package:todo_app/routes/main/Popup_page/new_note/color_picker.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
-import 'desc_box.dart';
-import 'due_date_picker.dart';
-import 'for_in_row.dart';
+import 'desc_box_note.dart';
 
-class NewTaskPage extends StatefulWidget {
-  const NewTaskPage({ Key? key }) : super(key: key);
+class NewNotePage extends StatefulWidget {
+  const NewNotePage({ Key? key }) : super(key: key);
 
   @override
-  _NewTaskPageState createState() => _NewTaskPageState();
+  _NewNotePageState createState() => _NewNotePageState();
 }
 
-class _NewTaskPageState extends State<NewTaskPage> with SingleTickerProviderStateMixin {
+class _NewNotePageState extends State<NewNotePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,11 +19,11 @@ class _NewTaskPageState extends State<NewTaskPage> with SingleTickerProviderStat
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(249, 96, 96, 1),
           elevation: 0, 
-          title: Text('New Task', style: TextStyle(fontSize: 20)),
+          title: Text('Add Note', style: TextStyle(fontSize: 20)),
           centerTitle: true,
         ),
         body: Container(
-          child: NewTaskForm(),
+          child: NewNoteForm(),
           decoration: BoxDecoration(
             image: DecorationImage(
             image: AssetImage('assets/background_1.png'),
@@ -40,18 +36,18 @@ class _NewTaskPageState extends State<NewTaskPage> with SingleTickerProviderStat
   }
 }
 
-class NewTaskForm extends StatefulWidget {
-  const NewTaskForm({ Key? key }) : super(key: key);
+class NewNoteForm extends StatefulWidget {
+  const NewNoteForm({ Key? key }) : super(key: key);
 
   @override
-  _NewTaskFormState createState() => _NewTaskFormState();
+  _NewNoteFormState createState() => _NewNoteFormState();
 }
 
-class _NewTaskFormState extends State<NewTaskForm> {
+class _NewNoteFormState extends State<NewNoteForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 30),
+      padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 230),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -69,29 +65,10 @@ class _NewTaskFormState extends State<NewTaskForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20),
-            ForInRow(),
+            DescriptionNoteBox(),
             SizedBox(height: 20),
-            Container(
-              child: Center(
-                child: TextField(
-                  style: textDarkStyleS18,
-                  decoration: new InputDecoration.collapsed(
-                    hintText: 'Title',
-                    hintStyle: textDarkStyleS18,
-                  ),
-                ),
-              ),
-              color: Color.fromRGBO(244, 244, 244, 1),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              height: 60,
-            ),
-            SizedBox(height: 20),
-            DescriptionBox(),
-            SizedBox(height: 20),
-            DueDatePicker(),
-            SizedBox(height: 20),
-            AddMemberCol(),
-            SizedBox(height: 30,),
+            ColorPicker(),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25),
               child: SizedBox(
@@ -100,7 +77,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
                   onPressed: (){},
                   style: buttonStyleAuthPages,
                   child: Text(
-                    "Add Task",
+                    "Done",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -108,7 +85,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }
