@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:measure_size/measure_size.dart';
-import 'package:todo_app/routes/auth/forgot_password_page.dart';
 import 'package:todo_app/routes/main/Popup_page/new_task/add_member_col.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
@@ -20,6 +18,7 @@ class _NewTaskPageState extends State<NewTaskPage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(249, 96, 96, 1),
           elevation: 0, 

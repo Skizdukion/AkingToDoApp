@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/routes/main/Popup_page/new_task/add_new_task_page.dart';
 import 'package:todo_app/routes/main/Task_page/task_page.dart';
+import 'package:todo_app/routes/main/popup_page/new_check_list/add_new_check_list.dart';
 
 import 'Popup_page/new_note/add_new_note.dart';
 import 'bottom_app_bar_item.dart';
@@ -111,8 +112,8 @@ class AddMenuItem extends StatelessWidget {
                 if (text == 'Add Quick Note'){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => NewNotePage()));
                 }
-                if (text == 'Add Note'){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewNotePage()));
+                if (text == 'Add Check List'){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewCheckListPage()));
                 }
               },
             ),
