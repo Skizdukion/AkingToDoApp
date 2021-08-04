@@ -84,3 +84,13 @@ var buttonStyleAuthPages =  ButtonStyle(
     )
   ),
 );
+
+var buttonStyleMenuPage = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(96, 116, 249, 1)),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(5.0),
+      side: BorderSide(color: Colors.white)
+    )
+  ),
+);

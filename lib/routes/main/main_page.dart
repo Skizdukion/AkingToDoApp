@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/routes/main/Popup_page/new_task/add_new_task_page.dart';
 import 'package:todo_app/routes/main/Task_page/task_page.dart';
+import 'package:todo_app/routes/main/menu_page/project_page.dart';
 import 'package:todo_app/routes/main/popup_page/new_check_list/add_new_check_list.dart';
 
 import 'Popup_page/new_note/add_new_note.dart';
@@ -57,7 +58,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   Widget changeTab(){
     if (_tabselect == 0) return const TaskPage();
-    else if (_tabselect == 1) return const Center(child: Text('Tab 2'),);
+    else if (_tabselect == 1) return const ProjectPage();
     else if (_tabselect == 2) return const Center(child: Text('Tab 3'),);
     else if (_tabselect == 3) return const Center(child: Text('Tab 4'),);
     else return const Center(child: Text('There is some bugs'));

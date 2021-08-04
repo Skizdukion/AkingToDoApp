@@ -11,9 +11,6 @@ class CheckListModel with ChangeNotifier{
   CheckListModel({required this.checkList});
   CheckListModel.fakeData():checkList = [
     CheckNote(isDone: false, title: 'Item 1'),
-    CheckNote(isDone: false, title: 'Item 2'),
-    CheckNote(isDone: false, title: 'Item 3'),
-    CheckNote(isDone: false, title: 'Item 4'),
   ];
 
   void addAutoCheckNote(){
@@ -27,6 +24,4 @@ class CheckListModel with ChangeNotifier{
     checkList[index].isDone = value!;
     notifyListeners();
   }
-
-  
 }
