@@ -22,38 +22,20 @@ class _TaskItemState extends State<TaskItem> {
       actionPane: SlidableDrawerActionPane(),
       showAllActionsThreshold: 0.1,
       actionExtentRatio: 0.25,
-      child: (!widget.task.isDone) ? Card(
+      child: Card(
         margin: EdgeInsets.symmetric(vertical: 8),
         color: Colors.white,
         elevation: 3.0,
         child: ListTile(
           leading: IconButton(
             icon: Icon(
-              Icons.circle_outlined,
-              color: Color.fromRGBO(96, 116, 249, 1),
+              !widget.task.isDone ? Icons.circle_outlined : Icons.check_circle_rounded,
+              color: !widget.task.isDone ? Color.fromRGBO(96, 116, 249, 1) : Color.fromRGBO(249, 96, 96, 1),
             ),
             onPressed:() => changDoneState(),
           ),
-          title: Text(widget.task.title, style: textDarkStyleW400S16),
-          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textLight154StyleW400S14,),
-          shape: Border(
-            right: BorderSide(width: 4.0, color: widget.task.barColor, style: BorderStyle.solid),
-          ),
-        ),
-      ) : Card(
-        margin: EdgeInsets.symmetric(vertical: 8),
-        color: Colors.white,
-        elevation: 3.0,
-        child: ListTile(
-          leading: IconButton(
-            icon: Icon(
-              Icons.check_circle_rounded,
-              color: Color.fromRGBO(249, 96, 96, 1),
-            ),
-            onPressed:() => changDoneState(),
-          ),
-          title: Text(widget.task.title, style: textLineThroughStyle),
-          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: textLineThroughStyle,),
+          title: Text(widget.task.title, style: !widget.task.isDone ? textDarkStyleW400S16 : textLineThroughStyle),
+          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: !widget.task.isDone ? textLight154StyleW400S14 : textLineThroughStyle.copyWith(fontSize: 14),),
           shape: Border(
             right: BorderSide(width: 4.0, color: widget.task.barColor, style: BorderStyle.solid),
           ),
