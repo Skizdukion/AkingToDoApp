@@ -12,7 +12,6 @@ class ColorPicker extends StatefulWidget {
 
 class _ColorPickerState extends State<ColorPicker> {
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +35,7 @@ class _ColorPickerState extends State<ColorPicker> {
                         onTap: (){
                           value.pickColor(index);
                         },
-                        child: ColorBtn(color: value.colorList[index]),
+                        child: ColorBtn(item: value.colorList[index]),
                       );
                     },
                   );
@@ -50,14 +49,15 @@ class _ColorPickerState extends State<ColorPicker> {
 }
 
 class ColorBtn extends StatefulWidget {
-  const ColorBtn({ Key? key, required this.color }) : super(key: key);
-  final RadioColor color;
+  const ColorBtn({ Key? key, required this.item }) : super(key: key);
+  final RadioColor item;
 
   @override
   _ColorBtnState createState() => _ColorBtnState();
 }
 
 class _ColorBtnState extends State<ColorBtn> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -65,8 +65,11 @@ class _ColorBtnState extends State<ColorBtn> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: widget.color.color,
-          border: (widget.color.isSelected ? Border.all(color: Colors.black) : Border.all(color: Colors.white))
+          color: widget.item.color,
+          border: Border.all(color: Colors.white),
+        ),
+        child: Center(
+          child: widget.item.isSelected ? Icon(Icons.check, color: Colors.white,) : null,
         ),
         width: 48,
       ),
