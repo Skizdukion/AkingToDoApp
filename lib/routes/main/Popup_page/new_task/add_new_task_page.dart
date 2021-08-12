@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/repositories/models/project.dart';
+import 'package:todo_app/models/repositories/models/user.dart';
+import 'package:todo_app/models/repositories/project_repository.dart';
+import 'package:todo_app/models/repositories/user_repository.dart';
 import 'package:todo_app/routes/main/Popup_page/new_task/add_member_col.dart';
+import 'package:todo_app/routes/main/popup_page/new_task/asignee_suggest_panel.dart';
+import 'package:todo_app/routes/main/popup_page/new_task/project_suggest_panel.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
-import 'desc_box.dart';
+import 'desc_panel.dart';
 import 'due_date_picker.dart';
 import 'for_in_row.dart';
 
@@ -47,6 +53,32 @@ class NewTaskForm extends StatefulWidget {
 }
 
 class _NewTaskFormState extends State<NewTaskForm> {
+  FakeUserRepository _userRepository = FakeUserRepository();
+  FakeProjectRepository _projectRepository = FakeProjectRepository();
+  late List<UserModel> userList;
+  late List<ProjectModel> projectList;
+  late String asignText;
+  late String projectText;
+  bool isSelectedAsgin = false;
+  bool isSelectedProject = false;
+  bool isSelectingAsign = false;
+  bool isSelectingProject = false;
+  UserModel? userSelect;
+  ProjectModel? projectSelect;
+
+  @override
+  void initState() {
+    asignText = '';
+    projectText = '';
+    userList = []..addAll(_userRepository.getUserList());
+    projectList = []..addAll(_projectRepository.getPorjectList());
+    for (var item in projectList) {
+      print('${item.id} init');
+    }
+    print('i was here');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,46 +99,155 @@ class _NewTaskFormState extends State<NewTaskForm> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            ForInRow(),
-            SizedBox(height: 20),
-            Container(
-              child: Center(
-                child: TextField(
-                  style: textDarkStyleS18,
-                  decoration: new InputDecoration.collapsed(
-                    hintText: 'Title',
-                    hintStyle: textDarkStyleS18,
-                  ),
-                ),
-              ),
-              color: Color.fromRGBO(244, 244, 244, 1),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              height: 60,
+            SizedBox(height: 20,),
+            ForInRow(
+              projectFieldOnChange: projectOnChange, 
+              projectFieldOntap: projectOnTap, 
+              asigneeFieldOnChange: asigneeOnChange, 
+              asigneeFieldOntap: asigneeOnTap,
+              asigneeFieldReset: asigneeReset,
+              projectFieldReset: projectReset,
+              userSelect: userSelect,
+              projectSelect: projectSelect,
             ),
-            SizedBox(height: 20),
-            DescriptionBox(),
-            SizedBox(height: 20),
-            DueDatePicker(),
-            SizedBox(height: 20),
-            AddMemberCol(),
-            SizedBox(height: 30,),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: SizedBox(
-                width: double.maxFinite,
-                child: ElevatedButton(
-                  onPressed: (){},
-                  style: buttonStyleAuthPages,
-                  child: Text(
-                    "Add Task",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-              ),
-            ),
+            if ((isSelectingAsign == true)||(isSelectingProject == true)) SizedBox(height: 20,),
+            if (isSelectingAsign == true) AsigneeSuggestPanel(userList: userList, onSelectUser: onSelectAsignee,),
+            if (isSelectingProject == true) ProjectSuggestPanel(projectList: projectList, onSelectProject: onSelectProject,),
+            if ((isSelectingProject == false)&&(isSelectingAsign == false)) TaskFormBody(),
           ],
         ),
+      ),
+    );
+  }
+
+  void asigneeOnTap(){
+    print('asign on tap');
+
+    setState(() {
+      isSelectingAsign = true;
+      isSelectingProject = false;
+    });
+  }
+
+  void asigneeOnChange(String val){
+    asignText = val;
+    userList.clear();
+    for (var item in FakeUserRepository.userList) {
+      String name = item.name;
+      String email = item.email;
+      if (name.toLowerCase().contains(val.toLowerCase())||email.toLowerCase().contains(val.toLowerCase())){
+        userList.add(item);
+      }
+    }
+    setState(() {
+      
+    });
+  }
+
+  void projectOnTap(){
+    print('project on tap');
+    setState(() {
+      isSelectingProject = true;
+      isSelectingAsign = false;
+    });
+  }
+
+  void projectOnChange(String val){
+    projectText = val;
+    projectList.clear();
+    for (var item in FakeProjectRepository.projectList) {
+      String title = item.title;
+      if (title.toLowerCase().contains(val.toLowerCase())){
+        projectList.add(item);
+      }
+    }
+    setState(() {
+      
+    });
+  }
+
+  void onSelectAsignee(String id){
+    userSelect = _userRepository.getUserWithId(id);
+    setState(() {
+      isSelectingAsign = false;
+    });
+  }
+
+  void onSelectProject(String id){
+    projectSelect = _projectRepository.getProjectWithId(id);
+    setState(() {
+      isSelectingProject = false;
+    });
+  }
+
+  void asigneeReset(){
+    userSelect = null;
+    isSelectedAsgin = true;
+    isSelectedProject = false;
+    setState(() {
+      
+    });
+  }
+
+  void projectReset(){
+    projectSelect = null;
+    isSelectedAsgin = false;
+    isSelectedProject = true;
+    setState(() {
+      
+    });
+  }
+
+}
+
+class TaskFormBody extends StatefulWidget {
+  const TaskFormBody({ Key? key }) : super(key: key);
+
+  @override
+  _TaskFormBodyState createState() => _TaskFormBodyState();
+}
+
+class _TaskFormBodyState extends State<TaskFormBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            child: Center(
+              child: TextField(
+                style: textDarkStyleS18,
+                decoration: new InputDecoration.collapsed(
+                  hintText: 'Title',
+                  hintStyle: textDarkStyleS18,
+                ),
+                autofocus: true,
+              ),
+            ),
+            color: Color.fromRGBO(244, 244, 244, 1),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            height: 60,
+          ),
+          DescriptionPanel(),
+          DueDatePicker(),
+          AddMemberCol(),
+          Padding(
+            padding: const EdgeInsets.only(left: 25, right: 25),
+            child: SizedBox(
+              width: double.maxFinite,
+              child: ElevatedButton(
+                onPressed: (){},
+                style: buttonStyleAuthPages,
+                child: Text(
+                  "Add Task",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

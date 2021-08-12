@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
-class UserInfoBox extends StatefulWidget {
-  const UserInfoBox({ Key? key }) : super(key: key);
+class UserInfoPanel extends StatefulWidget {
+  const UserInfoPanel({ Key? key }) : super(key: key);
 
   @override
-  _UserInfoBoxState createState() => _UserInfoBoxState();
+  _UserInfoPanelState createState() => _UserInfoPanelState();
 }
 
-class _UserInfoBoxState extends State<UserInfoBox> {
+class _UserInfoPanelState extends State<UserInfoPanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(

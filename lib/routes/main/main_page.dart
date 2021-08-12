@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:todo_app/routes/main/Popup_page/new_task/add_new_task_page.dart';
 import 'package:todo_app/routes/main/Task_page/task_page.dart';
@@ -67,25 +69,19 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   }
 
   _showAddMenu(context){
-    showGeneralDialog(
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: Duration(milliseconds: 300),
-      context: context,
-      pageBuilder: (_, __, ___) {
-        return Align(
-          alignment: Alignment.center,
+    showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          backgroundColor: Colors.white,
           child: AddMenu(),
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        return SlideTransition(
-          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
-          child: child,
-        );
-      },
-    );
+        )
+      );
+    });
   }
 }
 
@@ -145,7 +141,6 @@ class AddMenu extends StatelessWidget {
       ),
       height: 220,
       width: 260,
-      margin: EdgeInsets.only(bottom: 50, left: 12, right: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),

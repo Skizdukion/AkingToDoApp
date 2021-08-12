@@ -2,10 +2,10 @@ import 'models/project.dart';
 import 'package:flutter/material.dart';
 
 List<ProjectModel> fakeDataProject = [
-  ProjectModel(title: 'Personal', totalTask: 10, color: Color.fromRGBO(96, 116, 249, 1), projectId: '1'),
-  ProjectModel(title: 'Teamworks', totalTask: 10, color: Color.fromRGBO(228, 43, 106, 1), projectId: '2'),
-  ProjectModel(title: 'Home', totalTask: 10, color: Color.fromRGBO(90, 187, 86, 1), projectId: '3'),
-  ProjectModel(title: 'Meet', totalTask: 10, color: Color.fromRGBO(188, 121, 195, 1), projectId: '4'),
+  ProjectModel(title: 'Personal', totalTask: 10, color: Color.fromRGBO(96, 116, 249, 1), id: '1'),
+  ProjectModel(title: 'Teamworks', totalTask: 10, color: Color.fromRGBO(228, 43, 106, 1), id: '2'),
+  ProjectModel(title: 'Home', totalTask: 10, color: Color.fromRGBO(90, 187, 86, 1), id: '3'),
+  ProjectModel(title: 'Meet', totalTask: 10, color: Color.fromRGBO(188, 121, 195, 1), id: '4'),
 ];
 
 
@@ -27,13 +27,13 @@ class FakeProjectRepository extends ProjectRepository{
 
   @override
   void deleteProject(String projectId) {
-    projectList.remove(getTask(projectId));
+    projectList.remove(getProjectWithId(projectId));
   }
 
-  ProjectModel? getTask(String projectId){
+  ProjectModel? getProjectWithId(String projectId){
     ProjectModel? result;
     fakeDataProject.forEach((val) {
-      if(val.projectId == projectId){
+      if(val.id == projectId){
         result = val;
       }
     });

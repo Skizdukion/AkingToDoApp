@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/routes/main/profile_page/statistic_panel.dart';
-import 'package:todo_app/routes/main/profile_page/user_info_box.dart';
+import 'package:todo_app/routes/main/profile_page/user_info_panel.dart';
 import 'task_in_category.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: Column(
         children: [
           SizedBox(height: 25,),
-          UserInfoBox(),
+          UserInfoPanel(),
           SizedBox(height: 40,),
           TasksInCategory(),
           StatictisPanel(),

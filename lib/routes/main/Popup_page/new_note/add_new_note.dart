@@ -52,7 +52,7 @@ class _NewNoteFormState extends State<NewNoteForm> {
     return ChangeNotifierProvider<RadioColorList>(
       create: (_) => RadioColorList.autoInitial(),
       child: Padding(
-        padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 230),
+        padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: MediaQuery.of(context).size.height - 500),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,

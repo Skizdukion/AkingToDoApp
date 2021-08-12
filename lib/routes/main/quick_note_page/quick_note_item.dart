@@ -45,7 +45,6 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
                   padding: const EdgeInsets.only(left: 32.0),
                   child: Text('${widget.item.title}', style: textDarkStyleS18.copyWith(fontSize: 16, fontWeight: FontWeight.bold),),
                 ),
-                if (isExpand == true) const SizedBox(height: 16,),
                 if (isExpand == true) for (var item in widget.item.itemList) QuickNoteCheckListItem(item: item, parentId: widget.item.id,),
                 const SizedBox(height: 16,),
               ],

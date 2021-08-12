@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 
-class DescriptionBox extends StatefulWidget {
-  const DescriptionBox({ Key? key }) : super(key: key);
+class DescriptionPanel extends StatefulWidget {
+  const DescriptionPanel({ Key? key }) : super(key: key);
 
   @override
-  _DescriptionBoxState createState() => _DescriptionBoxState();
+  _DescriptionPanelState createState() => _DescriptionPanelState();
 }
 
-class _DescriptionBoxState extends State<DescriptionBox> {
+class _DescriptionPanelState extends State<DescriptionPanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(

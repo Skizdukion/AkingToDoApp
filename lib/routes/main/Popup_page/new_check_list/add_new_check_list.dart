@@ -63,7 +63,7 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
       child: Consumer2<CheckListModel,RadioColorList>(
         builder: (context, checkList, color, child){
           return Padding(
-            padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: (310 - checkList.checkList.length*50)),
+            padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: (MediaQuery.of(context).size.height - 450 - checkList.checkList.length*50)),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
