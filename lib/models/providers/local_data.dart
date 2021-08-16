@@ -9,15 +9,15 @@ class LocalDataProvider {
   static final LocalDataProvider _singleton = LocalDataProvider._internal();
 
   List<UserModel> userList = [
-    UserModel(email: 'sample1@gmail.com', password: '1234', name: 'Hieu Vo', id: '1'),
-    UserModel(email: 'sample2@gmail.com', password: '1234', name: 'Khang Le', id: '2'),
+    UserModel(email: 'sample1@gmail.com', password: '1234', name: 'Hieu Vo', id: '1', imgUrl: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg'),
+    UserModel(email: 'sample2@gmail.com', password: '1234', name: 'Khang Le', id: '2', imgUrl: 'https://images.unsplash.com/photo-1544526226-d4568090ffb8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
     UserModel(email: 'sample3@gmail.com', password: '1234', name: 'Long Pham', id: '3'),
-    UserModel(email: 'sample4@gmail.com', password: '1234', name: 'Truong Vo', id: '4'),
-    UserModel(email: 'sample5@gmail.com', password: '1234', name: 'Trong Lam', id: '5'),
+    UserModel(email: 'sample4@gmail.com', password: '1234', name: 'Truong Vo', id: '4', imgUrl: 'https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg'),
+    UserModel(email: 'sample5@gmail.com', password: '1234', name: 'Trong Lam', id: '5', imgUrl: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg'),
     UserModel(email: 'sample6@gmail.com', password: '1234', name: 'Nhan Phan', id: '6'),
-    UserModel(email: 'sample7@gmail.com', password: '1234', name: 'Khuong Dao', id: '7'),
+    UserModel(email: 'sample7@gmail.com', password: '1234', name: 'Khuong Dao', id: '7', imgUrl: 'https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg'),
     UserModel(email: 'sample8@gmail.com', password: '1234', name: 'Phuong Ha', id: '8'),
-    UserModel(email: 'sample9@gmail.com', password: '1234', name: 'Trieu Duong', id: '9'),
+    UserModel(email: 'sample9@gmail.com', password: '1234', name: 'Trieu Duong', id: '9', imgUrl: 'https://images.unsplash.com/photo-1544526226-d4568090ffb8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
   ];
 
   var taskList = [

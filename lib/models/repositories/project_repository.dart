@@ -1,12 +1,5 @@
+import 'package:todo_app/models/providers/local_data.dart';
 import 'models/project.dart';
-import 'package:flutter/material.dart';
-
-List<ProjectModel> fakeDataProject = [
-  ProjectModel(title: 'Personal', totalTask: 10, color: Color.fromRGBO(96, 116, 249, 1), id: '1'),
-  ProjectModel(title: 'Teamworks', totalTask: 10, color: Color.fromRGBO(228, 43, 106, 1), id: '2'),
-  ProjectModel(title: 'Home', totalTask: 10, color: Color.fromRGBO(90, 187, 86, 1), id: '3'),
-  ProjectModel(title: 'Meet', totalTask: 10, color: Color.fromRGBO(188, 121, 195, 1), id: '4'),
-];
 
 
 abstract class ProjectRepository{
@@ -18,21 +11,21 @@ abstract class ProjectRepository{
 
 class FakeProjectRepository extends ProjectRepository{
   const FakeProjectRepository();
-  static var projectList = fakeDataProject;
+  static var localData = LocalDataProvider();
 
   @override
   void addProject(ProjectModel item) {
-    projectList.add(item);
+    localData.projectList.add(item);
   }
 
   @override
   void deleteProject(String projectId) {
-    projectList.remove(getProjectWithId(projectId));
+    localData.projectList.remove(getProjectWithId(projectId));
   }
 
   ProjectModel? getProjectWithId(String projectId){
     ProjectModel? result;
-    fakeDataProject.forEach((val) {
+    localData.projectList.forEach((val) {
       if(val.id == projectId){
         result = val;
       }
@@ -42,20 +35,20 @@ class FakeProjectRepository extends ProjectRepository{
 
   @override
   List<ProjectModel> getPorjectList() {
-    return projectList;
+    return localData.projectList;
   }
 
   List<ProjectModel> getProjectListContainString(String searchString){
     List<ProjectModel>? tempList = []; 
     if(searchString != ''){
-      for (var item in projectList) {
+      for (var item in localData.projectList) {
         if (item.title.toLowerCase().contains(searchString.toLowerCase())){
           tempList.add(item);
         }
       }
     }
     else{ 
-      tempList = []..addAll(projectList);
+      tempList = []..addAll(localData.projectList);
     }
     return tempList;
   }
