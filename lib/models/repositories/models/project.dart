@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class ProjectModel {
   final String title;
   final int totalTask;
-  final String id;
+  final id;
   final Color color;
 
   ProjectModel({

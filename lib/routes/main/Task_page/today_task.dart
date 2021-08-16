@@ -67,10 +67,11 @@ class _TodayPageState extends State<TodayPage> {
   }
 
   void deleteTask(String id){
+    _taskRepository.deleteTask(id);
+    todayTask = _taskRepository.getTaskListForDay('userID', now);
+    tommorrowTask = _taskRepository.getTaskListForDay('userID', tommorrow);
     setState(() {
-      _taskRepository.deleteTask(id);
+     
     });
   }
 }
-
-

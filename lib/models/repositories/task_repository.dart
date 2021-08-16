@@ -1,33 +1,6 @@
-import 'models/task.dart';
+import 'package:todo_app/models/providers/local_data.dart';
 
-final fakeDataTask = {
-  TaskModel(taskId: '1', time: DateTime(2021, 8, 1, 9, 30), title: 'Random title No 1', isDone: true),
-  TaskModel(taskId: '2', time: DateTime(2021, 8, 1, 11, 30), title: 'Random title No 2'),
-  TaskModel(taskId: '3', time: DateTime(2021, 8, 3, 15, 30), title: 'Random title No 3'),
-  TaskModel(taskId: '4', time: DateTime(2021, 8, 3, 21, 30), title: 'Random title No 4', isDone: true),
-  TaskModel(taskId: '5', time: DateTime(2021, 8, 4, 6, 30), title: 'Random title No 5'),
-  TaskModel(taskId: '6', time: DateTime(2021, 8, 5, 7, 30), title: 'Random title No 6', isDone: true),
-  TaskModel(taskId: '7', time: DateTime(2021, 8, 6, 15, 30), title: 'Random title No 7'),
-  TaskModel(taskId: '', time: DateTime(2021, 8, 7, 11, 30), title: 'Random title No '),
-  TaskModel(taskId: '9', time: DateTime(2021, 8, 10, 20, 30), title: 'Random title No 9'),
-  TaskModel(taskId: '10', time: DateTime(2021, 8, 12, 21, 30), title: 'Random title No 10'),
-  TaskModel(taskId: '11', time: DateTime(2021, 8, 13, 7, 30), title: 'Random title No 11'),
-  TaskModel(taskId: '12', time: DateTime(2021, 8, 14, 9, 30), title: 'Random title No 12', isDone: true),
-  TaskModel(taskId: '13', time: DateTime(2021, 8, 14, 10, 30), title: 'Random title No 13'),
-  TaskModel(taskId: '14', time: DateTime(2021, 8, 14, 11, 30), title: 'Random title No 14'),
-  TaskModel(taskId: '15', time: DateTime(2021, 8, 15, 12, 30), title: 'Random title No 15', isDone: true),
-  TaskModel(taskId: '16', time: DateTime(2021, 8, 15, 13, 30), title: 'Random title No 16'),
-  TaskModel(taskId: '17', time: DateTime(2021, 8, 16, 19, 30), title: 'Random title No 17'),
-  TaskModel(taskId: '1', time: DateTime(2021, 8, 17, 14, 30), title: 'Random title No 1', isDone: true),
-  TaskModel(taskId: '19', time: DateTime(2021, 8, 20, 4, 30), title: 'Random title No 19'),
-  TaskModel(taskId: '20', time: DateTime(2021, 8, 22, 13, 30), title: 'Random title No 20', isDone: true),
-  TaskModel(taskId: '21', time: DateTime(2021, 8, 25, 13, 30), title: 'Random title No 21'),
-  TaskModel(taskId: '22', time: DateTime(2021, 8, 27, 13, 30), title: 'Random title No 22'),
-  TaskModel(taskId: '23', time: DateTime(2021, 8, 29, 13, 30), title: 'Random title No 23', isDone: true),
-  TaskModel(taskId: '24', time: DateTime(2021, 8, 15, 14, 30), title: 'Random title No 24', isDone: true),
-  TaskModel(taskId: '25', time: DateTime(2021, 8, 15, 15, 30), title: 'Random title No 25'),
-  TaskModel(taskId: '26', time: DateTime(2021, 8, 15, 16, 30), title: 'Random title No 26', isDone: true),
-};
+import 'models/task.dart';
 
 
 abstract class TaskRepository{
@@ -35,18 +8,17 @@ abstract class TaskRepository{
   List<TaskModel> getTaskListForDay(String userID, DateTime date);
   bool changeTaskDoneState(String taskId);
   void deleteTask(String taskId);
-  // void checkDoneState(String taskId);
   const TaskRepository();
 }
 
 class FakeTaskRepository extends TaskRepository{
   const FakeTaskRepository();
-  static var taskList = fakeDataTask;
+  static var localData = LocalDataProvider();
 
   @override
   List<TaskModel> getTaskListForRange(String userID, DateTime startTime, DateTime endTime) {
     List<TaskModel> returnList = [];
-    fakeDataTask.forEach((val) {
+    localData.taskList.forEach((val) {
       if(val.time.isAfter(startTime)&&val.time.isBefore(endTime)) {
         returnList.add(val);
       }
@@ -57,9 +29,8 @@ class FakeTaskRepository extends TaskRepository{
   @override
   List<TaskModel> getTaskListForDay(String userID, DateTime date) {
     List<TaskModel> returnList = [];
-    fakeDataTask.forEach((val) {
+    localData.taskList.forEach((val) {
       if((val.time.day == date.day)&&(val.time.month == date.month)&&(val.time.year == date.year)) {
-        // print('${val.taskId} ${val.isDone}');
         returnList.add(val);
       }
     });
@@ -69,7 +40,7 @@ class FakeTaskRepository extends TaskRepository{
   @override
   bool changeTaskDoneState(String taskId){
     bool result = false;
-    fakeDataTask.forEach((val) {
+    localData.taskList.forEach((val) {
       if(val.taskId == taskId){
         val.isDone = !val.isDone;
         result = true;
@@ -80,12 +51,12 @@ class FakeTaskRepository extends TaskRepository{
 
   @override
   void deleteTask(String taskId) {
-    fakeDataTask.remove(getTask(taskId));
+    localData.taskList.remove(getTask(taskId));
   }
 
   TaskModel? getTask(String taskId){
     TaskModel? result;
-    fakeDataTask.forEach((val) {
+    localData.taskList.forEach((val) {
       if(val.taskId == taskId){
         result = val;
       }

@@ -44,4 +44,19 @@ class FakeProjectRepository extends ProjectRepository{
   List<ProjectModel> getPorjectList() {
     return projectList;
   }
+
+  List<ProjectModel> getProjectListContainString(String searchString){
+    List<ProjectModel>? tempList = []; 
+    if(searchString != ''){
+      for (var item in projectList) {
+        if (item.title.toLowerCase().contains(searchString.toLowerCase())){
+          tempList.add(item);
+        }
+      }
+    }
+    else{ 
+      tempList = []..addAll(projectList);
+    }
+    return tempList;
+  }
 }

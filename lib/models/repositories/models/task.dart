@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TaskModel {
   final String title;
   final DateTime time;
-  final String taskId;
+  final taskId;
   bool isDone;
   final Color barColor;
 

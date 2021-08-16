@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/models/blocs/new_task_bloc/new_task_bloc.dart';
+import 'package:todo_app/models/blocs/new_task_bloc/new_task_event.dart';
+import 'package:todo_app/models/blocs/new_task_bloc/new_task_state.dart';
 import 'package:todo_app/models/repositories/models/project.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
+import 'asignee_suggest_panel.dart';
+
 class ProjectSuggestPanel extends StatefulWidget {
-  const ProjectSuggestPanel({ Key? key, required this.projectList, required this.onSelectProject }) : super(key: key);
-  final List<ProjectModel> projectList;
-  final ValueSetter<String> onSelectProject;
+  const ProjectSuggestPanel({ Key? key,}) : super(key: key);
 
   @override
   _ProjectSuggestPanelState createState() => _ProjectSuggestPanelState();
@@ -14,27 +18,30 @@ class ProjectSuggestPanel extends StatefulWidget {
 class _ProjectSuggestPanelState extends State<ProjectSuggestPanel> {
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(244, 244, 244, 1),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: ListView.builder(
-          itemCount: widget.projectList.length,
-          itemBuilder: (context, index){
-            return ProjectSuggestion(item: widget.projectList[index], onSelectedProject: widget.onSelectProject,);
-          },
-        ),
-      )
+    return BlocBuilder<NewTaskBloc, NewTaskState>(
+      builder: (context, state){
+        return Flexible(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(244, 244, 244, 1),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: ListView.builder(
+              itemCount: state.projectList.length,
+              itemBuilder: (context, index){
+                return ProjectSuggestion(item: state.projectList[index],);
+              },
+            ),
+          )
+        );
+      }
     );
   }
 }
 
 class ProjectSuggestion extends StatefulWidget {
-  const ProjectSuggestion({ Key? key, required this.item, required this.onSelectedProject}) : super(key: key);
+  const ProjectSuggestion({ Key? key, required this.item}) : super(key: key);
   final ProjectModel item;
-  final ValueSetter<String> onSelectedProject;
   @override
   _ProjectSuggestionState createState() => _ProjectSuggestionState();
 }
@@ -64,10 +71,9 @@ class _ProjectSuggestionState extends State<ProjectSuggestion> {
             ],
           ),
         ),
-        onTap: () => widget.onSelectedProject(widget.item.id),
-        // onTap: (){
-        //   print(widget.item.totalTask);
-        // },
+        onTap: (){
+          context.read<NewTaskBloc>().add(ProjectOnSelected(projectSelected: widget.item));
+        },
       )
     );
   }

@@ -56,12 +56,9 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
                 child: Row(
                   children: [
                     Expanded(child: Text('Incomplete Tasks')),
-                    (selectIndexInMenuPopup == 0) ? Icon(
+                    Icon(
                       Icons.check_outlined,
-                      color: Color.fromRGBO(126, 211, 33, 1),
-                    ): Icon(
-                      Icons.check_outlined,
-                      color: Colors.white,
+                      color: (selectIndexInMenuPopup == 0) ? Color.fromRGBO(126, 211, 33, 1) : Colors.white,
                     ),
                   ],
                 ),
@@ -71,12 +68,9 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
                 child: Row(
                   children: [
                     Expanded(child: Text('Complete Tasks')),
-                    (selectIndexInMenuPopup == 1) ? Icon(
+                    Icon(
                       Icons.check_outlined,
-                      color: Color.fromRGBO(126, 211, 33, 1),
-                    ): Icon(
-                      Icons.check_outlined,
-                      color: Colors.white,
+                      color: (selectIndexInMenuPopup == 1) ? Color.fromRGBO(126, 211, 33, 1) : Colors.white,
                     ),
                   ],
                 ),
@@ -86,12 +80,9 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
                 child: Row(
                   children: [
                     Expanded(child: Text('All Tasks')),
-                    (selectIndexInMenuPopup == 2) ? Icon(
+                    Icon(
                       Icons.check_outlined,
-                      color: Color.fromRGBO(126, 211, 33, 1),
-                    ): Icon(
-                      Icons.check_outlined,
-                      color: Colors.white,
+                      color: (selectIndexInMenuPopup == 2) ? Color.fromRGBO(126, 211, 33, 1) : Colors.white,
                     ),
                   ],
                 ),

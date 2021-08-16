@@ -40,6 +40,21 @@ class FakeUserRepository extends UserRepository{
     return userList;
   }
 
+  List<UserModel> getUserListContainString(String searchString){
+    List<UserModel>? tempList = []; 
+    if(searchString != ''){
+      for (var item in FakeUserRepository.userList) {
+        if (item.name.toLowerCase().contains(searchString.toLowerCase())){
+          tempList.add(item);
+        }
+      }
+    }
+    else{ 
+      tempList = []..addAll(userList);
+    }
+    return tempList;
+  }
+
   UserModel? getUserWithId(String id){
     UserModel? result;
     userList.forEach((val) {
@@ -49,4 +64,6 @@ class FakeUserRepository extends UserRepository{
     });
     return result;
   }
+
+
 }
