@@ -2,28 +2,28 @@ import 'package:equatable/equatable.dart';
 import 'package:todo_app/models/repositories/models/project.dart';
 import 'package:todo_app/models/repositories/models/user.dart';
 
-abstract class NewEvent extends Equatable{
-  const NewEvent();
+abstract class NewTaskEvent extends Equatable{
+  const NewTaskEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class AsigneeFieldOnTap extends NewEvent{
+class AsigneeFieldOnTap extends NewTaskEvent{
   const AsigneeFieldOnTap();
   
   @override
   List<Object> get props => [];
 }
 
-class AsigneeFieldOnChange extends NewEvent{
+class AsigneeFieldOnChange extends NewTaskEvent{
   const AsigneeFieldOnChange({required this.fieldValue});
   final String fieldValue;
   @override
   List<Object> get props => [fieldValue];
 }
 
-class AsigneeUserOnSelected extends NewEvent{
+class AsigneeUserOnSelected extends NewTaskEvent{
   const AsigneeUserOnSelected({required this.userSelected});
   final UserModel userSelected;
 
@@ -32,26 +32,42 @@ class AsigneeUserOnSelected extends NewEvent{
 }
 
 
-class ProjectFieldOnTap extends NewEvent{
+class ProjectFieldOnTap extends NewTaskEvent{
   const ProjectFieldOnTap();
   
   @override
   List<Object> get props => [];
 }
 
-class ProjectFieldOnChange extends NewEvent{
+class ProjectFieldOnChange extends NewTaskEvent{
   const ProjectFieldOnChange({required this.fieldValue});
   final String fieldValue;
   @override
   List<Object> get props => [fieldValue];
 }
 
-class ProjectOnSelected extends NewEvent{
+class ProjectOnSelected extends NewTaskEvent{
   const ProjectOnSelected({required this.projectSelected});
   final ProjectModel projectSelected;
 
   @override
   List<Object> get props => [projectSelected];
+}
+
+class DueDateOnChange extends NewTaskEvent{
+  const DueDateOnChange({required this.dueDate});
+  final DateTime dueDate;
+
+  @override
+  List<Object> get props => [dueDate];
+}
+
+class MemberListOnChange extends NewTaskEvent{
+  const MemberListOnChange({required this.memberList});
+  final List<UserModel> memberList;
+
+  @override
+  List<Object> get props => [memberList];
 }
 
 

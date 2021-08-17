@@ -5,8 +5,8 @@ import 'package:todo_app/models/repositories/user_repository.dart';
 import 'new_task_event.dart';
 import 'new_task_state.dart';
 
-class NewTaskBloc extends Bloc<NewEvent, NewTaskState>{
-  NewTaskBloc() : super(NewTaskState(projectList: [], userList: []));
+class NewTaskBloc extends Bloc<NewTaskEvent, NewTaskState>{
+  NewTaskBloc() : super(NewTaskState(projectList: [], userList: [], memberList: []));
 
   // @override
   // void onTransition(Transition<NewEvent, NewTaskState> transition) {
@@ -16,7 +16,7 @@ class NewTaskBloc extends Bloc<NewEvent, NewTaskState>{
   // }
 
   @override
-  Stream<NewTaskState> mapEventToState(NewEvent event) async*{
+  Stream<NewTaskState> mapEventToState(NewTaskEvent event) async*{
     FakeUserRepository _userRepository = FakeUserRepository();
     FakeProjectRepository _projectRepository = FakeProjectRepository();
 
@@ -55,12 +55,20 @@ class NewTaskBloc extends Bloc<NewEvent, NewTaskState>{
       );
     }
     if (event is ProjectOnSelected){
-      final project = event.projectSelected;
       yield state.copyWith(
-        project: project,
+        project: event.projectSelected,
         status: NewTaskStatus.normal,
       );
     }
-    
+    if (event is DueDateOnChange){
+      yield state.copyWith(
+        dueDate: event.dueDate,
+      );
+    }
+    if (event is MemberListOnChange){
+      yield state.copyWith(
+        memberList: event.memberList,
+      );
+    }
   }
 }

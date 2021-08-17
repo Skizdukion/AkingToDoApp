@@ -10,7 +10,9 @@ class NewTaskState extends Equatable{
     this.projectField = '',
     required this.projectList,
     required this.userList,
+    required this.memberList,
     this.status = NewTaskStatus.normal,
+    this.dueDate
   });
   final String asigneeField;
   final String projectField;
@@ -18,16 +20,20 @@ class NewTaskState extends Equatable{
   final List<ProjectModel> projectList;
   final UserModel? user;
   final ProjectModel? project;
+  final DateTime? dueDate;
   final NewTaskStatus status;
+  final List<UserModel> memberList;
   
   NewTaskState copyWith({
     String? asigneeField,
     String? projectField,
+    List<UserModel>? memberList,
     List<UserModel>? userList,
     List<ProjectModel>? projectList,
     UserModel? user,
     ProjectModel? project,
     NewTaskStatus? status,
+    DateTime? dueDate
   }) {
     return NewTaskState(
       asigneeField: asigneeField ?? this.asigneeField,
@@ -37,11 +43,13 @@ class NewTaskState extends Equatable{
       user: user ?? this.user,
       project: project ?? this.project,
       status: status ?? this.status,
+      dueDate: dueDate ?? this.dueDate,
+      memberList: memberList ?? this.memberList,
     );
   }
       
   @override
-  List<Object?> get props => [asigneeField, projectField, userList.length, projectList.length, user, project, status];
+  List<Object?> get props => [asigneeField, projectField, userList.length, projectList.length, user, project, status, dueDate, memberList];
 }
 
 
@@ -49,6 +57,7 @@ enum NewTaskStatus{
   normal,
   asigneeSelecting,
   projectSelecting,
+  dueDatePicking,
   imagePicking,
   dateTimePicking,
   addMember,
