@@ -21,7 +21,6 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState>{
   Stream<MainPageState> _reloadTaskPage(MainPageEvent event, MainPageState state) async*{
     if (state is TaskScreen){
       try{
-        print('i was here dumbass');
         yield Loading();
       } on Exception{
         yield Error();

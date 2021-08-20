@@ -5,8 +5,6 @@ import 'package:todo_app/models/repositories/models/project.dart';
 import 'package:todo_app/models/repositories/project_repository.dart';
 import 'package:todo_app/routes/main/menu_page/project_item.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
-
-import '../main_page.dart';
 import 'add_project_popup.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -45,12 +43,12 @@ class ProjectPageBody extends StatefulWidget {
 class _ProjectPageBodyState extends State<ProjectPageBody> {
 
   late ProjectRepository _projectRepository;
-  late List<ProjectModel> _projectlist;
+  late ValueNotifier<List<ProjectModel>> _projectlist;
 
   @override
   void initState() {
     _projectRepository = FakeProjectRepository();
-    _projectlist = _projectRepository.getPorjectList();
+    _projectlist = ValueNotifier([]..addAll(_projectRepository.getPorjectList()));
     super.initState();
   }
 
@@ -58,47 +56,60 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 50, right: 16, left: 16),
-      child: ListView(
-        children: [
-          Wrap(
-            spacing: 30,
-            runSpacing: 30,
+      child: ValueListenableBuilder<List<ProjectModel>>(
+        valueListenable: _projectlist,
+        builder: (context, value, _){
+          return ListView(
             children: [
-              for(var index in _projectlist) ProjectItem(item: index,),
-              SizedBox(
-                width: 80,
-                height: 80,
-                child: ElevatedButton(
-                  onPressed: _showAddMenu,
-                  style: buttonStyleMenuPage,
-                  child: Center(
-                    child: Text(
-                      '+',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+              Wrap(
+                spacing: 30,
+                runSpacing: 30,
+                children: [
+                  for(var index in value) ProjectItem(item: index,),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: ElevatedButton(
+                        onPressed: _showAddMenu,
+                        style: buttonStyleMenuPage,
+                        child: Center(
+                          child: Text(
+                            '+',
+                            style: TextStyle(color: Colors.white, fontSize: 24),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        }
       ),
     );
   }
 
-  _showAddMenu(){
-    showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext context) {
-      return BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          backgroundColor: Colors.white,
-          child: AddProjectMenu(),
-        )
-      );
+  _showAddMenu() async{
+    bool? isAdd = await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Dialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+            backgroundColor: Colors.white,
+            child: AddProjectMenu(),
+          )
+        );
     });
+    if (isAdd != null)
+    { 
+      _projectlist.value.clear();
+      _projectlist.value = []..addAll(_projectRepository.getPorjectList());
+    }
   }
 }
