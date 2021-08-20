@@ -53,6 +53,7 @@ class FakeUserRepository extends UserRepository{
         result = val;
       }
     });
+    if (result == null) print('wrong with data');
     return result;
   }
 

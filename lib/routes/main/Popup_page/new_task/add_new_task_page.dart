@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/models/blocs/new_task_bloc/new_task_bloc.dart';
-import 'package:todo_app/models/blocs/new_task_bloc/new_task_state.dart';
+import 'package:todo_app/models/blocs/new_task/new_task_bloc.dart';
+import 'package:todo_app/models/blocs/new_task/new_task_state.dart';
+import 'package:todo_app/models/repositories/models/task.dart';
+import 'package:todo_app/models/repositories/task_repository.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 import 'new_task_page_component/add_member_col.dart';
@@ -57,6 +59,9 @@ class NewTaskForm extends StatefulWidget {
 
 class _NewTaskFormState extends State<NewTaskForm> {
 
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewTaskBloc, NewTaskState>(
@@ -90,20 +95,21 @@ class _NewTaskFormState extends State<NewTaskForm> {
                   children: [
                     Container(
                       child: Center(
-                        child: TextField(
+                        child: TextFormField(
                           style: textDarkStyleS18,
                           decoration: new InputDecoration.collapsed(
                             hintText: 'Title',
                             hintStyle: textDarkStyleS18,
                           ),
                           autofocus: true,
+                          controller: _titleController,
                         ),
                       ),
                       color: Color.fromRGBO(244, 244, 244, 1),
                       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                       height: 60,
                     ),
-                    DescriptionPanel(),
+                    DescriptionPanel(descriptionController: _descriptionController,),
                     DueDatePicker(),
                     AddMemberCol(),
                     Padding(
@@ -111,7 +117,28 @@ class _NewTaskFormState extends State<NewTaskForm> {
                       child: SizedBox(
                         width: double.maxFinite,
                         child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            if ((_titleController.text == '')||(state.user == null)||(state.project == null)){
+                              print('cant create new task, field required is not fill');
+                            }
+                            else{
+                              FakeTaskRepository().addTask(TaskModel(
+                                title: _titleController.text,
+                                taskId: (FakeTaskRepository().getLength() + 1).toString(),
+                                time: DateTime.now(),
+                                userId: state.user!.id,
+                                dueDate: state.dueDate,
+                                description: _descriptionController.text,
+                                memberList: [
+                                  for (var item in state.memberList) item.id                                  
+                                ],
+                                projectList: [
+                                  state.project!.id,
+                                ],
+                              ));
+                              Navigator.pop(context, true);
+                            }
+                          },
                           style: buttonStyleAuthPages,
                           child: Text(
                             "Add Task",
@@ -130,5 +157,4 @@ class _NewTaskFormState extends State<NewTaskForm> {
       }
     );
   }
-
 }

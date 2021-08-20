@@ -14,13 +14,16 @@ abstract class TaskRepository{
 class FakeTaskRepository extends TaskRepository{
   const FakeTaskRepository();
   static var localData = LocalDataProvider();
+  static int getTaskType = 2;
 
   @override
   List<TaskModel> getTaskListForRange(String userID, DateTime startTime, DateTime endTime) {
     List<TaskModel> returnList = [];
     localData.taskList.forEach((val) {
       if(val.time.isAfter(startTime)&&val.time.isBefore(endTime)) {
-        returnList.add(val);
+        if (getTaskType == 2) returnList.add(val);
+        if ((getTaskType == 1)&&(val.isDone == true)) returnList.add(val);
+        if ((getTaskType == 0)&&(val.isDone == false)) returnList.add(val);
       }
     });
     return returnList;
@@ -31,7 +34,9 @@ class FakeTaskRepository extends TaskRepository{
     List<TaskModel> returnList = [];
     localData.taskList.forEach((val) {
       if((val.time.day == date.day)&&(val.time.month == date.month)&&(val.time.year == date.year)) {
-        returnList.add(val);
+        if (getTaskType == 2) returnList.add(val);
+        if ((getTaskType == 1)&&(val.isDone == true)) returnList.add(val);
+        if ((getTaskType == 0)&&(val.isDone == false)) returnList.add(val);
       }
     });
     return returnList;
@@ -62,5 +67,17 @@ class FakeTaskRepository extends TaskRepository{
       }
     });
     return result;
+  }
+
+  void addTask(TaskModel item){
+    localData.taskList.add(item);
+  }
+
+  int getLength(){
+    return localData.taskList.length;
+  }
+
+  void changeGetTaskType(int val){
+    getTaskType = val;
   }
 }

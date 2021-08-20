@@ -3,7 +3,8 @@ import 'package:todo_app/widgets/const_decoration.dart';
 
 
 class DescriptionPanel extends StatefulWidget {
-  const DescriptionPanel({ Key? key }) : super(key: key);
+  const DescriptionPanel({ Key? key, required this.descriptionController }) : super(key: key);
+  final TextEditingController descriptionController;
 
   @override
   _DescriptionPanelState createState() => _DescriptionPanelState();
@@ -35,10 +36,11 @@ class _DescriptionPanelState extends State<DescriptionPanel> {
                 Expanded(
                   flex: 62,
                   child: Center(
-                    child: TextField(
+                    child: TextFormField(
                       style: textDarkStyleS18,
                       minLines: 3,
                       maxLines: 3,
+                      controller: widget.descriptionController,
                     ),
                   ),
                 ),
