@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:todo_app/models/repositories/models/quick_note.dart';
 
 class CheckNote{
   bool isDone;
@@ -7,17 +8,15 @@ class CheckNote{
 }
 
 class CheckListModel with ChangeNotifier{
-  List<CheckNote> checkList;
+  List<QuickNoteCheckListItemModel> checkList;
   CheckListModel({required this.checkList});
   CheckListModel.fakeData():checkList = [
-    CheckNote(isDone: false, title: 'Item 1'),
+    QuickNoteCheckListItemModel(isDone: false, desc: 'Item 1', id: '1'),
   ];
 
   void addAutoCheckNote(){
-    if(checkList.length < 6){
-      checkList.add(CheckNote(title: 'Item ${checkList.length + 1}', isDone: false));
-      notifyListeners();
-    }
+    checkList.add(QuickNoteCheckListItemModel(isDone: false, desc: 'Item ${checkList.length + 1}', id: '${checkList.length + 1}'));
+    notifyListeners();
   }
 
   void setTrueFalse(index, bool? value){

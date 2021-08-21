@@ -14,18 +14,19 @@ class _CheckListState extends State<CheckList> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 20),
-      child: Column(
-        children: [
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: getListLength(),
-            itemBuilder: (BuildContext context, int index) {
-              return CheckNoteItem(index: index);
-            },
-          ),
-        ],
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height - 450,
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(right: 20),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: getListLength(),
+          itemBuilder: (BuildContext context, int index) {
+            return CheckNoteItem(index: index);
+          },
+        ),
       ),
     );
   }
@@ -67,7 +68,7 @@ class _CheckNoteItemState extends State<CheckNoteItem> {
                   child: TextFormField(
                     textInputAction: TextInputAction.done,
                     style: textDarkStyleW400S16,
-                    initialValue: value.checkList[widget.index].title,
+                    initialValue: value.checkList[widget.index].desc,
                     decoration: new InputDecoration(
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,

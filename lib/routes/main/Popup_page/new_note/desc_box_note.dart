@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
-class DescriptionNoteBox extends StatefulWidget {
-  const DescriptionNoteBox({ Key? key }) : super(key: key);
+class DescriptionNotePanel extends StatefulWidget {
+  const DescriptionNotePanel({ Key? key, required this.textController }) : super(key: key);
+  final TextEditingController textController;
 
   @override
-  _DescriptionNoteBoxState createState() => _DescriptionNoteBoxState();
+  _DescriptionNotePanelState createState() => _DescriptionNotePanelState();
 }
 
-class _DescriptionNoteBoxState extends State<DescriptionNoteBox> {
+class _DescriptionNotePanelState extends State<DescriptionNotePanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +32,8 @@ class _DescriptionNoteBoxState extends State<DescriptionNoteBox> {
               children: [
                 Expanded(
                   child: Center(
-                    child: TextField(
+                    child: TextFormField(
+                      controller: widget.textController,
                       style: textDarkStyleS18,
                       minLines: 6,
                       maxLines: 6,

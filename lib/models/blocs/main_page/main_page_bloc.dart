@@ -15,7 +15,19 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState>{
     if ((event is AddNewTask)||(event is ChangeTaskSelectType)){
       yield* _reloadTaskPage(event, state) ;
     }
+    if ((event is AddNewCheckList)||(event is AddNewQuickNote)){
+      yield* _reloadQuickNotePage(event, state) ;
+    }
+  }
 
+  Stream<MainPageState> _reloadQuickNotePage(MainPageEvent event, MainPageState state) async*{
+    if (state is QuickNoteScreen){
+      try{
+        yield Loading();
+      } on Exception{
+        yield Error();
+      }
+    }
   }
 
   Stream<MainPageState> _reloadTaskPage(MainPageEvent event, MainPageState state) async*{

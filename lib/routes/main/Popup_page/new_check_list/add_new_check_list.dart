@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/repositories/models/check.dart';
+import 'package:todo_app/models/repositories/models/quick_note.dart';
 import 'package:todo_app/models/repositories/models/radio_color.dart';
+import 'package:todo_app/models/repositories/quick_note_repository.dart';
 import 'package:todo_app/routes/main/popup_page/new_check_list/title_box_check_list.dart';
 import 'package:todo_app/routes/main/popup_page/new_note/color_picker.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
@@ -33,9 +35,9 @@ class _NewCheckListPageState extends State<NewCheckListPage> {
           child: NewCheckListForm(),
           decoration: BoxDecoration(
             image: DecorationImage(
-            image: AssetImage('assets/background_1.png'),
-            fit: BoxFit.cover,
-          ),
+              image: AssetImage('assets/background_1.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
@@ -52,6 +54,7 @@ class NewCheckListForm extends StatefulWidget {
 
 class _NewCheckListFormState extends State<NewCheckListForm> {
 
+  final TextEditingController _titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
       child: Consumer2<CheckListModel,RadioColorList>(
         builder: (context, checkList, color, child){
           return Padding(
-            padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: (MediaQuery.of(context).size.height - 450 - checkList.checkList.length*50)),
+            padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: getBottomPadding(checkList)),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -81,7 +84,7 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
-                  TilteBoxCheckList(),
+                  TilteBoxCheckList(titleController: _titleController,),
                   SizedBox(height: 20,),
                   ColorPicker(),
                   SizedBox(height: 20,),
@@ -100,8 +103,21 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                       width: double.maxFinite,
                       child: ElevatedButton(
                         onPressed: (){
-                          print(checkList.checkList.length);
-                          print(color.getSelectColor());
+                          for (var item in checkList.checkList) {
+                            print(item.desc);
+                          }
+                          if(_titleController.text.isNotEmpty){
+                            FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
+                            _quickNoteRepository.addQuickNote(
+                              QuickNoteModel(
+                                checkList: checkList.checkList,
+                                id: (_quickNoteRepository.getQuickNoteListLength() + 1).toString(), 
+                                title: _titleController.text,
+                                color: color.getSelectColor(),
+                              )
+                            ); 
+                            Navigator.pop(context, true);                           
+                          }                      
                         },
                         style: buttonStyleAuthPages,
                         child: Text(
@@ -118,5 +134,12 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
         }
       ),
     );
+  }
+
+  double getBottomPadding(CheckListModel checkList){
+    if (MediaQuery.of(context).size.height - 450 - checkList.checkList.length*50 > 60){
+      return MediaQuery.of(context).size.height - 450 - checkList.checkList.length*50;
+    }
+    else return 20;
   }
 }

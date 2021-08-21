@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/repositories/models/quick_note.dart';
 import 'package:todo_app/models/repositories/models/radio_color.dart';
+import 'package:todo_app/models/repositories/quick_note_repository.dart';
 import 'package:todo_app/routes/main/Popup_page/new_note/color_picker.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
@@ -47,61 +49,72 @@ class NewNoteForm extends StatefulWidget {
 }
 
 class _NewNoteFormState extends State<NewNoteForm> {
+
+  final TextEditingController _descController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<RadioColorList>(
       create: (_) => RadioColorList.autoInitial(),
       child: Padding(
         padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: MediaQuery.of(context).size.height - 500),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0.0, 1.0), 
-                blurRadius: 1.0,
+        child: Consumer<RadioColorList>(
+          builder: (context, color, child){
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), 
+                    blurRadius: 1.0,
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20),
-              DescriptionNoteBox(),
-              SizedBox(height: 20),
-              ColorPicker(),
-              SizedBox(height: 30),
-              DoneBtn(),
-            ],
-          ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  DescriptionNotePanel(textController: _descController,),
+                  SizedBox(height: 20),
+                  ColorPicker(),
+                  SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: SizedBox(
+                      width: double.maxFinite,
+                      child: ElevatedButton(
+                        onPressed: (){
+                          print(_descController.text);
+                          print(color.getSelectColor());
+                          if(_descController.text.isNotEmpty){
+                            FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
+                            _quickNoteRepository.addQuickNote(
+                              QuickNoteModel(
+                                checkList: [],
+                                id: (_quickNoteRepository.getQuickNoteListLength() + 1).toString(), 
+                                title: _descController.text,
+                                color: color.getSelectColor(),
+                              )
+                            ); 
+                            Navigator.pop(context);                           
+                          }                      
+                        },
+                        style: buttonStyleAuthPages,
+                        child: Text(
+                          "Done",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         )
-      ),
-    );
-  }
-}
-
-class DoneBtn extends StatelessWidget {
-  const DoneBtn({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25, right: 25),
-      child: SizedBox(
-        width: double.maxFinite,
-        child: ElevatedButton(
-          onPressed: (){
-            print(Provider.of<RadioColorList>(context, listen: false).getSelectColor());
-          },
-          style: buttonStyleAuthPages,
-          child: Text(
-            "Done",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
       ),
     );
   }

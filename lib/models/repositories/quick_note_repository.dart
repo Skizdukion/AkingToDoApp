@@ -17,7 +17,7 @@ class FakeQuickNoteRepository extends QuickNoteRepository{
 
   @override
   void addQuickNote(QuickNoteModel item) {
-    localData.quickNoteList.add(item);
+    localData.quickNoteList.insert(0, item);
   }
 
   @override
@@ -28,7 +28,7 @@ class FakeQuickNoteRepository extends QuickNoteRepository{
   void changeDoneState(String quickNoteId, String listItemId){
     QuickNoteModel? quickNote = getQuickNote(quickNoteId);
     QuickNoteCheckListItemModel? item;
-    quickNote!.itemList.forEach((val) {
+    quickNote!.checkList.forEach((val) {
       if(val.id == listItemId){
         item = val;
       }
@@ -51,5 +51,7 @@ class FakeQuickNoteRepository extends QuickNoteRepository{
     return result;
   }
 
-
+  int getQuickNoteListLength(){
+    return localData.quickNoteList.length;
+  }
 }

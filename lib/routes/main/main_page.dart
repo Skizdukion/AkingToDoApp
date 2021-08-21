@@ -155,10 +155,12 @@ class AddMenuItem extends StatelessWidget {
                   if (isAdd == true) Navigator.pop(context, 'task');
                 }
                 if (text == 'Add Quick Note'){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewNotePage()));
+                  bool? isAdd = await Navigator.push(context, MaterialPageRoute(builder: (context) => NewNotePage()));
+                  if (isAdd == true) Navigator.pop(context, 'quicknote');
                 }
                 if (text == 'Add Check List'){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewCheckListPage()));
+                  bool? isAdd = await Navigator.push(context, MaterialPageRoute(builder: (context) => NewCheckListPage()));
+                  if (isAdd == true) Navigator.pop(context, 'checklist');
                 }
               },
             ),

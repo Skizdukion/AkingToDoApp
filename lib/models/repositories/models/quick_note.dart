@@ -11,6 +11,6 @@ class QuickNoteModel{
   final title;
   final color;
   final id;
-  List<QuickNoteCheckListItemModel> itemList;
-  QuickNoteModel({required this.title, required this.id, required this.itemList, this.color = Colors.black});
+  List<QuickNoteCheckListItemModel> checkList;
+  QuickNoteModel({required this.title, required this.id, required this.checkList, this.color = Colors.black});
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class TilteBoxCheckList extends StatefulWidget {
-  const TilteBoxCheckList({ Key? key }) : super(key: key);
-
+  const TilteBoxCheckList({ Key? key, required this.titleController }) : super(key: key);
+  final TextEditingController titleController;
   @override
   _TilteBoxCheckListState createState() => _TilteBoxCheckListState();
 }
@@ -31,8 +31,9 @@ class _TilteBoxCheckListState extends State<TilteBoxCheckList> {
               children: [
                 Expanded(
                   child: Center(
-                    child: TextField(
+                    child: TextFormField(
                       textInputAction: TextInputAction.done,
+                      controller: widget.titleController,
                       style: textDarkStyleS18,
                       decoration: new InputDecoration(
                         border: InputBorder.none,
@@ -40,7 +41,6 @@ class _TilteBoxCheckListState extends State<TilteBoxCheckList> {
                         enabledBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
                         disabledBorder: InputBorder.none,
-
                       ),
                     ),
                   ),

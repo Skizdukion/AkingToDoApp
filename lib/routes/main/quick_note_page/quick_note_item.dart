@@ -13,21 +13,16 @@ class QuickNoteItem extends StatefulWidget {
 
 class _QuickNoteItemState extends State<QuickNoteItem> {
 
-  bool isExpand = false;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        setState(() {
-          isExpand = !isExpand;
-        });
+  
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: Material(
           elevation: 2.0,
-          borderRadius: BorderRadius.circular(5),
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 0),
@@ -45,7 +40,7 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
                   padding: const EdgeInsets.only(left: 32.0),
                   child: Text('${widget.item.title}', style: textDarkStyleS18.copyWith(fontSize: 16, fontWeight: FontWeight.bold),),
                 ),
-                if (isExpand == true) for (var item in widget.item.itemList) QuickNoteCheckListItem(item: item, parentId: widget.item.id,),
+                for (var item in widget.item.checkList) QuickNoteCheckListItem(item: item, parentId: widget.item.id,),
                 const SizedBox(height: 16,),
               ],
             ),
@@ -86,6 +81,9 @@ class _QuickNoteCheckListItemState extends State<QuickNoteCheckListItem> {
           children: [
             Checkbox(
               checkColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5)
+              ),
               value: isDone,
               onChanged: (bool? val) {  
                 setState(() {
@@ -94,7 +92,7 @@ class _QuickNoteCheckListItemState extends State<QuickNoteCheckListItem> {
                 _quickNoteRepository.changeDoneState(widget.parentId, widget.item.id);
               },
             ),
-            Flexible(child: Text('${widget.item.desc}', style: isDone ? textLineThroughStyle : textDarkStyleW400S16,)),
+            Flexible(child: Text('${widget.item.desc}', style: isDone ? textLineThroughStyle.copyWith(color: Color.fromRGBO(49, 49, 49, 1),) : textDarkStyleW400S16,)),
           ],
         ),
       ),

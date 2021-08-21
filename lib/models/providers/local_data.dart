@@ -267,7 +267,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Meeting with Jessica in Central Park at 10:30PM',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(
               desc: 'Math fasfjqw hgafhq gahfhq gashfgqh ghashf', id: '0'),
           QuickNoteCheckListItemModel(desc: 'Chemistry', id: '1'),
@@ -279,7 +279,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Clean house',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Kitchen', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Bath room', id: '2'),
           QuickNoteCheckListItemModel(desc: 'Bed room', id: '3'),
@@ -289,7 +289,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Make dinner',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Buy fish', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Make sweetdish meatball', id: '2'),
         ]),
@@ -298,7 +298,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Random stuff',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
@@ -309,7 +309,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Random stuff 1',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
@@ -320,7 +320,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Random stuff 2',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
@@ -331,7 +331,7 @@ class LocalDataProvider {
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         title: 'Random stuff 3',
-        itemList: [
+        checkList: [
           QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
@@ -339,6 +339,20 @@ class LocalDataProvider {
           QuickNoteCheckListItemModel(desc: 'Random stuff 5', id: '5'),
           QuickNoteCheckListItemModel(desc: 'Random stuff 6', id: '6'),
         ]),
+    QuickNoteModel(
+        id: '8',
+        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+            .withOpacity(1.0),
+        title: 'Radom QuickNote',
+        checkList: []
+    ),
+    QuickNoteModel(
+        id: '9',
+        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+            .withOpacity(1.0),
+        title: 'Radom QuickNote 2',
+        checkList: []
+    ),
   ];
 
   List<ProjectModel> projectList = [
