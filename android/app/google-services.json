@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "305303818164",
+    "project_id": "aking-6916f",
+    "storage_bucket": "aking-6916f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305303818164:android:ed41dbb582af91f1c2ece1",
+        "android_client_info": {
+          "package_name": "com.lilpunk.aking_todo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305303818164-i3mcl98kjnvr7qf840vsti0uvheja41b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApTR0waLOFVyWkKC2K0suwXfZvYfQ42aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305303818164-i3mcl98kjnvr7qf840vsti0uvheja41b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

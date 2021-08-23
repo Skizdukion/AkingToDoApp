@@ -1,7 +1,5 @@
 import 'package:todo_app/models/providers/local_data.dart';
 import 'package:todo_app/models/repositories/models/quick_note.dart';
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 
 abstract class QuickNoteRepository{

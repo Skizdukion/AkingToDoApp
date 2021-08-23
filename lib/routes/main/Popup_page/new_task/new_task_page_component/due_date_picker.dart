@@ -177,7 +177,7 @@ class _CalendarPickerState extends State<CalendarPicker> {
               width: double.maxFinite,
               child: ElevatedButton(
                 onPressed: () {
-                  print(_selectedDay);
+                  // print(_selectedDay);
                   Navigator.pop(context, _selectedDay);
                 },
                 style: buttonStyleAuthPages,

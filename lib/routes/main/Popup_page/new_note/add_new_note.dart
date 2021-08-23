@@ -87,8 +87,8 @@ class _NewNoteFormState extends State<NewNoteForm> {
                       width: double.maxFinite,
                       child: ElevatedButton(
                         onPressed: (){
-                          print(_descController.text);
-                          print(color.getSelectColor());
+                          // print(_descController.text);
+                          // print(color.getSelectColor());
                           if(_descController.text.isNotEmpty){
                             FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
                             _quickNoteRepository.addQuickNote(
@@ -99,7 +99,7 @@ class _NewNoteFormState extends State<NewNoteForm> {
                                 color: color.getSelectColor(),
                               )
                             ); 
-                            Navigator.pop(context);                           
+                            Navigator.pop(context, true);                           
                           }                      
                         },
                         style: buttonStyleAuthPages,

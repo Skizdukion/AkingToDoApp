@@ -11,9 +11,8 @@ abstract class AuthEvent extends Equatable{
   bool get stringify => true;
 }
 
-class AuthVerifyLogin extends AuthEvent{
-  const AuthVerifyLogin({required this.email, required this.password});
-
+class Login extends AuthEvent{
+  const Login({required this.email, required this.password});
   final email;
   final password;
 
@@ -21,15 +20,20 @@ class AuthVerifyLogin extends AuthEvent{
   List<Object> get props => [email,password];
 }
 
-class AuthLoginSuccess extends AuthEvent{
-  const AuthLoginSuccess({required this.user});
-
-  final UserModel user;
+class Register extends AuthEvent{
+  const Register({required this.email, required this.password});
+  final email;
+  final password;
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [email,password];
 }
 
-class AuthLogout extends AuthEvent{
-  const AuthLogout();
+class Loading extends AuthEvent{
+  const Loading();
 }
+
+class Logout extends AuthEvent{
+  const Logout();
+}
+

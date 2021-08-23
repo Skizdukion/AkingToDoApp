@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/models/repositories/models/quick_note.dart';
 import 'package:todo_app/models/repositories/quick_note_repository.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
@@ -15,12 +16,26 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-  
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      child: Slidable(
+        actionPane: SlidableDrawerActionPane(),
+        showAllActionsThreshold: 0.1,
+        actionExtentRatio: 0.25,
+        actions: <Widget>[
+          IconSlideAction(
+            color: Colors.white10,
+            iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
+            onTap: (){},
+          ),
+        ],
+        secondaryActions: <Widget>[
+          IconSlideAction(
+            color: Colors.white10,
+            iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
+            onTap: (){},
+          ),
+        ],
         child: Material(
           elevation: 2.0,
           color: Colors.white,

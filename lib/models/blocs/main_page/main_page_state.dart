@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:todo_app/models/repositories/task_repository.dart';
 
 abstract class MainPageState extends Equatable{
   const MainPageState();

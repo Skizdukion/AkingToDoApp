@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/providers/local_data.dart';
+import 'package:uuid/uuid.dart';
 
 import 'models/task.dart';
 
@@ -9,6 +12,81 @@ abstract class TaskRepository{
   bool changeTaskDoneState(String taskId);
   void deleteTask(String taskId);
   const TaskRepository();
+}
+
+class FireBaseTaskRepository{
+  const FireBaseTaskRepository();
+
+  static int getTaskType = 2;
+  static FireBaseDataProvider fireBaseDataProvider =  FireBaseDataProvider();
+
+  Stream<List<TaskModel>> getStreamTaskListForRange(DateTime startTime, DateTime endTime){
+    Timestamp startTimestamp = Timestamp.fromDate(startTime);
+    Timestamp endTimestamp = Timestamp.fromDate(endTime);
+    return fireBaseDataProvider.userTaskRef.where('dueDate', isGreaterThanOrEqualTo: startTimestamp, isLessThanOrEqualTo: endTimestamp).snapshots().map(_taskListDataFromSnapShot);
+  }
+  
+  Stream<List<TaskModel>> getStreamTaskListForDay(DateTime dateTime){
+    DateTime startOfDate = DateTime(dateTime.year, dateTime.month, dateTime.day, 0, 0);
+    DateTime endOfDate = DateTime(dateTime.year, dateTime.month, dateTime.day, 23, 59);
+    return getStreamTaskListForRange(startOfDate, endOfDate);
+  }
+
+  Stream<List<TaskModel>> getStreamAllTask(){
+    return fireBaseDataProvider.userTaskRef.snapshots().map(_taskListDataFromSnapShot);
+  }
+
+  Future<List<TaskModel>> getTaskList(Stream<List<TaskModel>> streamList) async{
+    return streamList.first;
+  }
+
+  List<TaskModel> _taskListDataFromSnapShot(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc){
+      return _taskDataFromSnapShot(doc);
+    }).toList();
+  }
+
+  TaskModel _taskDataFromSnapShot(DocumentSnapshot snapshot){
+    return TaskModel(
+      taskId: snapshot.reference.id, 
+      time: (snapshot['createdDate'] as Timestamp).toDate(),
+      title: snapshot['title'],
+      userId: snapshot['userId'],
+      dueDate: (snapshot['dueDate'] != null) ? (snapshot['dueDate'] as Timestamp).toDate() : null,
+      memberList: List.from(snapshot['memberList']),
+      projectList: List.from(snapshot['projectList']),
+      isDone: snapshot['isDone'],
+      description: snapshot['description'],
+    );
+  }
+
+  void addNewTask(TaskModel task){
+    var uuid = Uuid();
+    String randomId = uuid.v4();
+    FirebaseFirestore.instance.collection('task').doc(randomId).set({
+      'createdDate': Timestamp.fromDate(DateTime.now()),
+      'description': task.description,
+      'dueDate': (task.dueDate == null) ? null : Timestamp.fromDate(task.dueDate!),
+      'isDone': task.isDone,
+      'title': task.title,
+      'userId': task.userId,
+      'memberList': task.memberList,
+      'projectList': task.projectList,
+    });
+  }
+
+  void changeDoneState(TaskModel task){
+    FirebaseFirestore.instance.collection('task').doc(task.taskId).set({
+      'createdDate': Timestamp.fromDate(task.time),
+      'description': task.description,
+      'dueDate': (task.dueDate == null) ? null : Timestamp.fromDate(task.dueDate!),
+      'isDone': !task.isDone,
+      'title': task.title,
+      'userId': task.userId,
+      'memberList': task.memberList,
+      'projectList': task.projectList,
+    });
+  }
 }
 
 class FakeTaskRepository extends TaskRepository{

@@ -18,7 +18,6 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
-  TaskRepository _taskRepository = FakeTaskRepository();
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -38,7 +37,7 @@ class _TaskItemState extends State<TaskItem> {
             onPressed:() => changDoneState(),
           ),
           title: Text(widget.task.title, style: !widget.task.isDone ? textDarkStyleW400S16 : textLineThroughStyle),
-          subtitle: Text(DateFormat('hh:mm a').format(widget.task.time), style: !widget.task.isDone ? textLight154StyleW400S14 : textLineThroughStyle.copyWith(fontSize: 14),),
+          subtitle: Text(DateFormat('hh:mm a').format(widget.task.dueDate!), style: !widget.task.isDone ? textLight154StyleW400S14 : textLineThroughStyle.copyWith(fontSize: 14),),
           shape: Border(
             right: BorderSide(width: 4.0, color: widget.task.isDone ? Colors.red : Color.fromRGBO(96, 116, 249, 1), style: BorderStyle.solid),
           ),
@@ -88,9 +87,7 @@ class _TaskItemState extends State<TaskItem> {
   }
 
   void changDoneState(){
-    setState(() {
-      _taskRepository.changeTaskDoneState(widget.task.taskId);
-    });
+    FireBaseTaskRepository().changeDoneState(widget.task);
   }
 
   _showAddMenu() async{

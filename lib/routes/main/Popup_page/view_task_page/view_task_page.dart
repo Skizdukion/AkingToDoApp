@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_app/models/repositories/models/task.dart';
 import 'package:todo_app/models/repositories/models/user.dart';
 import 'package:todo_app/models/repositories/user_repository.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
-
 import 'component/asignee_row.dart';
 import 'component/desc_row.dart';
 import 'component/due_date_row.dart';
@@ -21,12 +19,12 @@ class TaskViewPage extends StatefulWidget {
 
 class _TaskViewPageState extends State<TaskViewPage> {
   FakeUserRepository _userRepository = FakeUserRepository();
-  late UserModel userTaskOwner;
+  // late UserModel userTaskOwner;
 
   @override
   void initState() {
-    userTaskOwner = _userRepository.getUserWithId(widget.item.userId)!;
-    print(widget.item.description);
+    // userTaskOwner = _userRepository.getUserWithId(widget.item.userId) ?? ;
+    // print(widget.item.description);
     super.initState();
   }
 
@@ -85,8 +83,8 @@ class _TaskViewPageState extends State<TaskViewPage> {
             height: 20,
           ),
           AsigneeRow(
-            urlImg: userTaskOwner.imgUrl,
-            userName: userTaskOwner.name,
+            urlImg: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+            userName: 'Long Pham',
           ),
           SizedBox(
             height: 20,

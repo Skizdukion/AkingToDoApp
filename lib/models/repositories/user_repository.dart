@@ -1,8 +1,5 @@
 import 'package:todo_app/models/providers/local_data.dart';
-import 'package:todo_app/models/repositories/task_repository.dart';
-
 import 'models/user.dart';
-import 'package:flutter/material.dart';
 
 
 abstract class UserRepository {

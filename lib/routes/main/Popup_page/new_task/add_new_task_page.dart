@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_state.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/repositories/models/task.dart';
 import 'package:todo_app/models/repositories/task_repository.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
@@ -122,12 +124,28 @@ class _NewTaskFormState extends State<NewTaskForm> {
                               print('cant create new task, field required is not fill');
                             }
                             else{
-                              FakeTaskRepository().addTask(TaskModel(
+                              // FakeTaskRepository().addTask(TaskModel(
+                              //   title: _titleController.text,
+                              //   taskId: (FakeTaskRepository().getLength() + 1).toString(),
+                              //   time: DateTime.now(),
+                              //   userId: state.user!.id,
+                              //   dueDate: state.dueDate,
+                              //   description: _descriptionController.text,
+                              //   memberList: [
+                              //     for (var item in state.memberList) item.id                                  
+                              //   ],
+                              //   projectList: [
+                              //     state.project!.id,
+                              //   ],
+                              // ));
+                              // Navigator.pop(context, true);
+                              FireBaseTaskRepository fireBaseTaskRepository = FireBaseTaskRepository();
+                              fireBaseTaskRepository.addNewTask(TaskModel(
                                 title: _titleController.text,
-                                taskId: (FakeTaskRepository().getLength() + 1).toString(),
+                                taskId: 'fuckoff',
                                 time: DateTime.now(),
-                                userId: state.user!.id,
-                                dueDate: state.dueDate,
+                                userId: FireBaseDataProvider.uid,
+                                dueDate: state.dueDate ?? DateTime.now(),
                                 description: _descriptionController.text,
                                 memberList: [
                                   for (var item in state.memberList) item.id                                  
@@ -136,7 +154,6 @@ class _NewTaskFormState extends State<NewTaskForm> {
                                   state.project!.id,
                                 ],
                               ));
-                              Navigator.pop(context, true);
                             }
                           },
                           style: buttonStyleAuthPages,

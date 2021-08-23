@@ -103,9 +103,6 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                       width: double.maxFinite,
                       child: ElevatedButton(
                         onPressed: (){
-                          for (var item in checkList.checkList) {
-                            print(item.desc);
-                          }
                           if(_titleController.text.isNotEmpty){
                             FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
                             _quickNoteRepository.addQuickNote(

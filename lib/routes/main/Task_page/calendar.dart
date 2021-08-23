@@ -11,7 +11,8 @@ import 'package:todo_app/routes/main/Task_page/slidable_task_item.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class TaskCalendar extends StatefulWidget {
-  const TaskCalendar({ Key? key }) : super(key: key);
+  const TaskCalendar({ Key? key, required this.data }) : super(key: key);
+  final List<TaskModel> data;
 
   @override
   _TaskCalendarState createState() => _TaskCalendarState();
@@ -19,18 +20,30 @@ class TaskCalendar extends StatefulWidget {
 
 class _TaskCalendarState extends State<TaskCalendar> {
   DateTime? _selectedDay;
-  late final ValueNotifier<List<TaskModel>> _selectedTasks;
+ 
+  late Stream<List<TaskModel>> _selectedTasks;
   DateTime _rangeStart = DateTime.utc(2010, 10, 16);
   DateTime _rangeEnd = DateTime.utc(2030, 3, 14);
   DateTime _focusedDay = DateTime.now();
   CalendarFormat _calendarFormat = CalendarFormat.week;
   TaskRepository _taskRepository = FakeTaskRepository();
 
+  List<TaskModel> getTaskListFromDate(DateTime date){
+    List<TaskModel> returnList = [];
+    widget.data.forEach((val) {
+      if((val.dueDate!.day == date.day)&&(val.dueDate!.month == date.month)&&(val.dueDate!.year == date.year)) {
+        returnList.add(val);
+      }
+    });
+    return returnList;
+  }
+
+
   @override
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
-    _selectedTasks = ValueNotifier(_taskRepository.getTaskListForDay('userID', _selectedDay!),);
+    _selectedTasks = FireBaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
   }
 
   @override
@@ -38,10 +51,10 @@ class _TaskCalendarState extends State<TaskCalendar> {
     return BlocListener<MainPageBloc, MainPageState>(
       listener: (context, state){
         if(state is Loading){
-          if ((_focusedDay.day == _selectedDay!.day)&&(_focusedDay.month == _selectedDay!.month)&&(_focusedDay.year == _selectedDay!.year)){
-            _selectedTasks.value = _taskRepository.getTaskListForDay('userID', _selectedDay!);
-          }
-          context.read<MainPageBloc>().add(SwitchPage(pageIndex: 0));
+          // if ((_focusedDay.day == _selectedDay!.day)&&(_focusedDay.month == _selectedDay!.month)&&(_focusedDay.year == _selectedDay!.year)){
+          //   _selectedTasks.value = _taskRepository.getTaskListForDay('userID', _selectedDay!);
+          // }
+          // context.read<MainPageBloc>().add(SwitchPage(pageIndex: 0));
         }
       },
       child: Column(
@@ -60,7 +73,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
               setState(() {
                 _focusedDay = focusedDay;
                 _selectedDay = selectedDay;
-                _selectedTasks.value = _taskRepository.getTaskListForDay('userID', selectedDay);
+                _selectedTasks = FireBaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
               });
             }
             },
@@ -73,7 +86,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
             onPageChanged: (focusedDay) {
               _focusedDay = focusedDay;
             },
-            eventLoader: (day) => _taskRepository.getTaskListForDay('userID', day),
+            eventLoader: (day) => getTaskListFromDate(day),
             calendarStyle: CalendarStyle(
               markersMaxCount: 1,
               markerDecoration: BoxDecoration(
@@ -116,16 +129,25 @@ class _TaskCalendarState extends State<TaskCalendar> {
           Text(DateFormat('E, MMM d/yyyy').format(_selectedDay!).toUpperCase(), style: textLight154StyleW400S14),
           const SizedBox(height: 8.0),
           Expanded(
-            child: ValueListenableBuilder<List<TaskModel>>(
-              valueListenable: _selectedTasks,
-              builder: (context, value, _){
+            child: StreamBuilder<List<TaskModel>>(
+              stream: _selectedTasks,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error.toString()),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final data = snapshot.requireData;
                 return ListView.builder(
-                  itemCount: value.length,
+                  itemCount: data.length,
                   itemBuilder: (context, index){
-                    return TaskItem(task: value[index], deleteTask: deleteTask, key: Key(value[index].taskId),);
+                    return TaskItem(task: data[index], deleteTask: (_){},);
                   },
                 );
-              },
+              }
             ),
           )
         ],
@@ -133,11 +155,11 @@ class _TaskCalendarState extends State<TaskCalendar> {
     );
   }
 
-  void deleteTask(String id){
-    _taskRepository.deleteTask(id);
-    _selectedTasks.value = _taskRepository.getTaskListForDay('userID', _selectedDay!);
-    setState(() {
+  // void deleteTask(String id){
+  //   _taskRepository.deleteTask(id);
+  //   _selectedTasks.value = _taskRepository.getTaskListForDay('userID', _selectedDay!);
+  //   setState(() {
      
-    });
-  }
+  //   });
+  // }
 }

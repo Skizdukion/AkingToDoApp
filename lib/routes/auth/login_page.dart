@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/models/blocs/auth/auth_bloc.dart';
+import 'package:todo_app/models/blocs/auth/auth_event.dart';
+import 'package:todo_app/models/blocs/auth/auth_state.dart';
+import 'package:todo_app/models/repositories/auth_repository.dart';
 import 'package:todo_app/routes/auth/forgot_password_page.dart';
 import 'package:todo_app/widgets/auth_form_widgets.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
@@ -13,18 +18,33 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: buildInitialInput(),
-        appBar: AppBar(backgroundColor: Colors.white10, elevation: 0, iconTheme: IconThemeData(color: Colors.black))
-      ),
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state){
+        if(state is LoginedUser){
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state){
+        if (state is AuthLoading) return buidLoading();
+        else return SafeArea(
+          child: Scaffold(
+            body: buildInitialInput(),
+            appBar: AppBar(backgroundColor: Colors.white10, elevation: 0, iconTheme: IconThemeData(color: Colors.black))
+          ),
+        );
+      }
     );
   }
 
   Widget buidLoading(){
-    return Center(
-      child: CircularProgressIndicator(
-        color: Colors.white,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.blue,
+          ),
+        ),
       ),
     );
   }
@@ -128,7 +148,7 @@ class LoginButton extends StatelessWidget {
   final formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-
+  final FireBaseAuthRepository _firebaseAuth = FireBaseAuthRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +157,7 @@ class LoginButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: ()async{
           if (formKey.currentState!.validate()){
-            loginWithEmail(context, emailController.text, passwordController.text);
+            context.read<AuthBloc>().add(Login(email: emailController.text,password: passwordController.text));
           }
         },
         style: buttonStyleAuthPages,
@@ -147,10 +167,6 @@ class LoginButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void loginWithEmail(BuildContext context, String email, String password){
-    
   }
 }
 
