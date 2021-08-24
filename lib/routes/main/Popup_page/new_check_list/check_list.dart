@@ -68,7 +68,7 @@ class _CheckNoteItemState extends State<CheckNoteItem> {
                   child: TextFormField(
                     textInputAction: TextInputAction.done,
                     style: textDarkStyleW400S16,
-                    initialValue: value.checkList[widget.index].desc,
+                    initialValue: value.checkList[widget.index].listTitle,
                     decoration: new InputDecoration(
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -76,6 +76,10 @@ class _CheckNoteItemState extends State<CheckNoteItem> {
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                     ),
+                    onChanged: (val){
+                      // print(val);
+                      value.changeTitle(widget.index, val);
+                    },
                   ),
                 ),
               ),

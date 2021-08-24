@@ -19,7 +19,7 @@ class AuthLoading extends AuthState{
 class LoginedUser extends AuthState{
   const LoginedUser({required this.user});
 
-  final FireBaseDataProvider user;
+  final FirebaseDataProvider user;
 
   @override
   List<Object?> get props => [user];

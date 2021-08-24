@@ -9,9 +9,8 @@ import 'package:todo_app/routes/main/popup_page/view_task_page/view_task_page.da
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class TaskItem extends StatefulWidget {
-  const TaskItem({ Key? key, required this.task, required this.deleteTask}) : super(key: key);
+  const TaskItem({ Key? key, required this.task}) : super(key: key);
   final TaskModel task;
-  final Function(String) deleteTask;
 
   @override
   _TaskItemState createState() => _TaskItemState();
@@ -53,7 +52,7 @@ class _TaskItemState extends State<TaskItem> {
           child: IconSlideAction(
             color: Colors.white10,
             iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
-            onTap:() => widget.deleteTask(widget.task.taskId),
+            onTap: deleteTask,
           ),
           decoration: BoxDecoration(
             color: Colors.white10,
@@ -80,14 +79,18 @@ class _TaskItemState extends State<TaskItem> {
         IconSlideAction(
           color: Colors.white10,
           iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
-          onTap:() => widget.deleteTask(widget.task.taskId),
+          onTap: deleteTask,
         ),
       ],
     );
   }
 
   void changDoneState(){
-    FireBaseTaskRepository().changeDoneState(widget.task);
+    FirebaseTaskRepository().changeDoneState(widget.task);
+  }
+
+  void deleteTask(){
+    FirebaseTaskRepository().deleteTask(widget.task.taskId);
   }
 
   _showAddMenu() async{

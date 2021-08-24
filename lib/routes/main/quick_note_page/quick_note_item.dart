@@ -26,14 +26,14 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
           IconSlideAction(
             color: Colors.white10,
             iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
-            onTap: (){},
+            onTap: () => FirebaseQuickNoteRepository().deleteTask(widget.item.id),
           ),
         ],
         secondaryActions: <Widget>[
           IconSlideAction(
             color: Colors.white10,
             iconWidget: Icon(Icons.delete_outline, color: Color.fromRGBO(249, 96, 96, 1)),
-            onTap: (){},
+            onTap:  () => FirebaseQuickNoteRepository().deleteTask(widget.item.id),
           ),
         ],
         child: Material(
@@ -77,12 +77,10 @@ class QuickNoteCheckListItem extends StatefulWidget {
 
 class _QuickNoteCheckListItemState extends State<QuickNoteCheckListItem> {
 
-  late bool isDone;
-  FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
+  FirebaseQuickNoteRepository _quickNoteRepository = FirebaseQuickNoteRepository();
 
   @override
   void initState() {
-    isDone = widget.item.isDone;
     super.initState();
   }
 
@@ -99,15 +97,12 @@ class _QuickNoteCheckListItemState extends State<QuickNoteCheckListItem> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5)
               ),
-              value: isDone,
+              value: widget.item.isDone,
               onChanged: (bool? val) {  
-                setState(() {
-                  isDone = val!;
-                });
                 _quickNoteRepository.changeDoneState(widget.parentId, widget.item.id);
               },
             ),
-            Flexible(child: Text('${widget.item.desc}', style: isDone ? textLineThroughStyle.copyWith(color: Color.fromRGBO(49, 49, 49, 1),) : textDarkStyleW400S16,)),
+            Flexible(child: Text('${widget.item.listTitle}', style: widget.item.isDone ? textLineThroughStyle.copyWith(color: Color.fromRGBO(49, 49, 49, 1),) : textDarkStyleW400S16,)),
           ],
         ),
       ),

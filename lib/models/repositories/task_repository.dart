@@ -14,11 +14,11 @@ abstract class TaskRepository{
   const TaskRepository();
 }
 
-class FireBaseTaskRepository{
-  const FireBaseTaskRepository();
+class FirebaseTaskRepository{
+  const FirebaseTaskRepository();
 
   static int getTaskType = 2;
-  static FireBaseDataProvider fireBaseDataProvider =  FireBaseDataProvider();
+  static FirebaseDataProvider fireBaseDataProvider =  FirebaseDataProvider();
 
   Stream<List<TaskModel>> getStreamTaskListForRange(DateTime startTime, DateTime endTime){
     Timestamp startTimestamp = Timestamp.fromDate(startTime);
@@ -76,7 +76,7 @@ class FireBaseTaskRepository{
   }
 
   void changeDoneState(TaskModel task){
-    FirebaseFirestore.instance.collection('task').doc(task.taskId).set({
+    FirebaseFirestore.instance.collection('task').doc(task.taskId).update({
       'createdDate': Timestamp.fromDate(task.time),
       'description': task.description,
       'dueDate': (task.dueDate == null) ? null : Timestamp.fromDate(task.dueDate!),
@@ -86,6 +86,10 @@ class FireBaseTaskRepository{
       'memberList': task.memberList,
       'projectList': task.projectList,
     });
+  }
+
+  void deleteTask(String id){
+    FirebaseFirestore.instance.collection('task').doc(id).delete();
   }
 }
 

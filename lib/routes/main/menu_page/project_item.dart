@@ -8,6 +8,11 @@ class ProjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String disPlayTitle = item.title;
+    int titleLen = item.title.length;
+    if (titleLen > 15){
+      disPlayTitle = disPlayTitle.replaceRange(12, titleLen, '...');
+    }
     return Container(
       width: 165,
       height: 180,
@@ -27,7 +32,7 @@ class ProjectItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50,),
-            Text('${item.title}', style: TextStyle(fontSize: 18, color: Colors.black),),
+            Text(disPlayTitle, style: TextStyle(fontSize: 18, color: Colors.black),),
             SizedBox(height: 20,),
             Text('${item.totalTask} Tasks', style: textLight154StyleW400S14.copyWith(fontSize: 16),)
           ],

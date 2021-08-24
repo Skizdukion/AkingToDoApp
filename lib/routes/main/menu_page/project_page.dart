@@ -42,13 +42,17 @@ class ProjectPageBody extends StatefulWidget {
 
 class _ProjectPageBodyState extends State<ProjectPageBody> {
 
-  late ProjectRepository _projectRepository;
-  late ValueNotifier<List<ProjectModel>> _projectlist;
+  // late ProjectRepository _projectRepository;
+  // late ValueNotifier<List<ProjectModel>> _projectlist;
+  late Stream<List<ProjectModel>> projectList;
+  late FirebaseProjectRepository _firebaseRepository = FirebaseProjectRepository();
+
 
   @override
   void initState() {
-    _projectRepository = FakeProjectRepository();
-    _projectlist = ValueNotifier([]..addAll(_projectRepository.getPorjectList()));
+    // _projectRepository = FakeProjectRepository();
+    // _projectlist = ValueNotifier([]..addAll(_projectRepository.getPorjectList()));
+    projectList = _firebaseRepository.getStreamProjectList();
     super.initState();
   }
 
@@ -56,16 +60,25 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 50, right: 16, left: 16),
-      child: ValueListenableBuilder<List<ProjectModel>>(
-        valueListenable: _projectlist,
-        builder: (context, value, _){
+      child: StreamBuilder<List<ProjectModel>>(
+        stream: projectList,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final data = snapshot.requireData;
           return ListView(
             children: [
               Wrap(
                 spacing: 30,
                 runSpacing: 30,
                 children: [
-                  for(var index in value) ProjectItem(item: index,),
+                  for(var index in data) ProjectItem(item: index,),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: SizedBox(
@@ -84,16 +97,16 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
                     ),
                   ),
                 ],
-              ),
-            ],
+              )
+            ]
           );
         }
-      ),
+      )
     );
   }
 
-  _showAddMenu() async{
-    bool? isAdd = await showDialog(
+  _showAddMenu() {
+    showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
@@ -106,10 +119,46 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
           )
         );
     });
-    if (isAdd != null)
-    { 
-      _projectlist.value.clear();
-      _projectlist.value = []..addAll(_projectRepository.getPorjectList());
-    }
   }
 }
+
+// @override
+// Widget build(BuildContext context) {
+//   return Padding(
+//     padding: const EdgeInsets.only(top: 50, right: 16, left: 16),
+//     child: ValueListenableBuilder<List<ProjectModel>>(
+//       valueListenable: _projectlist,
+//       builder: (context, value, _){
+//         return ListView(
+//           children: [
+//             Wrap(
+//               spacing: 30,
+//               runSpacing: 30,
+//               children: [
+//                 for(var index in value) ProjectItem(item: index,),
+//                 Padding(
+//                   padding: const EdgeInsets.only(bottom: 20),
+//                   child: SizedBox(
+//                     width: 80,
+//                     height: 80,
+//                     child: ElevatedButton(
+//                       onPressed: _showAddMenu,
+//                       style: buttonStyleMenuPage,
+//                       child: Center(
+//                         child: Text(
+//                           '+',
+//                           style: TextStyle(color: Colors.white, fontSize: 24),
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         );
+//       }
+//     ),
+//   );
+// }
+

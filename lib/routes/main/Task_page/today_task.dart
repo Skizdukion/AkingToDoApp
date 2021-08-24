@@ -23,27 +23,27 @@ class _TodayPageState extends State<TodayPage> {
   TaskRepository _taskRepository = FakeTaskRepository();
   late DateTime now;
   late DateTime tommorrow;
-  late ValueNotifier<List<TaskModel>> todayTask;
-  late ValueNotifier<List<TaskModel>> tommorrowTask;
+  // late ValueNotifier<List<TaskModel>> todayTask;
+  // late ValueNotifier<List<TaskModel>> tommorrowTask;
   late String nowText;
   late String tommorrowText;
   late Stream<List<TaskModel>> tommorowTaskList;
   late Stream<List<TaskModel>> todayTaskList;
-  late FireBaseTaskRepository _fireBaseTaskRepository = FireBaseTaskRepository();
+  late FirebaseTaskRepository _fireBaseTaskRepository = FirebaseTaskRepository();
 
 
   @override
   void initState() {
     now = DateTime.now();
     tommorrow = now.add(Duration(days: 1));
-    todayTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', now));
-    tommorrowTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', tommorrow));
+    // todayTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', now));
+    // tommorrowTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', tommorrow));
     nowText =('TODAY, ' + DateFormat('MMM d/yyyy').format(now)).toUpperCase();
     tommorrowText =('TOMMORROW, ' + DateFormat('MMM d/yyyy').format(tommorrow)).toUpperCase();
     AuthState authState = BlocProvider.of<AuthBloc>(context).state;
     if(authState is LoginedUser){
-      todayTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(DateTime.now());
-      tommorowTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(DateTime.now().add(Duration(days: 1)));
+      todayTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(now);
+      tommorowTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(tommorrow);
     }
     super.initState();
   }
@@ -74,7 +74,7 @@ class _TodayPageState extends State<TodayPage> {
                   ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index){
-                      return TaskItem(task: data[index], deleteTask: (_){},);
+                      return TaskItem(task: data[index], key: Key(data[index].taskId),);
                     },
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -103,7 +103,7 @@ class _TodayPageState extends State<TodayPage> {
                   ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index){
-                      return TaskItem(task: data[index], deleteTask: (_){},);
+                      return TaskItem(task: data[index], key: Key(data[index].taskId),);
                     },
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

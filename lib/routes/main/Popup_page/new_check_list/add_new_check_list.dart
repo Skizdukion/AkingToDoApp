@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/repositories/models/check.dart';
 import 'package:todo_app/models/repositories/models/quick_note.dart';
 import 'package:todo_app/models/repositories/models/radio_color.dart';
@@ -104,16 +105,17 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                       child: ElevatedButton(
                         onPressed: (){
                           if(_titleController.text.isNotEmpty){
-                            FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
+                            FirebaseQuickNoteRepository _quickNoteRepository = FirebaseQuickNoteRepository();
                             _quickNoteRepository.addQuickNote(
                               QuickNoteModel(
                                 checkList: checkList.checkList,
-                                id: (_quickNoteRepository.getQuickNoteListLength() + 1).toString(), 
+                                id: 'this field is unneccessary for firebase',
                                 title: _titleController.text,
                                 color: color.getSelectColor(),
+                                userId: FirebaseDataProvider.uid,
                               )
                             ); 
-                            Navigator.pop(context, true);                           
+                            // Navigator.pop(context, true);                           
                           }                      
                         },
                         style: buttonStyleAuthPages,

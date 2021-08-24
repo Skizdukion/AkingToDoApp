@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_app/models/repositories/models/task.dart';
 import 'package:todo_app/models/repositories/models/user.dart';
 
-class FireBaseDataProvider{
+class FirebaseDataProvider{
 
-  FireBaseDataProvider(){
+  FirebaseDataProvider(){
     if (uid != ''){
       userData = FirebaseFirestore.instance.collection('user_data');
       userTaskRef = FirebaseFirestore.instance.collection('task').where('userId', isEqualTo: uid);

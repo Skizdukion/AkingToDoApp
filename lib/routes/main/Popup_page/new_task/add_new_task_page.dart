@@ -139,12 +139,12 @@ class _NewTaskFormState extends State<NewTaskForm> {
                               //   ],
                               // ));
                               // Navigator.pop(context, true);
-                              FireBaseTaskRepository fireBaseTaskRepository = FireBaseTaskRepository();
+                              FirebaseTaskRepository fireBaseTaskRepository = FirebaseTaskRepository();
                               fireBaseTaskRepository.addNewTask(TaskModel(
                                 title: _titleController.text,
                                 taskId: 'fuckoff',
                                 time: DateTime.now(),
-                                userId: FireBaseDataProvider.uid,
+                                userId: FirebaseDataProvider.uid,
                                 dueDate: state.dueDate ?? DateTime.now(),
                                 description: _descriptionController.text,
                                 memberList: [

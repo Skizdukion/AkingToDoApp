@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/providers/local_data.dart';
+import 'package:uuid/uuid.dart';
 import 'models/project.dart';
 
 
@@ -7,6 +11,57 @@ abstract class ProjectRepository{
   void deleteProject(String projectId);
   void addProject(ProjectModel item);
   const ProjectRepository();
+}
+
+class FirebaseProjectRepository{
+  const FirebaseProjectRepository();
+  static FirebaseDataProvider fireBaseDataProvider =  FirebaseDataProvider();
+
+  Stream<List<ProjectModel>> getStreamProjectList(){
+    return fireBaseDataProvider.userProjectRef.orderBy('createdDate', descending: false).snapshots().map(_projectListDataFromSnapShot);
+  }
+
+  List<ProjectModel> _projectListDataFromSnapShot(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc){
+      return _projectDataFromSnapShot(doc);
+    }).toList();
+  }
+
+  ProjectModel _projectDataFromSnapShot(DocumentSnapshot snapshot){
+    return ProjectModel(
+      id: snapshot.reference.id, 
+      title: snapshot['title'],
+      color: _convertMapToColor(snapshot),
+      userId: snapshot['userId'],
+    );
+  }
+
+  Color _convertMapToColor(DocumentSnapshot snapshot){
+    Map<String, dynamic> rgbColor = snapshot['color'];
+    return Color.fromRGBO(rgbColor['red'], rgbColor['green'], rgbColor['blue'], (rgbColor['opacity'] as num).toDouble());
+  }
+
+  Map converColorToMap(Color color){
+    Map<String, num> mapColor = {
+      'red': color.red,
+      'blue': color.blue,
+      'green': color.green,
+      'opacity': color.opacity,
+    };
+    return mapColor;
+  }
+
+  void addProject(ProjectModel project){
+    var uuid = Uuid();
+    String randomId = uuid.v4();
+    FirebaseFirestore.instance.collection('project').doc(randomId).set({
+      'userId': project.userId,
+      'title': project.title,
+      'totalTask': 0,
+      'color': converColorToMap(project.color),
+      'createdDate': Timestamp.fromDate(DateTime.now()),
+    });
+  }
 }
 
 class FakeProjectRepository extends ProjectRepository{

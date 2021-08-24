@@ -5,12 +5,14 @@ class ProjectModel {
   final int totalTask;
   final id;
   final Color color;
+  final userId;
 
   ProjectModel({
     required this.title,
     this.totalTask = 0,
     required this.id,
     this.color = Colors.white,
+    required this.userId,
   });
 
   @override

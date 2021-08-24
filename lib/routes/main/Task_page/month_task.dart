@@ -17,7 +17,7 @@ class _MonthPageState extends State<MonthPage> {
 
   @override
   void initState() {
-    taskList = FireBaseTaskRepository().getStreamAllTask();
+    taskList = FirebaseTaskRepository().getStreamAllTask();
     super.initState();
   }
 

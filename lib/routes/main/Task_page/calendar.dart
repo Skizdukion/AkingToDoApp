@@ -43,7 +43,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
-    _selectedTasks = FireBaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
+    _selectedTasks = FirebaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
   }
 
   @override
@@ -73,7 +73,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
               setState(() {
                 _focusedDay = focusedDay;
                 _selectedDay = selectedDay;
-                _selectedTasks = FireBaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
+                _selectedTasks = FirebaseTaskRepository().getStreamTaskListForDay(_selectedDay!);
               });
             }
             },
@@ -144,7 +144,7 @@ class _TaskCalendarState extends State<TaskCalendar> {
                 return ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index){
-                    return TaskItem(task: data[index], deleteTask: (_){},);
+                    return TaskItem(task: data[index], key: Key(data[index].taskId),);
                   },
                 );
               }

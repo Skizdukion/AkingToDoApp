@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/repositories/models/quick_note.dart';
 import 'package:todo_app/models/repositories/models/radio_color.dart';
 import 'package:todo_app/models/repositories/quick_note_repository.dart';
@@ -50,7 +51,7 @@ class NewNoteForm extends StatefulWidget {
 
 class _NewNoteFormState extends State<NewNoteForm> {
 
-  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class _NewNoteFormState extends State<NewNoteForm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
-                  DescriptionNotePanel(textController: _descController,),
+                  DescriptionNotePanel(textController: _titleController,),
                   SizedBox(height: 20),
                   ColorPicker(),
                   SizedBox(height: 30),
@@ -87,19 +88,18 @@ class _NewNoteFormState extends State<NewNoteForm> {
                       width: double.maxFinite,
                       child: ElevatedButton(
                         onPressed: (){
-                          // print(_descController.text);
-                          // print(color.getSelectColor());
-                          if(_descController.text.isNotEmpty){
-                            FakeQuickNoteRepository _quickNoteRepository = FakeQuickNoteRepository();
+                          if(_titleController.text.isNotEmpty){
+                            FirebaseQuickNoteRepository _quickNoteRepository = FirebaseQuickNoteRepository();
                             _quickNoteRepository.addQuickNote(
                               QuickNoteModel(
                                 checkList: [],
-                                id: (_quickNoteRepository.getQuickNoteListLength() + 1).toString(), 
-                                title: _descController.text,
+                                id: 'this field is unneccessary for firebase',
+                                title: _titleController.text,
                                 color: color.getSelectColor(),
+                                userId: FirebaseDataProvider.uid,
                               )
                             ); 
-                            Navigator.pop(context, true);                           
+                            // Navigator.pop(context, true);                           
                           }                      
                         },
                         style: buttonStyleAuthPages,

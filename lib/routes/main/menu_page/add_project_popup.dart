@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/repositories/models/project.dart';
 import 'package:todo_app/models/repositories/models/radio_color.dart';
 import 'package:todo_app/models/repositories/project_repository.dart';
@@ -67,13 +68,15 @@ class AddProjectMenu extends StatelessWidget {
                       style: buttonStyleAuthPages,
                       onPressed: (){
                         if (_titleController.text != '') {
+                          print(color.getSelectColor());
                           ProjectModel addProject = ProjectModel(
                             title: _titleController.text,
-                            id: (FakeProjectRepository.localData.projectList.length + 1).toString(),
+                            id: 'this field is not neccessary',
                             color: color.getSelectColor(),
+                            userId: FirebaseDataProvider.uid,
                           );
-                          FakeProjectRepository().addProject(addProject);
-                          Navigator.pop(context, true);
+                          FirebaseProjectRepository().addProject(addProject);
+                          Navigator.pop(context);
                         }
                       },
                       child: Text(

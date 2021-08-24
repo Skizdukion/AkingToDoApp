@@ -261,152 +261,153 @@ class LocalDataProvider {
         projectList: ['1', '2', '3']),
   ];
 
-  List<QuickNoteModel> quickNoteList = [
-    QuickNoteModel(
-        id: '1',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Meeting with Jessica in Central Park at 10:30PM',
-        checkList: [
-          QuickNoteCheckListItemModel(
-              desc: 'Math fasfjqw hgafhq gahfhq gashfgqh ghashf', id: '0'),
-          QuickNoteCheckListItemModel(desc: 'Chemistry', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Literature', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Physic', id: '3'),
-        ]),
-    QuickNoteModel(
-        id: '2',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Clean house',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Kitchen', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Bath room', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Bed room', id: '3'),
-        ]),
-    QuickNoteModel(
-        id: '3',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Make dinner',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Buy fish', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Make sweetdish meatball', id: '2'),
-        ]),
-    QuickNoteModel(
-        id: '4',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Random stuff',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
-        ]),
-    QuickNoteModel(
-        id: '5',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Random stuff 1',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
-        ]),
-    QuickNoteModel(
-        id: '6',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Random stuff 2',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
-        ]),
-    QuickNoteModel(
-        id: '7',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Random stuff 3',
-        checkList: [
-          QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 5', id: '5'),
-          QuickNoteCheckListItemModel(desc: 'Random stuff 6', id: '6'),
-        ]),
-    QuickNoteModel(
-        id: '8',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Radom QuickNote',
-        checkList: []
-    ),
-    QuickNoteModel(
-        id: '9',
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        title: 'Radom QuickNote 2',
-        checkList: []
-    ),
-  ];
+  List<QuickNoteModel> quickNoteList = [];
+  //   QuickNoteModel(
+  //       id: '1',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Meeting with Jessica in Central Park at 10:30PM',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(
+  //             desc: 'Math fasfjqw hgafhq gahfhq gashfgqh ghashf', id: '0'),
+  //         QuickNoteCheckListItemModel(desc: 'Chemistry', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Literature', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Physic', id: '3'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '2',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Clean house',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Kitchen', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Bath room', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Bed room', id: '3'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '3',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Make dinner',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Buy fish', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Make sweetdish meatball', id: '2'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '4',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Random stuff',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '5',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Random stuff 1',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '6',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Random stuff 2',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '7',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Random stuff 3',
+  //       checkList: [
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 1', id: '1'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 2', id: '2'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 3', id: '3'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 4', id: '4'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 5', id: '5'),
+  //         QuickNoteCheckListItemModel(desc: 'Random stuff 6', id: '6'),
+  //       ]),
+  //   QuickNoteModel(
+  //       id: '8',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Radom QuickNote',
+  //       checkList: []
+  //   ),
+  //   QuickNoteModel(
+  //       id: '9',
+  //       color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+  //           .withOpacity(1.0),
+  //       title: 'Radom QuickNote 2',
+  //       checkList: []
+  //   ),
+  // ];
 
-  List<ProjectModel> projectList = [
-    ProjectModel(
-        title: 'Personal',
-        totalTask: 10,
-        color: Color.fromRGBO(96, 116, 249, 1),
-        id: '1'),
-    ProjectModel(
-        title: 'Teamworks',
-        totalTask: 10,
-        color: Color.fromRGBO(228, 43, 106, 1),
-        id: '2'),
-    ProjectModel(
-        title: 'Home',
-        totalTask: 10,
-        color: Color.fromRGBO(90, 187, 86, 1),
-        id: '3'),
-    ProjectModel(
-        title: 'Meet',
-        totalTask: 10,
-        color: Color.fromRGBO(188, 121, 195, 1),
-        id: '4'),
-    ProjectModel(
-        title: 'School',
-        totalTask: 10,
-        color: Color.fromRGBO(90, 187, 86, 1),
-        id: '5'),
-    ProjectModel(
-        title: 'Games',
-        totalTask: 10,
-        color: Color.fromRGBO(188, 121, 195, 1),
-        id: '6'),
-    ProjectModel(
-        title: 'Friend',
-        totalTask: 10,
-        color: Color.fromRGBO(90, 187, 86, 1),
-        id: '7'),
-    ProjectModel(
-        title: 'Workout',
-        totalTask: 10,
-        color: Color.fromRGBO(228, 43, 106, 1),
-        id: '8'),
-    ProjectModel(
-        title: 'Important',
-        totalTask: 10,
-        color: Color.fromRGBO(188, 121, 195, 1),
-        id: '9'),
-    ProjectModel(
-        title: 'Radom thing',
-        totalTask: 10,
-        color: Color.fromRGBO(228, 43, 106, 1),
-        id: '10'),
-  ];
+
+  List<ProjectModel> projectList = [];
+  //   ProjectModel(
+  //       title: 'Personal',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(96, 116, 249, 1),
+  //       id: '1'),
+  //   ProjectModel(
+  //       title: 'Teamworks',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(228, 43, 106, 1),
+  //       id: '2'),
+  //   ProjectModel(
+  //       title: 'Home',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(90, 187, 86, 1),
+  //       id: '3'),
+  //   ProjectModel(
+  //       title: 'Meet',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(188, 121, 195, 1),
+  //       id: '4'),
+  //   ProjectModel(
+  //       title: 'School',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(90, 187, 86, 1),
+  //       id: '5'),
+  //   ProjectModel(
+  //       title: 'Games',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(188, 121, 195, 1),
+  //       id: '6'),
+  //   ProjectModel(
+  //       title: 'Friend',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(90, 187, 86, 1),
+  //       id: '7'),
+  //   ProjectModel(
+  //       title: 'Workout',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(228, 43, 106, 1),
+  //       id: '8'),
+  //   ProjectModel(
+  //       title: 'Important',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(188, 121, 195, 1),
+  //       id: '9'),
+  //   ProjectModel(
+  //       title: 'Radom thing',
+  //       totalTask: 10,
+  //       color: Color.fromRGBO(228, 43, 106, 1),
+  //       id: '10'),
+  // ];
 
   factory LocalDataProvider() {
     return _singleton;
