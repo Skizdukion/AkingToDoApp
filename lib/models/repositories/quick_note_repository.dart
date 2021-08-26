@@ -13,11 +13,18 @@ abstract class QuickNoteRepository{
 }
 
 class FirebaseQuickNoteRepository {
-  const FirebaseQuickNoteRepository();
-  static FirebaseDataProvider fireBaseDataProvider =  FirebaseDataProvider();
+  FirebaseQuickNoteRepository(){
+    userQuickNoteRef = FirebaseFirestore.instance.collection('quick_note').where('userId', isEqualTo: FirebaseDataProvider.uid);
+  }
+
+  late Query userQuickNoteRef;
+
+  Stream<QuerySnapshot> requestTotalQuickNoteCount() {
+    return userQuickNoteRef.snapshots();
+  }
 
   Stream<List<QuickNoteModel>> getStreamQuickNoteList(){
-    return fireBaseDataProvider.userQuickNoteRef.orderBy('createdDate', descending: true).snapshots().map(_quickNoteListDataFromSnapShot);
+    return userQuickNoteRef.orderBy('createdDate', descending: true).snapshots().map(_quickNoteListDataFromSnapShot);
   }
 
   List<QuickNoteModel> _quickNoteListDataFromSnapShot(QuerySnapshot snapshot){

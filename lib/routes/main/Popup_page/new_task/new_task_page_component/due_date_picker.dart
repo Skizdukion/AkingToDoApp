@@ -59,7 +59,7 @@ class _DueDatePickerState extends State<DueDatePicker> {
   }
 
   _showAddMenu() async {
-    DateTime dueDate = await showDialog(
+    DateTime? dueDate = await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
@@ -78,7 +78,7 @@ class _DueDatePickerState extends State<DueDatePicker> {
           );
       }
     );
-    context.read<NewTaskBloc>().add(DueDateOnChange(dueDate: dueDate));
+    if (dueDate != null) context.read<NewTaskBloc>().add(DueDateOnChange(dueDate: dueDate));
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/providers/local_data.dart';
@@ -14,11 +15,26 @@ abstract class ProjectRepository{
 }
 
 class FirebaseProjectRepository{
-  const FirebaseProjectRepository();
-  static FirebaseDataProvider fireBaseDataProvider =  FirebaseDataProvider();
+  FirebaseProjectRepository(){
+    userProjectRef = FirebaseFirestore.instance.collection('project').where('userId', isEqualTo: FirebaseDataProvider.uid);
+  }
+
+  late Query userProjectRef;
+
+  Future<List<ProjectModel>> getProjectList() async{
+    List<ProjectModel> returnList = [];
+    await userProjectRef.get().then((doc) => {
+      returnList = _projectListDataFromSnapShot(doc),
+    });
+    return returnList;
+  }
+
+  Stream<ProjectModel> getProjectWithId(String id) {
+    return FirebaseFirestore.instance.collection('project').doc(id).snapshots().map(_projectDataFromSnapShot);
+  }
 
   Stream<List<ProjectModel>> getStreamProjectList(){
-    return fireBaseDataProvider.userProjectRef.orderBy('createdDate', descending: false).snapshots().map(_projectListDataFromSnapShot);
+    return userProjectRef.orderBy('createdDate', descending: false).snapshots().map(_projectListDataFromSnapShot);
   }
 
   List<ProjectModel> _projectListDataFromSnapShot(QuerySnapshot snapshot){
@@ -33,6 +49,7 @@ class FirebaseProjectRepository{
       title: snapshot['title'],
       color: _convertMapToColor(snapshot),
       userId: snapshot['userId'],
+      totalTask: snapshot['totalTask'],
     );
   }
 
@@ -61,6 +78,42 @@ class FirebaseProjectRepository{
       'color': converColorToMap(project.color),
       'createdDate': Timestamp.fromDate(DateTime.now()),
     });
+  }
+
+  void updateTotalTask(String id, int num) async{
+    FirebaseFirestore.instance.collection('project').doc(id).get().then((value) => {
+      _updateTotalTaskWithSnapshot(value, num),
+    });
+  }
+
+  void _updateTotalTaskWithSnapshot(DocumentSnapshot doc, int num){
+    ProjectModel project = _projectDataFromSnapShot(doc);
+    project.totalTask += num;
+    updateProjectDocument(project);
+  }
+
+  void updateProjectDocument(ProjectModel project){
+    FirebaseFirestore.instance.collection('project').doc(project.id).update({
+      'userId': project.userId,
+      'title': project.title,
+      'totalTask': project.totalTask,
+      'color': converColorToMap(project.color),
+    });
+  }
+
+  List<ProjectModel> getProjectListContainString(String searchString, List<ProjectModel> searchList){
+    List<ProjectModel>? returnList = []; 
+    if(searchString != ''){
+      for (var item in searchList) {
+        if (item.title.toLowerCase().contains(searchString.toLowerCase())){
+          returnList.add(item);
+        }
+      }
+    }
+    else{ 
+      returnList = []..addAll(searchList);
+    }
+    return returnList;
   }
 }
 

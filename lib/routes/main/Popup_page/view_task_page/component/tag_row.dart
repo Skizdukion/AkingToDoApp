@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/models/repositories/models/project.dart';
 import 'package:todo_app/models/repositories/project_repository.dart';
 import 'package:todo_app/routes/main/popup_page/view_task_page/component/component_template.dart';
+import 'package:todo_app/utils/frequent_use_fuction.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class TagRow extends StatelessWidget {
@@ -40,13 +41,25 @@ class TagRow extends StatelessWidget {
   }
 }
 
-class ProjectTag extends StatelessWidget {
+class ProjectTag extends StatefulWidget {
   const ProjectTag({ Key? key, required this.projectId }) : super(key: key);
   final String projectId;
-  
+
   @override
-  Widget build(BuildContext context) {
-    ProjectModel project = FakeProjectRepository().getProjectWithId(projectId)!;
+  _ProjectTagState createState() => _ProjectTagState();
+}
+
+class _ProjectTagState extends State<ProjectTag> {
+
+  late Stream<ProjectModel> project;
+  @override
+  void initState() {  
+    project = FirebaseProjectRepository().getProjectWithId(widget.projectId);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context){
     return Padding(
       padding: const EdgeInsets.only(right: 10),
       child: Container(
@@ -56,13 +69,26 @@ class ProjectTag extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            project.title, 
-            style: TextStyle(
-              color: Color.fromRGBO(96, 116, 249, 1),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          child: StreamBuilder<ProjectModel>(
+            stream: project,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Failed'),
+                );
+              }
+              if (!snapshot.hasData) {
+                return const Text('...');
+              }
+              return Text(
+                limitString(snapshot.data!.title, 15), 
+                style: TextStyle(
+                  color: Color.fromRGBO(96, 116, 249, 1),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }
           ),
         ),
       ),

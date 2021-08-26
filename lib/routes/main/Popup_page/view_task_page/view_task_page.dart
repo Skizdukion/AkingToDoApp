@@ -18,13 +18,11 @@ class TaskViewPage extends StatefulWidget {
 }
 
 class _TaskViewPageState extends State<TaskViewPage> {
-  FakeUserRepository _userRepository = FakeUserRepository();
-  // late UserModel userTaskOwner;
+  late Stream<UserModel> userOwnerStream;
 
   @override
   void initState() {
-    // userTaskOwner = _userRepository.getUserWithId(widget.item.userId) ?? ;
-    // print(widget.item.description);
+    userOwnerStream = FirebaseUserRepository().getUserWithId(widget.item.userId);
     super.initState();
   }
 
@@ -82,15 +80,33 @@ class _TaskViewPageState extends State<TaskViewPage> {
           SizedBox(
             height: 20,
           ),
-          AsigneeRow(
-            urlImg: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
-            userName: 'Long Pham',
+          StreamBuilder<UserModel>(
+            stream: userOwnerStream,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Failed'),
+                );
+              }
+              if (!snapshot.hasData) {
+                return const AsigneeRow(
+                  urlImg: 'https://i.pinimg.com/originals/10/b2/f6/10b2f6d95195994fca386842dae53bb2.png',
+                  userName: '...',
+                );
+              }
+              UserModel userOwner = snapshot.data!;
+              return AsigneeRow(
+                urlImg: userOwner.imgUrl,
+                userName: userOwner.name,
+              );
+            }
           ),
           SizedBox(
             height: 20,
           ),
           DueDateRow(
             dueDate: widget.item.dueDate,
+            isEvent: widget.item.isEvent,
           ),
           SizedBox(
             height: 20,

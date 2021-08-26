@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProjectModel {
   final String title;
-  final int totalTask;
+  int totalTask;
   final id;
   final Color color;
   final userId;

@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/models/repositories/models/project.dart';
+import 'package:todo_app/models/repositories/models/user.dart';
 import 'package:todo_app/models/repositories/project_repository.dart';
 import 'package:todo_app/models/repositories/user_repository.dart';
 
@@ -17,39 +19,40 @@ class NewTaskBloc extends Bloc<NewTaskEvent, NewTaskState>{
 
   @override
   Stream<NewTaskState> mapEventToState(NewTaskEvent event) async*{
-    FakeUserRepository _userRepository = FakeUserRepository();
-    FakeProjectRepository _projectRepository = FakeProjectRepository();
+    FirebaseProjectRepository firebaseProjectRepository = FirebaseProjectRepository();
+    FirebaseUserRepository firebaseUserRepository = FirebaseUserRepository();
+    List<ProjectModel> allProjectList =  await firebaseProjectRepository.getProjectList();
+    List<UserModel> allUserList =  await firebaseUserRepository.getUserList();
 
     if (event is AsigneeFieldOnTap){
       if (state.status == NewTaskStatus.normal) yield state.copyWith(
-        userList: _userRepository.getUserListContainString(state.asigneeField),
+        userList: firebaseUserRepository.getUserListContainString(state.asigneeField, allUserList),
         status: NewTaskStatus.asigneeSelecting,
       );
     }
     if (event is AsigneeFieldOnChange){
+      print(event.fieldValue);
       yield state.copyWith(
-        userList: _userRepository.getUserListContainString(event.fieldValue),
+        userList: firebaseUserRepository.getUserListContainString(event.fieldValue, allUserList),
         status: NewTaskStatus.asigneeSelecting,
         asigneeField: event.fieldValue,
       );
     }
     if (event is AsigneeUserOnSelected){
-      final user = event.userSelected;
       yield state.copyWith(
-        user: user,
+        user: event.userSelected,
         status: NewTaskStatus.normal,
       );
     }
 
     if (event is ProjectFieldOnTap){
-      if (state.status == NewTaskStatus.normal) yield state.copyWith(
-        projectList: _projectRepository.getProjectListContainString(state.projectField),
-        status: NewTaskStatus.projectSelecting,
-      );
+      if (state.status == NewTaskStatus.normal){ 
+        yield state.copyWith(projectList: firebaseProjectRepository.getProjectListContainString(state.projectField, allProjectList), status: NewTaskStatus.projectSelecting,);
+      }
     }
     if (event is ProjectFieldOnChange){
       yield state.copyWith(
-        projectList: _projectRepository.getProjectListContainString(event.fieldValue),
+        projectList: firebaseProjectRepository.getProjectListContainString(event.fieldValue, allProjectList),
         status: NewTaskStatus.projectSelecting,
         projectField: event.fieldValue,
       );
@@ -71,4 +74,6 @@ class NewTaskBloc extends Bloc<NewTaskEvent, NewTaskState>{
       );
     }
   }
+
+
 }

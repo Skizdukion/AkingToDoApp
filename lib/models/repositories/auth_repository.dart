@@ -30,6 +30,16 @@ class FireBaseAuthRepository extends AuthRepository{
     }
   }
 
+  Future signOut() async{
+    try{
+      return await _firebaseAuth.signOut();
+    }
+    catch (e){
+      print(e.toString());
+      return null;
+    }
+  }
+
   String? _userIdFromFirebase(User? user){
     if (user != null) {
       return user.uid;

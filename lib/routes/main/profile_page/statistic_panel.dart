@@ -4,26 +4,15 @@ import 'package:todo_app/models/repositories/models/statictis.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class StatictisPanel extends StatefulWidget {
-  const StatictisPanel({ Key? key }) : super(key: key);
+  const StatictisPanel({ Key? key, required this.taskStatictis }) : super(key: key);
+  final List<TasksStatictis> taskStatictis;
 
   @override
   _StatictisPanelState createState() => _StatictisPanelState();
 }
 
 class _StatictisPanelState extends State<StatictisPanel> {
-
-  late List<TasksStatictis> _taskStatictis;
-
-  @override
-  void initState() {
-    _taskStatictis = [
-      TasksStatictis(totalTask: 12, doneTask: 7, color: Color.fromRGBO(249, 96, 96, 1), type: 'Events'),
-      TasksStatictis(totalTask: 20, doneTask: 3, color: Color.fromRGBO(96, 116, 249, 1), type: 'To do'),
-      TasksStatictis(totalTask: 12, doneTask: 5, color: Color.fromRGBO(133, 96, 249, 1), type: 'Quick Notes'),
-    ];
-    super.initState();
-  }
-  
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,7 +31,7 @@ class _StatictisPanelState extends State<StatictisPanel> {
               SizedBox(height: 20,),
               Row(
                 children: [
-                  for (var item in _taskStatictis) StatictisItem(item: item)
+                  for (var item in widget.taskStatictis) StatictisItem(item: item)
                 ],
               )
             ],
@@ -59,6 +48,7 @@ class StatictisItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double percent =  ((item.totalTask != 0) ? item.doneTask/item.totalTask : 0).toDouble();
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: Column(
@@ -66,8 +56,8 @@ class StatictisItem extends StatelessWidget {
           CircularPercentIndicator(
             radius: 100.0,
             lineWidth: 2.0,
-            percent: item.doneTask/item.totalTask,
-            center: Text('${(item.doneTask/item.totalTask*100).toInt()}%', style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold),),
+            percent: percent,
+            center: Text('${(percent * 100).toInt()}%', style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold),),
             progressColor: item.color,
           ),
           SizedBox(height: 15,),

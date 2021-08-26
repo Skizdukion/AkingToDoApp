@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_state.dart';
+import 'package:todo_app/utils/frequent_use_fuction.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 
@@ -67,7 +68,7 @@ class _AsigneeFieldState extends State<AsigneeField> {
                       backgroundImage: NetworkImage('${state.user!.imgUrl}'),                     
                     ),
                     const SizedBox(width: 10,),
-                    Text("${state.user!.name}", style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold, fontSize: 14),),
+                    Text(limitString(state.user!.name, 15), style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold, fontSize: 14),),
                   ],
                 ),
               ),

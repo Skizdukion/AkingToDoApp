@@ -82,7 +82,7 @@ class _AddMemberColState extends State<AddMemberCol> {
   }
 
   _showAddMenu() async {
-    List<UserModel> tempList = await showDialog(
+    List<UserModel>? memberList = await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
@@ -101,7 +101,7 @@ class _AddMemberColState extends State<AddMemberCol> {
         );
       }
     );
-    context.read<NewTaskBloc>().add(MemberListOnChange(memberList: tempList));
+    if (memberList != null) context.read<NewTaskBloc>().add(MemberListOnChange(memberList: memberList));
   }
 }
 
@@ -114,8 +114,11 @@ class UserPicker extends StatefulWidget {
 
 class _UserPickerState extends State<UserPicker> {
 
-  ValueNotifier<List<UserModel>> userList = ValueNotifier([]..addAll(FakeUserRepository().getUserList()));
+  // ValueNotifier<List<UserModel>> userList = ValueNotifier([]..addAll(FakeUserRepository().getUserList()));
+  ValueNotifier<String> searchString = ValueNotifier('');
+  Stream<List<UserModel>> streamUserList = FirebaseUserRepository().getStreamUserList();
   List<UserModel> memberList = [];
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +129,7 @@ class _UserPickerState extends State<UserPicker> {
           SizedBox(height: 5,),
           Center(
             child: TextFormField(
+              controller: _textEditingController,
               style: textDarkStyleW400S16.copyWith(fontSize: 18),
               autofocus: false,
               decoration: InputDecoration(
@@ -137,23 +141,37 @@ class _UserPickerState extends State<UserPicker> {
                 hintText: 'User name',
               ),
               onChanged: (val){
-                userList.value = FakeUserRepository().getUserListContainString(val);
+                searchString.value = val;
               },
             ),
           ),
           Container(
             height: 280,
-            child: ValueListenableBuilder<List<UserModel>>(
-              valueListenable: userList,
-              builder: (context, value, _){
-                return ListView.builder(
-                  itemCount: userList.value.length,
-                  itemBuilder: (context, index){
-                    return UserItemInAddMember(item: userList.value[index], addMember: addMemberToList, unAddmember: unAddMemberToList,);
+            child: StreamBuilder<List<UserModel>>(
+              stream: streamUserList,
+              builder: (context, userListSnapshot) {
+                if (userListSnapshot.hasError) {
+                  return Center(
+                    child: Text('Error'),
+                  );
+                }
+                if (!userListSnapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return ValueListenableBuilder<String>(
+                  valueListenable: searchString,
+                  builder: (context, value, _){
+                    List<UserModel> userList = FirebaseUserRepository().getUserListContainString(searchString.value, userListSnapshot.data!);
+                    return ListView.builder(
+                      itemCount: userList.length,
+                      itemBuilder: (context, index){
+                        return UserItemInAddMember(item: userList[index], addMember: addMemberToList, unAddmember: unAddMemberToList,);
+                      },
+                    );
                   },
                 );
-              },
-            ),
+              }
+            )
           ),
           SizedBox(height: 10,),
           Padding(
@@ -186,6 +204,8 @@ class _UserPickerState extends State<UserPicker> {
     memberList.remove(item);
   }
 }
+
+
 
 class UserItemInAddMember extends StatefulWidget {
   const UserItemInAddMember({ Key? key, required this.item, required this.addMember, required this.unAddmember }) : super(key: key);

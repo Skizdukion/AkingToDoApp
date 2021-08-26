@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/auth/auth_bloc.dart';
 import 'package:todo_app/models/blocs/auth/auth_state.dart';
-import 'package:todo_app/models/blocs/main_page/main_page_bloc.dart';
-import 'package:todo_app/models/blocs/main_page/main_page_event.dart';
-import 'package:todo_app/models/blocs/main_page/main_page_state.dart';
 import 'package:todo_app/models/repositories/models/task.dart';
 import 'package:todo_app/models/repositories/task_repository.dart';
 import 'package:todo_app/routes/main/Task_page/slidable_task_item.dart';
@@ -20,31 +17,22 @@ class TodayPage extends StatefulWidget {
 
 class _TodayPageState extends State<TodayPage> {
 
-  TaskRepository _taskRepository = FakeTaskRepository();
   late DateTime now;
   late DateTime tommorrow;
-  // late ValueNotifier<List<TaskModel>> todayTask;
-  // late ValueNotifier<List<TaskModel>> tommorrowTask;
   late String nowText;
   late String tommorrowText;
   late Stream<List<TaskModel>> tommorowTaskList;
   late Stream<List<TaskModel>> todayTaskList;
   late FirebaseTaskRepository _fireBaseTaskRepository = FirebaseTaskRepository();
 
-
   @override
   void initState() {
     now = DateTime.now();
     tommorrow = now.add(Duration(days: 1));
-    // todayTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', now));
-    // tommorrowTask = ValueNotifier(_taskRepository.getTaskListForDay('userID', tommorrow));
     nowText =('TODAY, ' + DateFormat('MMM d/yyyy').format(now)).toUpperCase();
     tommorrowText =('TOMMORROW, ' + DateFormat('MMM d/yyyy').format(tommorrow)).toUpperCase();
-    AuthState authState = BlocProvider.of<AuthBloc>(context).state;
-    if(authState is LoginedUser){
-      todayTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(now);
-      tommorowTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(tommorrow);
-    }
+    todayTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(now);
+    tommorowTaskList = _fireBaseTaskRepository.getStreamTaskListForDay(tommorrow);
     super.initState();
   }
 

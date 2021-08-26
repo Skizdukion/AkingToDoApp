@@ -16,8 +16,8 @@ class AuthLoading extends AuthState{
   const AuthLoading();
 }
 
-class LoginedUser extends AuthState{
-  const LoginedUser({required this.user});
+class LoggeddUser extends AuthState{
+  const LoggeddUser({required this.user});
 
   final FirebaseDataProvider user;
 

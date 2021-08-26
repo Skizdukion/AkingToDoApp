@@ -77,7 +77,6 @@ class _CheckNoteItemState extends State<CheckNoteItem> {
                       disabledBorder: InputBorder.none,
                     ),
                     onChanged: (val){
-                      // print(val);
                       value.changeTitle(widget.index, val);
                     },
                   ),

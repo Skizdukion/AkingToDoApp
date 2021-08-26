@@ -85,8 +85,8 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  _showAddMenu() async{
-    String? command = await showDialog(
+  _showAddMenu() {
+    showDialog(
     context: context,
     barrierDismissible: true,
     builder: (BuildContext context) {
@@ -99,15 +99,6 @@ class _MainScreenState extends State<MainScreen> {
         )
       );
     }); 
-    if (command == 'task'){
-      context.read<MainPageBloc>().add(AddNewTask());
-    }   
-    if (command == 'quicknote'){
-      context.read<MainPageBloc>().add(AddNewQuickNote());
-    }  
-    if (command == 'checklist'){
-      context.read<MainPageBloc>().add(AddNewCheckList());
-    }  
   }  
   
 }

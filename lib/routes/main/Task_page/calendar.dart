@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_bloc.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_event.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_state.dart';
+import 'package:todo_app/models/providers/firebase_data.dart';
 import 'package:todo_app/models/repositories/models/task.dart';
 import 'package:todo_app/models/repositories/task_repository.dart';
 import 'package:todo_app/routes/main/Task_page/slidable_task_item.dart';

@@ -119,7 +119,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
                       child: SizedBox(
                         width: double.maxFinite,
                         child: ElevatedButton(
-                          onPressed: (){
+                          onPressed: ()async{
                             if ((_titleController.text == '')||(state.user == null)||(state.project == null)){
                               print('cant create new task, field required is not fill');
                             }
@@ -138,13 +138,12 @@ class _NewTaskFormState extends State<NewTaskForm> {
                               //     state.project!.id,
                               //   ],
                               // ));
-                              // Navigator.pop(context, true);
                               FirebaseTaskRepository fireBaseTaskRepository = FirebaseTaskRepository();
-                              fireBaseTaskRepository.addNewTask(TaskModel(
+                              await fireBaseTaskRepository.addNewTask(TaskModel(
                                 title: _titleController.text,
-                                taskId: 'fuckoff',
+                                taskId: 'this field is unneccessary',
                                 time: DateTime.now(),
-                                userId: FirebaseDataProvider.uid,
+                                userId: state.user!.id,
                                 dueDate: state.dueDate ?? DateTime.now(),
                                 description: _descriptionController.text,
                                 memberList: [
@@ -153,7 +152,9 @@ class _NewTaskFormState extends State<NewTaskForm> {
                                 projectList: [
                                   state.project!.id,
                                 ],
+                                isEvent: (state.dueDate != null),
                               ));
+                              Navigator.pop(context, true);
                             }
                           },
                           style: buttonStyleAuthPages,

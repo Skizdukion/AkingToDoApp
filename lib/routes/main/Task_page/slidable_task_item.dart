@@ -46,7 +46,7 @@ class _TaskItemState extends State<TaskItem> {
         IconSlideAction(
           color: Colors.white10,
           iconWidget: Icon(Icons.edit_outlined, color: Color.fromRGBO(249, 96, 96, 1)),
-          onTap: _showAddMenu,
+          onTap: _showTaskDetail,
         ),
         Container(
           child: IconSlideAction(
@@ -67,7 +67,7 @@ class _TaskItemState extends State<TaskItem> {
           child: IconSlideAction(
             color: Colors.white10,
             iconWidget: Icon(Icons.edit_outlined, color: Color.fromRGBO(249, 96, 96, 1)),
-            onTap: _showAddMenu,
+            onTap: _showTaskDetail,
           ),
           decoration: BoxDecoration(
             color: Colors.white10,
@@ -93,7 +93,7 @@ class _TaskItemState extends State<TaskItem> {
     FirebaseTaskRepository().deleteTask(widget.task.taskId);
   }
 
-  _showAddMenu() async{
+  _showTaskDetail() async{
     bool isClickChangeDoneState = await showDialog(
       context: context,
       barrierDismissible: true,

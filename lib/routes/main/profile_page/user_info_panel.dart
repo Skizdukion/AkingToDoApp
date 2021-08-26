@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/auth/auth_bloc.dart';
-import 'package:todo_app/models/blocs/auth/auth_state.dart';
-import 'package:todo_app/models/repositories/models/task.dart';
-import 'package:todo_app/models/repositories/models/user.dart';
+import 'package:todo_app/models/blocs/auth/auth_event.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 class UserInfoPanel extends StatefulWidget {
-  const UserInfoPanel({ Key? key }) : super(key: key);
+  const UserInfoPanel({ Key? key, required this.userUrlImg, required this.userEmail, required this.userName, this.userTotalDoneTask = '...', this.userTotalTask = '...' }) : super(key: key);
+  final String userName;
+  final String userUrlImg;
+  final String userEmail;
+  final String userTotalTask;
+  final String userTotalDoneTask;
 
   @override
   _UserInfoPanelState createState() => _UserInfoPanelState();
@@ -15,103 +18,108 @@ class UserInfoPanel extends StatefulWidget {
 
 class _UserInfoPanelState extends State<UserInfoPanel> {
 
-  late Stream<UserModel> user;
-  late Stream<List<TaskModel>> taskList;
+  late AuthBloc authBloc;
 
   @override
   void initState() {
-    AuthState authState = BlocProvider.of<AuthBloc>(context).state;
-    if(authState is LoginedUser){
-      user = authState.user.getUserData();
-      taskList = authState.user.getTaskList();
-    }
+    authBloc = BlocProvider.of<AuthBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<UserModel>(
-      stream: user,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(snapshot.error.toString()),
-          );
-        }
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final data = snapshot.requireData;
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Container(
-            child: Material(
-              elevation: 2.0,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 25),
-                child: Column(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        child: Material(
+          elevation: 2.0,
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: CircleAvatar(
+                        radius: 32, 
+                        backgroundImage: NetworkImage(widget.userUrlImg),                     
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.userName, style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold),),
+                            Text(widget.userEmail, style: textLight154StyleW400S14.copyWith(fontSize: 16),),
+                          ],
+                        ),
+                      ),
+                    ),
+                    PopupMenuButton(
+                      itemBuilder: (context) => [
+                        PopupMenuItem<int>(
+                          child: Text('Change Name'),
+                          value: 0,
+                        ),
+                        PopupMenuItem(
+                          child: Text('Change Image Url'),
+                          value: 1,
+                        ),
+                        PopupMenuItem(
+                          child: Text('Log Out'),
+                          value: 2,
+                        ),
+                      ],
+                      icon: const Icon(
+                        Icons.settings,
+                        color: Colors.black,
+                      ),
+                      iconSize: 15,
+                      onSelected: (int value) {
+                        if(value == 2){
+                          authBloc.add(Logout());
+                        }
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                      offset: Offset(-10, 40),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25),
-                          child: CircleAvatar(
-                            radius: 32, 
-                            backgroundImage: NetworkImage(data.imgUrl),                     
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 40, left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${data.name}", style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold),),
-                                Text('rider993sinus@gmail.com', style: textLight154StyleW400S14.copyWith(fontSize: 16),),
-                              ],
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.settings),
-                          onPressed: (){},
-                          iconSize: 15,
-                        ),
+                        Text(widget.userTotalTask, style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold)),
+                        Text('Created Tasks', style: textLight154StyleW400S14.copyWith(fontSize: 16)),
                       ],
                     ),
-                    const SizedBox(height: 30,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    SizedBox(width: 50,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('120', style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold)),
-                            Text('Created Tasks', style: textLight154StyleW400S14.copyWith(fontSize: 16)),
-                          ],
-                        ),
-                        SizedBox(width: 50,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('80', style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold)),
-                            Text('Completed Tasks', style: textLight154StyleW400S14.copyWith(fontSize: 16)),
-                          ],
-                        ),
+                        Text(widget.userTotalDoneTask, style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold)),
+                        Text('Completed Tasks', style: textLight154StyleW400S14.copyWith(fontSize: 16)),
                       ],
                     ),
-                    const SizedBox(height: 30,),
-                  ]
+                  ],
                 ),
-              ),
+                const SizedBox(height: 30,),
+              ]
             ),
           ),
-        );
-      }
+        ),
+      ),
     );
   }
 }

@@ -35,18 +35,42 @@ class MemberListRow extends StatelessWidget {
   }
 }
 
-class MemberAvatarItem extends StatelessWidget {
+class MemberAvatarItem extends StatefulWidget {
   const MemberAvatarItem({ Key? key, required this.userId }) : super(key: key);
   final String userId;
 
   @override
+  _MemberAvatarItemState createState() => _MemberAvatarItemState();
+}
+
+class _MemberAvatarItemState extends State<MemberAvatarItem> {
+
+  
+  @override
   Widget build(BuildContext context) {
-    UserModel user = FakeUserRepository().getUserWithId(userId)!;
+    Stream<UserModel> userStream = FirebaseUserRepository().getUserWithId(widget.userId);
     return Padding(
       padding: const EdgeInsets.only(right: 10),
-      child: CircleAvatar(
-        radius: 16, 
-        backgroundImage: NetworkImage('${user.imgUrl}'),                     
+      child: StreamBuilder<UserModel>(
+        stream: userStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('Failed'),
+            );
+          }
+          if (!snapshot.hasData) {
+            return const CircleAvatar(
+              radius: 16, 
+              backgroundColor: Colors.blue,                  
+            );
+          }
+          UserModel user = snapshot.data!;
+          return CircleAvatar(
+            radius: 16, 
+            backgroundImage: NetworkImage('${user.imgUrl}'),                     
+          );
+        }
       ),
     );
   }

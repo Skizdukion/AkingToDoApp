@@ -2,24 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/models/repositories/models/statictis.dart';
 
 class TasksInCategory extends StatefulWidget {
-  const TasksInCategory({ Key? key }) : super(key: key);
+  const TasksInCategory({ Key? key, required this.taskStatictis}) : super(key: key);
+  final List<TasksStatictis> taskStatictis;
 
   @override
   _TasksInCategoryState createState() => _TasksInCategoryState();
 }
 
 class _TasksInCategoryState extends State<TasksInCategory> {
-  late List<TasksStatictis> _taskStatictis;
-
-  @override
-  void initState() {
-    _taskStatictis = [
-      TasksStatictis(totalTask: 12, doneTask: 6, color: Color.fromRGBO(249, 96, 96, 1), type: 'Events'),
-      TasksStatictis(totalTask: 20, doneTask: 5, color: Color.fromRGBO(96, 116, 249, 1), type: 'To do Tasks'),
-      TasksStatictis(totalTask: 12, doneTask: 6, color: Color.fromRGBO(133, 96, 249, 1), type: 'Quick Notes'),
-    ];
-    super.initState();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +18,9 @@ class _TasksInCategoryState extends State<TasksInCategory> {
       height: 100.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _taskStatictis.length,
+        itemCount: widget.taskStatictis.length,
         itemBuilder: (context, index){
-          return TaskCountBox(taskStatic: _taskStatictis[index],);
+          return TaskCountBox(taskStatic: widget.taskStatictis[index],);
         },
       ),
     );

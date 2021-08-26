@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_bloc.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/models/blocs/new_task/new_task_state.dart';
+import 'package:todo_app/utils/frequent_use_fuction.dart';
 import 'package:todo_app/widgets/const_decoration.dart';
 
 
@@ -26,7 +27,7 @@ class _ProjectFieldState extends State<ProjectField> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50.0),
           ),
-          child: (state.project == null) ? Container(
+          child: (state.project == null)||(state.status == NewTaskStatus.projectSelecting) ? Container(
             width: 90,
             height: 48,
             child: Padding(
@@ -63,7 +64,7 @@ class _ProjectFieldState extends State<ProjectField> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(width: 10,),
-                    Text("${state.project!.title}", style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold, fontSize: 14),),
+                    Text(limitString(state.project!.title, 15), style: textDarkStyleS18.copyWith(fontWeight: FontWeight.bold, fontSize: 14),),
                   ],
                 ),
               ),

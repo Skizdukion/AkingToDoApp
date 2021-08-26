@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_bloc.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_event.dart';
 import 'package:todo_app/models/blocs/main_page/main_page_state.dart';
-import 'package:todo_app/models/repositories/task_repository.dart';
 import 'package:todo_app/routes/main/Task_page/today_task.dart';
 
 import 'month_task.dart';
@@ -101,7 +100,6 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
                 onSelected: (int value){
                   if (selectIndexInMenuPopup != value){
                     selectIndexInMenuPopup = value;
-                    FakeTaskRepository().changeGetTaskType(value);
                     context.read<MainPageBloc>().add(ChangeTaskSelectType());                    
                   }
                 },
@@ -113,8 +111,8 @@ class _TaskPageState extends State<TaskPage> with SingleTickerProviderStateMixin
           body: TabBarView(
             controller: _tabController,
             children: [
-              TodayPage(),
-              MonthPage(),
+              TodayPage(key: Key('Today task page'),),
+              MonthPage(key: Key('Month Page'),),
             ],
           ),
         );

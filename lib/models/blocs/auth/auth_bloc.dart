@@ -18,21 +18,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
     if (event is Login){
       yield AuthLoading();
       var user = await _fireBaseAuthRepository.signInWithEmail(event.email, event.password);
-      print(user);
       if (user != null){
         FirebaseDataProvider.uid = user;
-        yield LoginedUser(user: FirebaseDataProvider());
+        yield LoggeddUser(user: new FirebaseDataProvider());
       }
       else yield AnonymousUser();
     }
     if (event is Register){
       yield AuthLoading();
       var user = await _fireBaseAuthRepository.registerWithEmail(event.email, event.password);
-      print(user);
       if (user != null){
-        yield LoginedUser(user: user);
+        yield LoggeddUser(user: user);
       }
       else yield AnonymousUser();
+    }
+    if (event is Logout){
+      _fireBaseAuthRepository.signOut();
+      yield AnonymousUser();
     }
   }
 }

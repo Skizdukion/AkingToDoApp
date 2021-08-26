@@ -30,6 +30,5 @@ class CheckListModel with ChangeNotifier{
   void changeTitle(index, String title){
     checkList[index].listTitle = title;
     notifyListeners();
-    // print(checkList[index].listTitle);
   }
 }

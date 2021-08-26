@@ -8,6 +8,7 @@ class TaskModel {
   List<String> memberList;
   List<String> projectList;
   bool isDone;
+  bool isEvent;
 
   TaskModel({
     required this.title,
@@ -19,5 +20,6 @@ class TaskModel {
     this.description = '',
     this.memberList = const [],
     this.projectList = const [],
+    required this.isEvent,
   });
 }
