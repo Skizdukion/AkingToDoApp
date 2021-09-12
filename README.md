@@ -8,7 +8,7 @@
 - [About the author](#about)
 ## Feature <a name = "feature"></a>
 ### Authenticate
-<b>I just implement log in, but no register. You could log in the app by email like sample@gmail.com, sample1@gmail.com, sample2@gmail.com,... with passoword: 123456. I would create register fuction if you request me to do so.</b> 
+<b>I just implement log in, but no register. You could log in the app by email like sample@gmail.com, sample1@gmail.com, sample2@gmail.com,... with password: 123456. I would create register function if you request me to do so.</b> 
 - Onboarding Page <br />
 ![alt text](https://drive.google.com/uc?export=view&id=1XOWZHh3op7DsOcOrzaDE_Y36N6uK5m_o)<br />
 - Login Page<br />
@@ -31,15 +31,15 @@ You could create a project, change name of it or delete it. But in order to dele
 - Quick Note Page<br />
 ![alt text](https://drive.google.com/uc?export=view&id=1H9-GLZ-f8Q1rOG6cNrMH9UA36v2gcYYM)<br />
 ### Check List
-<b>Check list just like quick note expcept it contains many list that can be mark as done or undone.</b>
+<b>Check list just like quick note except it contains many list that can be mark as done or undone.</b>
 - Add Check List Page<br />
 ![alt text](https://drive.google.com/uc?export=view&id=1xqvZBFH1FZpaIrXzRluBTaj7yRq-SO6W)<br />
 ### User Profile
-<b>You could see all your statictis at here. More over, you could change your name or your avatar base on url image from the internet.</b>
+<b>You could see all your statistic at here. More over, you could change your name or your avatar base on url image from the internet.</b>
 - Profile Page<br />
 ![alt text](https://drive.google.com/uc?export=view&id=1qw9PTtpV-mUgx6k-ZX63ssc6pJKUIrNg)<br />
 ## Database
-<b>This project was created with firebase. I mostly use stream & streamBuilder becasue it's convenient and could sync data with flutter in a mere secconds.</b>
+<b>This project was created with firebase. I mostly use stream & streamBuilder becasue it's convenient and could sync data with flutter in a mere seconds.</b>
 - User Data DB<br />
 ![alt text](https://drive.google.com/uc?export=view&id=154NPcCO0_l46fHoArPR9lo3HFEjalLPh)<br />
 - Project DB<br />
@@ -50,12 +50,12 @@ You could create a project, change name of it or delete it. But in order to dele
 ![alt text](https://drive.google.com/uc?export=view&id=1Gt6fxFE6M76zMJ1fWBuBqR22qcYAJO_y)<br />
 ## Some notes <a name = "notes"></a>
 - This project was used for learning purpose. The UI i create was base on Devera Academy design team.
-- I was not implemented any animation use for onboarding scene, so it stay at the same color and sometimes get bugs for different phone size becasue it's an image :)) I would fix this in near future if i could learn how to use animation.
+- I was not implemented any animation use for onboarding scene, so it stay at the same color and sometimes get bugs for different phone size because it's an image :)) I would fix this in near future if i could learn how to use animation.
 - About the routing. I was create bloc and ui before i implement routing services so i just navigate screen back and forth through Navigator.push, Navigator.pop. However i could create routing services if i have more time because there are plenty of bug of bloc if i use Navigator.pushNamed instead of Navigator.push.
 ## Some bugs <a name = "bugs"></a>
 - There are some bugs about the display of project's total task numbers when you use change tag in task.
 - <s>The ui was original create in 1080:2240 with 440 dpi. I just test it could work on many different size like: 900x1600, 320 dpi. However, it still get overflowed with size like: 720x1280 with 320dpi. I could fix this if i with screen utils package later on.</s>
-- I will fix these bugs and build splash and oboarding screen as soon as possible
+- I will fix these bugs and build splash and onboarding screen as soon as possible
 ## Introduce videos and file apk release <a name = "videos"></a>
 [Drive Link](https://drive.google.com/drive/folders/1Zu3mayz9B3f-dgkc_Bi7XKL2y7MjtwxY?usp=sharing)
 ## About the author <a name = "about"></a>
