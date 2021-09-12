@@ -9,6 +9,7 @@ import 'package:todo_app/logic/providers/firebase_data.dart';
 import 'package:todo_app/logic/repositories/project_repository.dart';
 import 'package:todo_app/views/routes/main/popup_page/new_note/color_picker.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddProjectMenu extends StatefulWidget {
   AddProjectMenu({Key? key}) : super(key: key);
@@ -31,18 +32,18 @@ class _AddProjectMenuState extends State<AddProjectMenu> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Padding(
-                padding: const EdgeInsets.only(left: 24, top: 24),
+                padding: EdgeInsets.only(left: 24.w, top: 24.h),
                 child: Text(
                   'Title',
                   style: TextStyle(fontSize: 18, color: Colors.black),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 24),
+                padding: EdgeInsets.only(left: 24.w),
                 child: Container(
-                  height: 85,
+                  height: 85.h,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
@@ -81,11 +82,11 @@ class _AddProjectMenuState extends State<AddProjectMenu> {
                     ));
                   }),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               ColorPicker(),
               SizedBox(
-                height: 25,
+                height: 25.h,
               ),
               StrechButton(
                 text: 'Done',
@@ -105,11 +106,11 @@ class _AddProjectMenuState extends State<AddProjectMenu> {
                   }
                 },
                 buttonStyle: AppButtonDecoration.authenticate2,
-                horizontalPadding: 25,
+                horizontalPadding: 25.w,
               )
             ],
           ),
-          height: 330,
+          height: 330.h,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),

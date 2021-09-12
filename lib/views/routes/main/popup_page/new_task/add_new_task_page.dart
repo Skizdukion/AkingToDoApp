@@ -16,6 +16,7 @@ import 'new_task_page_component/desc_panel.dart';
 import 'new_task_page_component/due_date_picker.dart';
 import 'new_task_page_component/for_in_row.dart';
 import 'new_task_page_component/project_suggest_panel.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewTaskPage extends StatefulWidget {
   const NewTaskPage({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewTaskBloc, NewTaskState>(builder: (context, state) {
       return Padding(
-          padding: EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 30),
+          padding: EdgeInsets.only(top: 10.h, left: 16.w, right: 16.w, bottom: 30.h),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -87,7 +88,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 ForInRow(),
                 if (state.status == NewTaskStatus.asigneeSelecting)
@@ -115,7 +116,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
                           color: Color.fromRGBO(244, 244, 244, 1),
                           padding:
                               EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          height: 60,
+                          height: 60.h,
                         ),
                         DescriptionPanel(
                           descriptionController: _descriptionController,
@@ -164,7 +165,7 @@ class _NewTaskFormState extends State<NewTaskForm> {
                             }
                           },
                           buttonStyle: AppButtonDecoration.authenticate2,
-                          horizontalPadding: 25,
+                          horizontalPadding: 25.w,
                         ),
                       ],
                     ),

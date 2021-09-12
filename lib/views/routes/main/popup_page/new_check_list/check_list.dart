@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/check.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckList extends StatefulWidget {
   const CheckList({
@@ -20,7 +21,7 @@ class _CheckListState extends State<CheckList> {
         maxHeight: MediaQuery.of(context).size.height - 450,
       ),
       child: Padding(
-        padding: EdgeInsets.only(right: 20),
+        padding: EdgeInsets.only(right: 20.w),
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: getListLength(),
@@ -51,7 +52,7 @@ class _CheckNoteItemState extends State<CheckNoteItem> {
   Widget build(BuildContext context) {
     return Consumer<CheckListModel>(builder: (_, value, __) {
       return Padding(
-        padding: EdgeInsets.only(bottom: 5),
+        padding: EdgeInsets.only(bottom: 5.h),
         child: Row(
           children: [
             Checkbox(

@@ -8,6 +8,7 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/task.dart';
 import 'package:todo_app/logic/repositories/task_repository.dart';
 import 'package:todo_app/views/routes/main/popup_page/view_task_page/view_task_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskItem extends StatefulWidget {
   const TaskItem({Key? key, required this.task}) : super(key: key);
@@ -133,12 +134,12 @@ class _TaskItemState extends State<TaskItem> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: TaskViewPage(
                     task: widget.task,
                   ),
                 ),
-                insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
     if (isClickChangeDoneState != null) {

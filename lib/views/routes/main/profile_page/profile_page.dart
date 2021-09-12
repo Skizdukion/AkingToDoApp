@@ -9,6 +9,7 @@ import 'package:todo_app/logic/repositories/task_repository.dart';
 import 'package:todo_app/views/routes/main/profile_page/component/statistic_panel.dart';
 import 'package:todo_app/views/routes/main/profile_page/component/user_info_panel.dart';
 import 'component/task_in_category.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -94,11 +95,11 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 10.h),
       child: Column(
         children: [
           SizedBox(
-            height: 25,
+            height: 25.h,
           ),
           StreamBuilder<UserModel>(
               stream: user,
@@ -136,7 +137,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     });
               }),
           SizedBox(
-            height: 40,
+            height: 25.h,
           ),
           //Nesting stream builder is absolute fucking terrible
           StreamBuilder<QuerySnapshot>(

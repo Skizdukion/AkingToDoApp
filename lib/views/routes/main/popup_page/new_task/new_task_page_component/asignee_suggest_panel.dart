@@ -6,6 +6,7 @@ import 'package:todo_app/logic/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_state.dart';
 import 'package:todo_app/logic/models/user.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AsigneeSuggestPanel extends StatefulWidget {
   const AsigneeSuggestPanel({Key? key}) : super(key: key);
@@ -50,14 +51,14 @@ class _AsigneeUserSuggestionState extends State<AsigneeUserSuggestion> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewTaskBloc, NewTaskState>(builder: (context, state) {
       return Padding(
-        padding: const EdgeInsets.only(top: 16, left: 16, bottom: 10),
+        padding: EdgeInsets.only(top: 16.h, left: 16.w, bottom: 10.h),
         child: InkWell(
           child: Container(
             child: Row(
               children: [
                 ImgLoading(imgUrl: widget.item.imgUrl, radius: 16),
                 SizedBox(
-                  width: 10,
+                  width: 10.w,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

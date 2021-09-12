@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'component_template.dart';
 
 class AsigneeRow extends StatelessWidget {
@@ -16,7 +16,7 @@ class AsigneeRow extends StatelessWidget {
       child: [
         ImgLoading(imgUrl: urlImg, radius: 20),
         SizedBox(
-          width: 10,
+          width: 10.w,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +25,7 @@ class AsigneeRow extends StatelessWidget {
                 style: AppTextDecoration.light154W400S14
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 16)),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
             Text(
               userName,

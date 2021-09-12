@@ -8,6 +8,7 @@ import 'package:todo_app/logic/blocs/new_task/new_task_state.dart';
 import 'package:todo_app/logic/models/user.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
 import 'package:todo_app/views/widgets/member_list_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddMemberCol extends StatefulWidget {
   const AddMemberCol({Key? key}) : super(key: key);
@@ -22,18 +23,18 @@ class _AddMemberColState extends State<AddMemberCol> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewTaskBloc, NewTaskState>(builder: (context, state) {
       return Padding(
-        padding: EdgeInsets.only(left: 24),
+        padding: EdgeInsets.only(left: 24.w),
         child: Column(
           children: [
             Text(
               'Add Member',
               style: AppTextDecoration.darkW400S16,
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             if (state.memberList.length == 0)
               SizedBox(
-                height: 50,
-                width: 90,
+                height: 50.h,
+                width: 90.h,
                 child: TextButton(
                   child: Text(
                     'Anyone',
@@ -58,12 +59,12 @@ class _AddMemberColState extends State<AddMemberCol> {
                 children: [
                   for (var item in state.memberList)
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: 10.w),
                       child: ImgLoading(imgUrl: item.imgUrl, radius: 16),
                     ),
                   Container(
-                    width: 32,
-                    height: 32,
+                    width: 32.w,
+                    height: 32.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color.fromRGBO(204, 204, 204, 1),
@@ -99,12 +100,12 @@ class _AddMemberColState extends State<AddMemberCol> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: MemberListPicker(
                     memberList: memberStringList,
                   ),
                 ),
-                insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
     if (returnList != null) {

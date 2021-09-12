@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/radio_color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ColorPicker extends StatefulWidget {
   const ColorPicker({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _ColorPickerState extends State<ColorPicker> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: 20.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -24,10 +25,10 @@ class _ColorPickerState extends State<ColorPicker> {
             style: AppTextDecoration.darkS18,
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Container(
-            height: 48,
+            height: 48.h,
             child: Consumer<RadioColorList>(builder: (_, value, __) {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -62,7 +63,7 @@ class _ColorBtnState extends State<ColorBtn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 12),
+      padding: EdgeInsets.only(right: 12.w),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -77,7 +78,7 @@ class _ColorBtnState extends State<ColorBtn> {
                 )
               : null,
         ),
-        width: 48,
+        width: 48.w,
       ),
     );
   }

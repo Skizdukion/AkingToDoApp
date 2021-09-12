@@ -6,6 +6,7 @@ import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/views/routes/auth/login_page.dart';
 import 'package:todo_app/views/widgets/custom_text_button.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IntroButton extends StatefulWidget {
   const IntroButton({Key? key}) : super(key: key);
@@ -22,18 +23,18 @@ class _IntroButtonState extends State<IntroButton> {
         width: double.infinity,
         height: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 80),
+              SizedBox(height: 80.h),
               StrechButton(
                 text: 'Get started',
                 onPressed: () {},
                 buttonStyle: AppButtonDecoration.authenticate1,
                 textColor: Colors.black,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               CustomTextButton(
                 text: 'Log In',
                 onPress: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IntroductionTopScreen extends StatefulWidget {
   const IntroductionTopScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class _IntroductionTopScreenState extends State<IntroductionTopScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 50),
+      padding: EdgeInsets.only(top: 50.h),
       child: IntroductionScreen(
         pages: listIntroPage,
         showDoneButton: false,
@@ -48,7 +49,7 @@ var listIntroPage = [
   ),
 ];
 
-const pageDecoration = PageDecoration(
+var pageDecoration = PageDecoration(
   titleTextStyle: TextStyle(
     color: Color.fromRGBO(49, 49, 49, 1),
     fontSize: 24.0,
@@ -56,6 +57,6 @@ const pageDecoration = PageDecoration(
   ),
   bodyTextStyle:
       TextStyle(fontSize: 18.0, color: Color.fromRGBO(49, 49, 49, 1)),
-  titlePadding: EdgeInsets.only(top: 50, bottom: 20),
+  titlePadding: EdgeInsets.only(top: 50.h, bottom: 20.h),
   imagePadding: EdgeInsets.only(top: 0),
 );

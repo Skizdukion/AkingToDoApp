@@ -4,6 +4,7 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/project.dart';
 import 'package:todo_app/logic/repositories/project_repository.dart';
 import 'package:todo_app/utils/frequent_use_fuction.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProjectItem extends StatelessWidget {
   const ProjectItem({Key? key, required this.item}) : super(key: key);
@@ -14,11 +15,11 @@ class ProjectItem extends StatelessWidget {
     return GestureDetector(
       onLongPress: () => _showChangeTitleDialog(context),
       child: Container(
-        width: 165,
+        width: 165.w,
         height: 180,
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.only(top: 24, left: 24),
+          padding: EdgeInsets.only(top: 24.w, left: 24.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,14 +33,14 @@ class ProjectItem extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 50.h,
               ),
               Text(
                 limitString(item.title, 15),
                 style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Text(
                 '${item.totalTask} Tasks',

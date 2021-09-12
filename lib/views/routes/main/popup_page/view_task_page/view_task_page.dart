@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:todo_app/global/decoration/button_decoration.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
@@ -17,6 +16,7 @@ import 'component/desc_row.dart';
 import 'component/due_date_row.dart';
 import 'component/member_list_row.dart';
 import 'component/tag_row.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskViewPage extends StatefulWidget {
   const TaskViewPage({Key? key, required this.task}) : super(key: key);
@@ -58,7 +58,7 @@ class _TaskViewPageState extends State<TaskViewPage> {
           }
           TaskModel dataTask = snapshot.data!;
           return Container(
-            height: 650,
+            height: 650.h,
             child: Column(
               children: [
                 Row(
@@ -124,7 +124,7 @@ class _TaskViewPageState extends State<TaskViewPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 StreamBuilder<UserModel>(
                     stream: userOwnerStream,
@@ -148,32 +148,32 @@ class _TaskViewPageState extends State<TaskViewPage> {
                       );
                     }),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 DueDateRow(
                   dueDate: dataTask.dueDate,
                   isEvent: dataTask.isEvent,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 DescRow(
                   description: dataTask.description,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 MemberListRow(
                   memberList: dataTask.memberList,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 TagRow(
                   projectList: dataTask.projectList,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 StrechButton(
                   text: !dataTask.isDone ? 'Complete Task' : 'Uncomplete Task',
@@ -186,10 +186,10 @@ class _TaskViewPageState extends State<TaskViewPage> {
                             ? Color.fromRGBO(96, 116, 249, 1)
                             : Color.fromRGBO(249, 96, 96, 1)),
                   ),
-                  horizontalPadding: 25,
+                  horizontalPadding: 25.w,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
               ],
             ),
@@ -209,10 +209,10 @@ class _TaskViewPageState extends State<TaskViewPage> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: memberListPicker,
                 ),
-                insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
     if (returnList != null) {
@@ -238,10 +238,10 @@ class _TaskViewPageState extends State<TaskViewPage> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: projectListPicker,
                 ),
-                insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
     if (returnList != null) {

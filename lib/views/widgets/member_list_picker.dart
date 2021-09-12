@@ -4,8 +4,8 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/user.dart';
 import 'package:todo_app/logic/repositories/user_repository.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
-
 import 'image_loading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MemberListPicker extends StatefulWidget {
   const MemberListPicker({Key? key, required this.memberList})
@@ -37,11 +37,11 @@ class _MemberListPickerState extends State<MemberListPicker> {
         future: memberFutureList,
         builder: (context, memberListSnapshot) {
           return Container(
-            height: 400,
+            height: 400.h,
             child: Column(
               children: [
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Center(
                   child: TextFormField(
@@ -62,7 +62,7 @@ class _MemberListPickerState extends State<MemberListPicker> {
                   ),
                 ),
                 Container(
-                    height: 280,
+                    height: 280.h,
                     child: StreamBuilder<List<UserModel>>(
                         stream: userStreamList,
                         builder: (context, userListSnapshot) {
@@ -102,7 +102,7 @@ class _MemberListPickerState extends State<MemberListPicker> {
                           );
                         })),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 StrechButton(
                   text: 'Done',
@@ -110,7 +110,7 @@ class _MemberListPickerState extends State<MemberListPicker> {
                     Navigator.pop(context, memberList);
                   },
                   buttonStyle: AppButtonDecoration.authenticate2,
-                  horizontalPadding: 80,
+                  horizontalPadding: 80.w,
                 ),
               ],
             ),
@@ -170,13 +170,13 @@ class _UserItemInAddMemberState extends State<UserItemInAddMember> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
       child: Container(
         child: Row(
           children: [
             ImgLoading(imgUrl: widget.item.imgUrl, radius: 20),
             SizedBox(
-              width: 10,
+              width: 10.w,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

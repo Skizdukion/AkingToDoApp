@@ -3,8 +3,8 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/user.dart';
 import 'package:todo_app/logic/repositories/user_repository.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
-
 import 'component_template.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MemberListRow extends StatelessWidget {
   const MemberListRow({Key? key, required this.memberList}) : super(key: key);
@@ -18,13 +18,13 @@ class MemberListRow extends StatelessWidget {
     } else
       listLen = memberList.length;
     return ComponentTemplate(child: [
-      SizedBox(width: 10),
+      SizedBox(width: 10.w),
       Icon(
         Icons.person_outline,
         size: 15,
       ),
       SizedBox(
-        width: 25,
+        width: 25.w,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +34,7 @@ class MemberListRow extends StatelessWidget {
             style: AppTextDecoration.light154W400S14
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: 5.h),
           Row(
             children: [
               for (var i = 0; i < listLen; i++)
@@ -49,7 +49,7 @@ class MemberListRow extends StatelessWidget {
           ),
           if (memberList.length == 0)
             SizedBox(
-              height: 30,
+              height: 30.h,
             ),
         ],
       ),
@@ -71,7 +71,7 @@ class _MemberAvatarItemState extends State<MemberAvatarItem> {
     Stream<UserModel> userStream =
         FirebaseUserRepository().getStreamUserWithId(widget.userId);
     return Padding(
-      padding: const EdgeInsets.only(right: 10),
+      padding: EdgeInsets.only(right: 10.w),
       child: StreamBuilder<UserModel>(
           stream: userStream,
           builder: (context, snapshot) {

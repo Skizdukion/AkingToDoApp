@@ -5,6 +5,7 @@ import 'package:todo_app/logic/blocs/new_task/new_task_bloc.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_state.dart';
 import 'package:todo_app/logic/models/project.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProjectSuggestPanel extends StatefulWidget {
   const ProjectSuggestPanel({
@@ -49,7 +50,7 @@ class _ProjectSuggestionState extends State<ProjectSuggestion> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 16, left: 16, bottom: 10),
+        padding: EdgeInsets.only(top: 16.h, left: 16.w, bottom: 10.h),
         child: InkWell(
           child: Container(
             child: Row(
@@ -59,7 +60,7 @@ class _ProjectSuggestionState extends State<ProjectSuggestion> {
                   backgroundColor: widget.item.color,
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 10.w,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

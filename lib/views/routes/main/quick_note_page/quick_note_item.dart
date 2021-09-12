@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/quick_note.dart';
 import 'package:todo_app/logic/repositories/quick_note_repository.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuickNoteItem extends StatefulWidget {
   const QuickNoteItem({Key? key, required this.item}) : super(key: key);
@@ -17,7 +18,7 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
         showAllActionsThreshold: 0.1,
@@ -48,14 +49,14 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 20, right: 200, bottom: 10),
+                      EdgeInsets.only(left: 20.w, right: 200.w, bottom: 10.h),
                   child: Divider(
                     color: widget.item.color,
                     thickness: 3,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
+                  padding: EdgeInsets.only(left: 32.w),
                   child: Text(
                     '${widget.item.title}',
                     style: AppTextDecoration.darkS18
@@ -67,8 +68,8 @@ class _QuickNoteItemState extends State<QuickNoteItem> {
                     item: item,
                     parentId: widget.item.id,
                   ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
               ],
             ),
@@ -110,8 +111,8 @@ class _QuickNoteCheckListItemState extends State<QuickNoteCheckListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 20.0,
+      padding: EdgeInsets.only(
+        left: 20.w,
       ),
       child: Container(
         child: Row(

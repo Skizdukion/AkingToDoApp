@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:todo_app/logic/blocs/auth/auth_bloc.dart';
 import 'package:todo_app/logic/blocs/auth/auth_event.dart';
 import 'package:todo_app/logic/repositories/user_repository.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserInfoPanel extends StatefulWidget {
   const UserInfoPanel(
@@ -40,29 +40,29 @@ class _UserInfoPanelState extends State<UserInfoPanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
         child: Material(
           elevation: 2.0,
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
           child: Padding(
-            padding: const EdgeInsets.only(left: 25),
+            padding: EdgeInsets.only(left: 25.w),
             child: Column(children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 25),
+                    padding: EdgeInsets.only(top: 25.h),
                     child: ImgLoading(
-                      radius: 32,
+                      radius: 32.h,
                       imgUrl: widget.userUrlImg,
                     ),
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 10),
+                      padding: EdgeInsets.only(top: 40.h, left: 10.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -117,8 +117,8 @@ class _UserInfoPanelState extends State<UserInfoPanel> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +135,7 @@ class _UserInfoPanelState extends State<UserInfoPanel> {
                     ],
                   ),
                   SizedBox(
-                    width: 50,
+                    width: 50.w,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,8 +150,8 @@ class _UserInfoPanelState extends State<UserInfoPanel> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 20.h,
               ),
             ]),
           ),

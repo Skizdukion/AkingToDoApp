@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DescriptionNotePanel extends StatefulWidget {
   const DescriptionNotePanel({Key? key, required this.textController})
@@ -14,7 +15,7 @@ class _DescriptionNotePanelState extends State<DescriptionNotePanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -24,11 +25,11 @@ class _DescriptionNotePanelState extends State<DescriptionNotePanel> {
             style: AppTextDecoration.darkS18,
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Container(
-            width: 310,
-            height: 150,
+            width: 310.w,
+            height: 150.h,
             decoration: BoxDecoration(
               color: Colors.white,
             ),

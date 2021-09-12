@@ -4,6 +4,7 @@ import 'package:todo_app/logic/blocs/auth/auth_bloc.dart';
 import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/logic/models/quick_note.dart';
 import 'package:todo_app/views/routes/main/quick_note_page/quick_note_item.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuickNotePage extends StatefulWidget {
   const QuickNotePage({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _QuickNoteBodyState extends State<QuickNoteBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 20.h),
       child: StreamBuilder<List<QuickNoteModel>>(
           stream: quickNoteList,
           builder: (context, snapshot) {

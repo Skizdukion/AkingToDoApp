@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ComponentTemplate extends StatelessWidget {
   const ComponentTemplate({Key? key, required this.child}) : super(key: key);
@@ -7,7 +8,7 @@ class ComponentTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
         child: Column(
           children: [
             Row(
@@ -16,7 +17,7 @@ class ComponentTemplate extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
             Divider(),
           ],

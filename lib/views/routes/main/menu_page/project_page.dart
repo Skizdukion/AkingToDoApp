@@ -7,6 +7,7 @@ import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/logic/models/project.dart';
 import 'package:todo_app/views/routes/main/menu_page/project_item.dart';
 import 'add_project_popup.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({Key? key}) : super(key: key);
@@ -60,10 +61,8 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double spacing = size.width - 16 * 2 - 165 * 2;
     return Padding(
-        padding: const EdgeInsets.only(top: 50, right: 16, left: 16),
+        padding: EdgeInsets.only(top: 50.h, right: 16.w, left: 16.w),
         child: StreamBuilder<List<ProjectModel>>(
             stream: projectList,
             builder: (context, snapshot) {
@@ -78,15 +77,15 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
               final data = snapshot.requireData;
               return ListView(children: [
                 Wrap(
-                  spacing: spacing,
-                  runSpacing: 30,
+                  spacing: 30.w,
+                  runSpacing: 30.h,
                   children: [
                     for (var index in data)
                       ProjectItem(
                         item: index,
                       ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(bottom: 20.h),
                       child: SizedBox(
                         width: 80,
                         height: 80,

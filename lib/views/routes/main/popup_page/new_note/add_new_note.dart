@@ -10,6 +10,7 @@ import 'package:todo_app/views/utils/extension/snack_bar.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
 import 'color_picker.dart';
 import 'desc_box_note.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewNotePage extends StatefulWidget {
   const NewNotePage({Key? key}) : super(key: key);
@@ -60,10 +61,10 @@ class _NewNoteFormState extends State<NewNoteForm> {
       create: (_) => RadioColorList.autoInitial(),
       child: Padding(
           padding: EdgeInsets.only(
-              top: 10,
-              left: 16,
-              right: 16,
-              bottom: MediaQuery.of(context).size.height - 500),
+              top: 10.h,
+              left: 16.w,
+              right: 16.w,
+              bottom: MediaQuery.of(context).size.height - 500.h),
           child: Consumer<RadioColorList>(builder: (context, color, child) {
             return Container(
               decoration: BoxDecoration(
@@ -81,13 +82,13 @@ class _NewNoteFormState extends State<NewNoteForm> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   DescriptionNotePanel(
                     textController: _titleController,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   ColorPicker(),
-                  SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   StrechButton(
                     text: 'Done',
                     onPressed: () {
@@ -109,7 +110,7 @@ class _NewNoteFormState extends State<NewNoteForm> {
                       }
                     },
                     buttonStyle: AppButtonDecoration.authenticate2,
-                    horizontalPadding: 25,
+                    horizontalPadding: 25.w,
                   ),
                 ],
               ),

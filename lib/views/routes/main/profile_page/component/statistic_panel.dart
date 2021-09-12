@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/statictis.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class StatictisPanel extends StatefulWidget {
   const StatictisPanel({Key? key, required this.taskStatictis})
       : super(key: key);
@@ -16,14 +16,14 @@ class _StatictisPanelState extends State<StatictisPanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16, top: 25),
+      padding: EdgeInsets.only(left: 16.w, top: 25.h),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 10, top: 15),
+          padding: EdgeInsets.only(left: 10.w, top: 15.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,7 +33,7 @@ class _StatictisPanelState extends State<StatictisPanel> {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Row(
                 children: [
@@ -58,11 +58,11 @@ class StatictisItem extends StatelessWidget {
     double percent =
         ((item.totalTask != 0) ? item.doneTask / item.totalTask : 0).toDouble();
     return Padding(
-      padding: const EdgeInsets.only(right: 20),
+      padding: EdgeInsets.only(right: 20.w),
       child: Column(
         children: [
           CircularPercentIndicator(
-            radius: 100.0,
+            radius: 100.h,
             lineWidth: 2.0,
             percent: percent,
             center: Text(
@@ -73,13 +73,13 @@ class StatictisItem extends StatelessWidget {
             progressColor: item.color,
           ),
           SizedBox(
-            height: 15,
+            height: 15.h,
           ),
           Text('${item.type}',
               style: AppTextDecoration.darkS18
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 16)),
           SizedBox(
-            height: 32,
+            height: 32.h,
           ),
         ],
       ),

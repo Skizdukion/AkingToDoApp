@@ -5,6 +5,7 @@ import 'package:todo_app/logic/blocs/task/task_event.dart';
 import 'package:todo_app/logic/blocs/task/task_state.dart';
 import 'package:todo_app/views/routes/main/task_page/component/today_task.dart';
 import 'package:todo_app/views/routes/main/task_page/component/month_task.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key}) : super(key: key);
@@ -68,9 +69,9 @@ class _TaskPageBodyState extends State<TaskPageBody>
             controller: _tabController,
             indicatorColor: Colors.white,
             indicatorWeight: 3.0,
-            indicatorPadding: EdgeInsets.only(bottom: 1, left: 50, right: 50),
+            indicatorPadding: EdgeInsets.only(bottom: 1.h, left: 50.w, right: 50.h),
             labelStyle: TextStyle(fontSize: 18),
-            labelPadding: EdgeInsets.symmetric(horizontal: 10),
+            labelPadding: EdgeInsets.symmetric(horizontal: 10.w),
           ),
           actions: [
             PopupMenuButton(

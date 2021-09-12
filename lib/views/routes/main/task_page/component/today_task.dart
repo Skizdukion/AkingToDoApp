@@ -9,6 +9,7 @@ import 'package:todo_app/logic/models/task.dart';
 import 'package:todo_app/logic/repositories/task_repository.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/views/routes/main/task_page/component/slidable_task_item.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TodayPage extends StatefulWidget {
   const TodayPage({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class _TodayPageState extends State<TodayPage> {
             .tommorowTaskList;
       },
       child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+          padding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 0),
           child: ListView(
             children: [
               StreamBuilder<List<TaskModel>>(
@@ -81,7 +82,7 @@ class _TodayPageState extends State<TodayPage> {
                     return Column(
                       children: [
                         SizedBox(
-                          height: 20,
+                          height: 20.h,
                         ),
                         (data.length != 0)
                             ? Text(nowText,
@@ -103,7 +104,7 @@ class _TodayPageState extends State<TodayPage> {
                     );
                   }),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               StreamBuilder<List<TaskModel>>(
                   stream: tommorowTaskList,
@@ -125,7 +126,7 @@ class _TodayPageState extends State<TodayPage> {
                             : Text("THERE IS NOTHING TOMMORROW",
                                 style: AppTextDecoration.light154W400S14),
                         SizedBox(
-                          height: 20,
+                          height: 20.h,
                         ),
                         ListView.builder(
                           itemCount: data.length,

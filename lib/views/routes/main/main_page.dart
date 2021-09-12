@@ -12,6 +12,7 @@ import 'package:todo_app/views/routes/main/task_page/task_page.dart';
 import 'Popup_page/new_note/add_new_note.dart';
 import 'bottom_app_bar_item.dart';
 import 'menu_page/project_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -128,7 +129,7 @@ class AddMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 70.h,
       child: Column(
         children: [
           Center(
@@ -183,7 +184,7 @@ class AddMenu extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 10.h),
           AddMenuItem(
             text: 'Add Task',
           ),
@@ -195,8 +196,8 @@ class AddMenu extends StatelessWidget {
           ),
         ],
       ),
-      height: 220,
-      width: 260,
+      height: 220.h,
+      width: 260.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),

@@ -6,6 +6,7 @@ import 'package:todo_app/logic/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_state.dart';
 import 'package:todo_app/utils/frequent_use_fuction.dart';
 import 'package:todo_app/views/widgets/image_loading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AsigneeField extends StatefulWidget {
   const AsigneeField({
@@ -32,10 +33,10 @@ class _AsigneeFieldState extends State<AsigneeField> {
         child: (state.user == null) ||
                 (state.status == NewTaskStatus.asigneeSelecting)
             ? Container(
-                width: 90,
-                height: 48,
+                width: 90.w,
+                height: 48.h,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: Center(
                     child: TextFormField(
                       initialValue: state.asigneeField,
@@ -65,16 +66,16 @@ class _AsigneeFieldState extends State<AsigneeField> {
                 ),
               )
             : Container(
-                height: 48,
+                height: 48.h,
                 child: InkWell(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.only(right: 10.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ImgLoading(imgUrl: state.user!.imgUrl, radius: 20),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: 10.w,
                         ),
                         Text(
                           limitString(state.user!.name, 15),

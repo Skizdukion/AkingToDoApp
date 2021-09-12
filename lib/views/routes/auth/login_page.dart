@@ -8,6 +8,7 @@ import 'package:todo_app/views/routes/auth/forgot_password_page.dart';
 import 'package:todo_app/views/utils/extension/snack_bar.dart';
 import 'package:todo_app/views/widgets/auth_form_widgets.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -59,24 +60,23 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildInitialInput() {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+      padding: EdgeInsets.only(left: 30.w, top: 20.h, right: 30.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Text('Welcome back',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 32,
                   fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
+          SizedBox(height: 10.h),
           Text('Sign in to continue',
               style: TextStyle(
                   color: Color.fromRGBO(155, 155, 155, 1), fontSize: 16)),
-          SizedBox(height: 50),
+          SizedBox(height: 50.h),
           FormInputField(),
-          // RegisterNav(toggleView: toggleView),
         ],
       ),
     );
@@ -105,7 +105,7 @@ class _FormInputFieldState extends State<FormInputField> {
           hintText: 'Enter your email as user name',
           type: VisibleInputFieldType.email,
         ),
-        SizedBox(height: 40),
+        SizedBox(height: 40.h),
         ObscureInputField(
           controller: _passwordController,
           labelText: 'Password',
@@ -113,7 +113,7 @@ class _FormInputFieldState extends State<FormInputField> {
           type: ObscureInputFieldType.password,
         ),
         ForgotTextButton(),
-        SizedBox(height: 50),
+        SizedBox(height: 50.h),
         StrechButton(
           text: 'Login',
           onPressed: () {

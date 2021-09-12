@@ -12,8 +12,8 @@ import 'package:todo_app/views/routes/main/popup_page/new_check_list/title_box_c
 import 'package:todo_app/views/routes/main/popup_page/new_note/color_picker.dart';
 import 'package:todo_app/views/utils/extension/snack_bar.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
-
 import 'check_list.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewCheckListPage extends StatefulWidget {
   const NewCheckListPage({Key? key}) : super(key: key);
@@ -71,9 +71,9 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
           builder: (context, checkList, color, child) {
         return Padding(
             padding: EdgeInsets.only(
-                top: 10,
-                left: 16,
-                right: 16,
+                top: 10.h,
+                left: 16.w,
+                right: 16.w,
                 bottom: getBottomPadding(checkList)),
             child: Container(
               decoration: BoxDecoration(
@@ -91,16 +91,16 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   TilteBoxCheckList(
                     titleController: _titleController,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   ColorPicker(),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   CheckList(),
                   Center(
@@ -135,7 +135,7 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
                       }
                     },
                     buttonStyle: AppButtonDecoration.authenticate2,
-                    horizontalPadding: 25,
+                    horizontalPadding: 25.w,
                   )
                 ],
               ),
@@ -146,13 +146,13 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
 
   double getBottomPadding(CheckListModel checkList) {
     if (MediaQuery.of(context).size.height -
-            450 -
-            checkList.checkList.length * 50 >
-        60) {
+            450.h -
+            checkList.checkList.length * 50.h >
+        60.h) {
       return MediaQuery.of(context).size.height -
-          450 -
-          checkList.checkList.length * 50;
+          450.h -
+          checkList.checkList.length * 50.h;
     } else
-      return 20;
+      return 20.h;
   }
 }

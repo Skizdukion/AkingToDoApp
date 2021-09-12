@@ -8,7 +8,7 @@ import 'package:todo_app/logic/blocs/task/task_state.dart';
 import 'package:todo_app/logic/models/task.dart';
 import 'package:todo_app/logic/repositories/task_repository.dart';
 import 'package:todo_app/views/routes/main/task_page/component/slidable_task_item.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TaskCalendar extends StatefulWidget {
   const TaskCalendar({Key? key, required this.data}) : super(key: key);
   final List<TaskModel> data;
@@ -125,10 +125,10 @@ class _TaskCalendarState extends State<TaskCalendar> {
                   color: const Color.fromRGBO(154, 154, 154, 1)),
             ),
           ),
-          const SizedBox(height: 8.0),
+          SizedBox(height: 8.0.h),
           Text(DateFormat('E, MMM d/yyyy').format(_selectedDay!).toUpperCase(),
               style: AppTextDecoration.light154W400S14),
-          const SizedBox(height: 8.0),
+          SizedBox(height: 8.0.h),
           Expanded(
             child: StreamBuilder<List<TaskModel>>(
                 stream: _selectedTasks,

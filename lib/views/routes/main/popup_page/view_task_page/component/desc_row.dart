@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
-
 import 'component_template.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DescRow extends StatelessWidget {
   const DescRow({Key? key, required this.description}) : super(key: key);
@@ -10,13 +10,13 @@ class DescRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentTemplate(child: [
-      SizedBox(width: 10),
+      SizedBox(width: 10.w),
       Icon(
         Icons.description,
         size: 15,
       ),
       SizedBox(
-        width: 25,
+        width: 25.w,
       ),
       Expanded(
         child: Column(
@@ -28,7 +28,7 @@ class DescRow extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
             Row(
               children: [
@@ -41,7 +41,7 @@ class DescRow extends StatelessWidget {
                 ),
                 if (description == '')
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
               ],
             ),

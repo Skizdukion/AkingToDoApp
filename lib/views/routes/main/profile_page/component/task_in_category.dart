@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/logic/models/statictis.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TasksInCategory extends StatefulWidget {
   const TasksInCategory({Key? key, required this.taskStatictis})
@@ -14,7 +15,7 @@ class _TasksInCategoryState extends State<TasksInCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
+      height: 100.0.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: widget.taskStatictis.length,
@@ -40,15 +41,15 @@ class _TaskCountBoxState extends State<TaskCountBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: 20.w),
       child: Container(
-        width: 160,
+        width: 160.w,
         decoration: BoxDecoration(
           color: widget.taskStatic.color,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: 27, left: 24),
+          padding: EdgeInsets.only(top: 27.h, left: 24.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +59,7 @@ class _TaskCountBoxState extends State<TaskCountBox> {
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Text(
                 '${widget.taskStatic.totalTask} Tasks',

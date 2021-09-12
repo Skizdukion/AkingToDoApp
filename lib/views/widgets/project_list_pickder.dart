@@ -4,6 +4,7 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/project.dart';
 import 'package:todo_app/logic/repositories/project_repository.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProjectListPicker extends StatefulWidget {
   const ProjectListPicker({Key? key, required this.projectList})
@@ -35,11 +36,11 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
         future: projectFutureList,
         builder: (context, memberListSnapshot) {
           return Container(
-            height: 400,
+            height: 400.h,
             child: Column(
               children: [
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Center(
                   child: TextFormField(
@@ -60,7 +61,7 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
                   ),
                 ),
                 Container(
-                    height: 280,
+                    height: 280.h,
                     child: StreamBuilder<List<ProjectModel>>(
                         stream: projectStreamList,
                         builder: (context, userListSnapshot) {
@@ -100,7 +101,7 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
                           );
                         })),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 StrechButton(
                   text: 'Done',
@@ -108,7 +109,7 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
                     Navigator.pop(context, projectList);
                   },
                   buttonStyle: AppButtonDecoration.authenticate2,
-                  horizontalPadding: 80,
+                  horizontalPadding: 80.w,
                 ),
               ],
             ),
@@ -168,7 +169,7 @@ class _ProjectItemInAddMemberState extends State<ProjectItemInAddMember> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       child: Container(
         child: Row(
           children: [
@@ -177,7 +178,7 @@ class _ProjectItemInAddMemberState extends State<ProjectItemInAddMember> {
               backgroundColor: widget.item.color,
             ),
             SizedBox(
-              width: 10,
+              width: 10.w,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +9,7 @@ import 'package:todo_app/logic/blocs/new_task/new_task_bloc.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_event.dart';
 import 'package:todo_app/logic/blocs/new_task/new_task_state.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DueDatePicker extends StatefulWidget {
   const DueDatePicker({Key? key}) : super(key: key);
@@ -25,21 +25,21 @@ class _DueDatePickerState extends State<DueDatePicker> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewTaskBloc, NewTaskState>(builder: (context, state) {
       return Container(
-        height: 70,
+        height: 70.h,
         decoration: BoxDecoration(
           color: Color.fromRGBO(244, 244, 244, 1),
         ),
         child: Row(
           children: [
             SizedBox(
-              width: 25,
+              width: 25.w,
             ),
             Text(
               'Due Date',
               style: AppTextDecoration.darkW400S16,
             ),
             SizedBox(
-              width: 10,
+              width: 10.w,
             ),
             TextButton(
               child: Text(
@@ -74,10 +74,10 @@ class _DueDatePickerState extends State<DueDatePicker> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: CalendarPicker(),
                 ),
-                insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
     if (dueDate != null)
@@ -108,11 +108,11 @@ class _CalendarPickerState extends State<CalendarPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 440,
+      height: 440.h,
       child: Column(
         children: [
           TableCalendar(
-            rowHeight: 40,
+            rowHeight: 40.h,
             firstDay: _rangeStart,
             lastDay: _rangeEnd,
             focusedDay: _focusedDay,
@@ -156,7 +156,7 @@ class _CalendarPickerState extends State<CalendarPicker> {
             ),
             headerStyle: HeaderStyle(
               headerMargin: EdgeInsets.all(10.0),
-              headerPadding: const EdgeInsets.symmetric(vertical: 20.0),
+              headerPadding: EdgeInsets.symmetric(vertical: 20.h),
               titleCentered: true,
               leftChevronVisible: false,
               rightChevronVisible: false,
@@ -181,7 +181,7 @@ class _CalendarPickerState extends State<CalendarPicker> {
               Navigator.pop(context, _selectedDay);
             },
             buttonStyle: AppButtonDecoration.authenticate2,
-            horizontalPadding: 80,
+            horizontalPadding: 80.w,
           ),
         ],
       ),

@@ -3,8 +3,8 @@ import 'package:todo_app/global/decoration/text_decoration.dart';
 import 'package:todo_app/logic/models/project.dart';
 import 'package:todo_app/logic/repositories/project_repository.dart';
 import 'package:todo_app/utils/frequent_use_fuction.dart';
-
 import 'component_template.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TagRow extends StatelessWidget {
   const TagRow({Key? key, required this.projectList}) : super(key: key);
@@ -14,14 +14,14 @@ class TagRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ComponentTemplate(child: [
       SizedBox(
-        height: 10,
+        height: 10.h,
       ),
       Icon(
         Icons.tag,
         size: 15,
       ),
       SizedBox(
-        width: 25,
+        width: 25.w,
       ),
       Expanded(
         child: Column(
@@ -33,10 +33,10 @@ class TagRow extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
             Container(
-              height: 38,
+              height: 38.h,
               child: ListView(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -74,7 +74,7 @@ class _ProjectTagState extends State<ProjectTag> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 10),
+      padding: EdgeInsets.only(right: 10.w),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

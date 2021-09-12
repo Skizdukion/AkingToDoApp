@@ -3,6 +3,7 @@ import 'package:todo_app/global/decoration/button_decoration.dart';
 import 'package:todo_app/views/routes/auth/reset_password_page.dart';
 import 'package:todo_app/views/widgets/auth_form_widgets.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -35,23 +36,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   Widget buildInitialInput() {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+      padding: EdgeInsets.only(left: 30.h, top: 20.h, right: 30.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Text('Forgot Password',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 32,
                   fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
+          SizedBox(height: 10.h),
           Text(
               'Please enter your email below to receive your password reset instructions',
               style: TextStyle(
                   color: Color.fromRGBO(155, 155, 155, 1), fontSize: 16)),
-          SizedBox(height: 50),
+          SizedBox(height: 50.h),
           FormInputField(),
         ],
       ),
@@ -80,7 +81,7 @@ class _FormInputFieldState extends State<FormInputField> {
           hintText: 'Enter your email as user name',
           type: VisibleInputFieldType.email,
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 50.h),
         StrechButton(
           text: 'Send Request',
           onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TilteBoxCheckList extends StatefulWidget {
   const TilteBoxCheckList({Key? key, required this.titleController})
@@ -13,7 +14,7 @@ class _TilteBoxCheckListState extends State<TilteBoxCheckList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,11 +24,11 @@ class _TilteBoxCheckListState extends State<TilteBoxCheckList> {
             style: AppTextDecoration.darkS18,
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Container(
-            width: 310,
-            height: 40,
+            width: 310.w,
+            height: 40.h,
             decoration: BoxDecoration(
               color: Colors.white,
             ),

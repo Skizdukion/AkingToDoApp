@@ -5,8 +5,8 @@ import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/logic/blocs/task/task_bloc.dart';
 import 'package:todo_app/logic/blocs/task/task_state.dart';
 import 'package:todo_app/logic/models/task.dart';
-
 import 'calendar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MonthPage extends StatefulWidget {
   const MonthPage({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class _MonthPageState extends State<MonthPage> {
             }
             final data = snapshot.requireData;
             return Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(20.w, 0, 20, 0),
               child: TaskCalendar(data: data),
             );
           }),

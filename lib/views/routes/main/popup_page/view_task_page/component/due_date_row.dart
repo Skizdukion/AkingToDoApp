@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
-
 import 'component_template.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DueDateRow extends StatelessWidget {
   const DueDateRow({Key? key, required this.dueDate, required this.isEvent})
@@ -13,13 +13,13 @@ class DueDateRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentTemplate(child: [
-      SizedBox(width: 10),
+      SizedBox(width: 10.w),
       Icon(
         Icons.calendar_today_outlined,
         size: 15,
       ),
       SizedBox(
-        width: 25,
+        width: 25.w,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,7 @@ class DueDateRow extends StatelessWidget {
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(
-            height: 5,
+            height: 5.h,
           ),
           Text(
             (isEvent == false)
