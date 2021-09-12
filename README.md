@@ -8,11 +8,20 @@
 - [About the author](#about)
 ## Feature <a name = "feature"></a>
 ### Authenticate
-<b>I just implement log in, but no register. You could log in the app by email like sample@gmail.com, sample1@gmail.com, sample2@gmail.com,... with password: 123456. I would create register function if you request me to do so.</b> 
+<b>I just implement log in, but no register.I would create register function if you request me to do so.</b> 
 - Onboarding Page <br />
 ![alt text](https://drive.google.com/uc?export=view&id=1XOWZHh3op7DsOcOrzaDE_Y36N6uK5m_o)<br />
 - Login Page<br />
 ![alt text](https://drive.google.com/uc?export=view&id=1vmik8jTo7CqHNSPnggkg6IH7D4VlB4cU)<br />
+
+| User        | Username            | Password |
+| ------------- |:------------------------:| -----:|
+| Long Pham     | sample@gmail.com | 123456|
+| Hieu Vo      | sample1@gmail.com     | 123456 |
+| Khang Le | sample2@gmail.com    |   123456|
+| Truong Vo | sample3@gmail.com    |   123456|
+| Nhan Phan | sample4@gmail.com    |   123456|
+| Lam Trong | sample5@gmail.com    |   123456|
 ### Project
 <b>The core idea of this app was manage, classify task to project. You couldn't create task without project, so keep in mind that the first thing you want to do in the app is initialize a project.</b>
 You could create a project, change name of it or delete it. But in order to delete it, you must clear all the task which belong to the project.
