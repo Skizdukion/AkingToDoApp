@@ -54,7 +54,7 @@ You could create a project, change name of it or delete it. But in order to dele
 - About the routing. I was create bloc and ui before i implement routing services so i just navigate screen back and forth through Navigator.push, Navigator.pop. However i could create routing services if i have more time because there are plenty of bug of bloc if i use Navigator.pushNamed instead of Navigator.push.
 ## Some bugs <a name = "bugs"></a>
 - There are some bugs about the display of project's total task numbers when you use change tag in task.
-- <s>The ui was original create in 1080:2240 with 440 dpi. I just test it could work on many different size like: 900x1600, 320 dpi. However, it still get overflowed with size like: 720x1280 with 320dpi. I could fix this if i with screen utils package later on.</s>
+- <s>The ui was original create in 1080:2240 with 440 dpi. I just test it could work on many different size like: 900x1600, 320 dpi. However, it still get overflowed with size like: 720x1280 with 320dpi. I could fix this if i with screen utils package later on.</s> Fixed
 - I will fix these bugs and build splash and onboarding screen as soon as possible
 ## Introduce videos and file apk release <a name = "videos"></a>
 [Drive Link](https://drive.google.com/drive/folders/1Zu3mayz9B3f-dgkc_Bi7XKL2y7MjtwxY?usp=sharing)
