@@ -56,7 +56,7 @@ class _ProjectSuggestionState extends State<ProjectSuggestion> {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 20,
+                  radius: 20.r,
                   backgroundColor: widget.item.color,
                 ),
                 SizedBox(

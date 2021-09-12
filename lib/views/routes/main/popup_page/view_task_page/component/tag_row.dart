@@ -36,7 +36,7 @@ class TagRow extends StatelessWidget {
               height: 5.h,
             ),
             Container(
-              height: 38.h,
+              height: 50.h,
               child: ListView(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,

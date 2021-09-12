@@ -129,7 +129,7 @@ class AddMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70.h,
+      height: 85.h,
       child: Column(
         children: [
           Center(
@@ -196,7 +196,7 @@ class AddMenu extends StatelessWidget {
           ),
         ],
       ),
-      height: 220.h,
+      height: 270.h,
       width: 260.w,
       decoration: BoxDecoration(
         color: Colors.white,

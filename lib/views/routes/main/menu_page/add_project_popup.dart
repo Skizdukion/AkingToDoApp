@@ -110,7 +110,7 @@ class _AddProjectMenuState extends State<AddProjectMenu> {
               )
             ],
           ),
-          height: 330.h,
+          height: 400.h,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),

@@ -56,7 +56,7 @@ class _AsigneeUserSuggestionState extends State<AsigneeUserSuggestion> {
           child: Container(
             child: Row(
               children: [
-                ImgLoading(imgUrl: widget.item.imgUrl, radius: 16),
+                ImgLoading(imgUrl: widget.item.imgUrl, radius: 16.r),
                 SizedBox(
                   width: 10.w,
                 ),

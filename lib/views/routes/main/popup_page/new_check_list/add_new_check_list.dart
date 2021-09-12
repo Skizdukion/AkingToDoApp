@@ -146,11 +146,11 @@ class _NewCheckListFormState extends State<NewCheckListForm> {
 
   double getBottomPadding(CheckListModel checkList) {
     if (MediaQuery.of(context).size.height -
-            450.h -
+            600.h -
             checkList.checkList.length * 50.h >
         60.h) {
       return MediaQuery.of(context).size.height -
-          450.h -
+          600.h -
           checkList.checkList.length * 50.h;
     } else
       return 20.h;

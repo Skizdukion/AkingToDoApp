@@ -25,7 +25,7 @@ class ProjectItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: Color.fromRGBO(219, 221, 239, 1),
-                radius: 13,
+                radius: 13.r,
                 child: Icon(
                   Icons.circle,
                   color: item.color,

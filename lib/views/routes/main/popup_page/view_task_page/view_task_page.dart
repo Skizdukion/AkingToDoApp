@@ -58,7 +58,7 @@ class _TaskViewPageState extends State<TaskViewPage> {
           }
           TaskModel dataTask = snapshot.data!;
           return Container(
-            height: 650.h,
+            height: 750.h,
             child: Column(
               children: [
                 Row(

@@ -56,7 +56,7 @@ class _UserInfoPanelState extends State<UserInfoPanel> {
                   Padding(
                     padding: EdgeInsets.only(top: 25.h),
                     child: ImgLoading(
-                      radius: 32.h,
+                      radius: 32.r,
                       imgUrl: widget.userUrlImg,
                     ),
                   ),

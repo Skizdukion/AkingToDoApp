@@ -62,7 +62,7 @@ class StatictisItem extends StatelessWidget {
       child: Column(
         children: [
           CircularPercentIndicator(
-            radius: 100.h,
+            radius: 100.r,
             lineWidth: 2.0,
             percent: percent,
             center: Text(

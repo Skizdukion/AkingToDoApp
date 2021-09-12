@@ -37,7 +37,7 @@ class _MemberListPickerState extends State<MemberListPicker> {
         future: memberFutureList,
         builder: (context, memberListSnapshot) {
           return Container(
-            height: 400.h,
+            height: 450.h,
             child: Column(
               children: [
                 SizedBox(
@@ -174,7 +174,7 @@ class _UserItemInAddMemberState extends State<UserItemInAddMember> {
       child: Container(
         child: Row(
           children: [
-            ImgLoading(imgUrl: widget.item.imgUrl, radius: 20),
+            ImgLoading(imgUrl: widget.item.imgUrl, radius: 20.r),
             SizedBox(
               width: 10.w,
             ),

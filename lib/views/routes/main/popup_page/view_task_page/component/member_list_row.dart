@@ -41,7 +41,7 @@ class MemberListRow extends StatelessWidget {
                 MemberAvatarItem(userId: memberList[i]),
               if (memberList.length > 9)
                 CircleAvatar(
-                  radius: 16,
+                  radius: 16.r,
                   backgroundImage: NetworkImage(
                       'https://image.shutterstock.com/image-vector/vector-ellipses-icon-triple-dots-260nw-709829182.jpg'),
                 )
@@ -81,13 +81,13 @@ class _MemberAvatarItemState extends State<MemberAvatarItem> {
               );
             }
             if (!snapshot.hasData) {
-              return const CircleAvatar(
-                radius: 16,
+              return CircleAvatar(
+                radius: 16.r,
                 backgroundColor: Colors.blue,
               );
             }
             UserModel user = snapshot.data!;
-            return ImgLoading(imgUrl: user.imgUrl, radius: 16);
+            return ImgLoading(imgUrl: user.imgUrl, radius: 16.r);
           }),
     );
   }

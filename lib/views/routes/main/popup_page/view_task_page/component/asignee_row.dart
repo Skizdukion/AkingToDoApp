@@ -14,7 +14,7 @@ class AsigneeRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ComponentTemplate(
       child: [
-        ImgLoading(imgUrl: urlImg, radius: 20),
+        ImgLoading(imgUrl: urlImg, radius: 20.r),
         SizedBox(
           width: 10.w,
         ),

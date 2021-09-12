@@ -120,6 +120,7 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
                     borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: Colors.white,
                 child: AddProjectMenu(),
+                insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
               ));
         });
   }

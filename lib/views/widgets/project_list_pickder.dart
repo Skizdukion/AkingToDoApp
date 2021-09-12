@@ -36,7 +36,7 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
         future: projectFutureList,
         builder: (context, memberListSnapshot) {
           return Container(
-            height: 400.h,
+            height: 450.h,
             child: Column(
               children: [
                 SizedBox(
@@ -53,7 +53,7 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
                       enabledBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
-                      hintText: 'User name',
+                      hintText: 'Project name',
                     ),
                     onChanged: (val) {
                       searchString.value = val;
@@ -174,7 +174,7 @@ class _ProjectItemInAddMemberState extends State<ProjectItemInAddMember> {
         child: Row(
           children: [
             CircleAvatar(
-              radius: 20,
+              radius: 20.r,
               backgroundColor: widget.item.color,
             ),
             SizedBox(

@@ -60,7 +60,7 @@ class _AddMemberColState extends State<AddMemberCol> {
                   for (var item in state.memberList)
                     Padding(
                       padding: EdgeInsets.only(right: 10.w),
-                      child: ImgLoading(imgUrl: item.imgUrl, radius: 16),
+                      child: ImgLoading(imgUrl: item.imgUrl, radius: 16.r),
                     ),
                   Container(
                     width: 32.w,

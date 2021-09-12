@@ -64,7 +64,7 @@ class _NewNoteFormState extends State<NewNoteForm> {
               top: 10.h,
               left: 16.w,
               right: 16.w,
-              bottom: MediaQuery.of(context).size.height - 500.h),
+              bottom: MediaQuery.of(context).size.height - 600.h),
           child: Consumer<RadioColorList>(builder: (context, color, child) {
             return Container(
               decoration: BoxDecoration(

@@ -73,7 +73,7 @@ class _AsigneeFieldState extends State<AsigneeField> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ImgLoading(imgUrl: state.user!.imgUrl, radius: 20),
+                        ImgLoading(imgUrl: state.user!.imgUrl, radius: 20.r),
                         SizedBox(
                           width: 10.w,
                         ),

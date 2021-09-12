@@ -18,7 +18,7 @@ class _CheckListState extends State<CheckList> {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height - 450,
+        maxHeight: MediaQuery.of(context).size.height - 500.h,
       ),
       child: Padding(
         padding: EdgeInsets.only(right: 20.w),
