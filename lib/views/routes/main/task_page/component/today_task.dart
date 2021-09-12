@@ -36,10 +36,10 @@ class _TodayPageState extends State<TodayPage> {
         .toUpperCase();
     if (authState is LoggeddUser) {
       todayTaskList =
-          (authState as LoggeddUser).firebaseDataProvider.cache.todayTaskList;
+          (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.todayTaskList;
       tommorowTaskList = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .tommorowTaskList;
     } else {
       throw ("access denied ${authState.toString()}");
@@ -51,15 +51,15 @@ class _TodayPageState extends State<TodayPage> {
   Widget build(BuildContext context) {
     return BlocListener<TaskBloc, TaskState>(
       listener: (BuildContext context, state) {
-        (authState as LoggeddUser).firebaseDataProvider.cache.todayTaskList =
+        (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.todayTaskList =
             FirebaseTaskRepository().getStreamTaskListForDay(now);
-        (authState as LoggeddUser).firebaseDataProvider.cache.tommorowTaskList =
+        (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.tommorowTaskList =
             FirebaseTaskRepository().getStreamTaskListForDay(tommorrow);
         todayTaskList =
-            (authState as LoggeddUser).firebaseDataProvider.cache.todayTaskList;
+            (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.todayTaskList;
         tommorowTaskList = (authState as LoggeddUser)
             .firebaseDataProvider
-            .cache
+            .streamFromFirebase
             .tommorowTaskList;
       },
       child: Padding(

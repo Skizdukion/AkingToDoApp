@@ -48,9 +48,10 @@ class _ProjectPageBodyState extends State<ProjectPageBody> {
   @override
   void initState() {
     authState = BlocProvider.of<AuthBloc>(context).state;
+    // print(authState.toString());
     if (authState is LoggeddUser) {
       projectList =
-          (authState as LoggeddUser).firebaseDataProvider.cache.allProjectList;
+          (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.allProjectList;
     } else {
       throw ("access denied ${authState.toString()}");
     }

@@ -26,17 +26,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthLoading();
       if (event.email.isEmpty) {
         yield VerifyFailed(errorString: ErrorAuthString.emptyEmailAddress);
-        yield AnonymousUser();
       } else if (!event.email.isValidEmail()) {
         yield VerifyFailed(errorString: ErrorAuthString.unvalidEmailAddress);
-        yield AnonymousUser();
       } else if (event.password.isEmpty) {
         yield VerifyFailed(errorString: ErrorAuthString.emptyPassword);
-        yield AnonymousUser();
       } else if (event.password.length < 6) {
         yield VerifyFailed(
             errorString: ErrorAuthString.notEnoughPasswordLength);
-        yield AnonymousUser();
       } else {
         try {
           UserCredential userCredential =
@@ -50,24 +46,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 await FirebaseUserRepository().getCurrentUserEmail();
             yield LoggeddUser(firebaseDataProvider: new FirebaseDataProvider());
           }
+          else{
+            VerifyFailed(errorString: 'Anonymous bugs');
+          }
         } on FirebaseAuthException catch (e) {
           yield VerifyFailed(errorString: e.code);
-          yield AnonymousUser();
         } on Exception catch (e) {
           yield VerifyFailed(errorString: e.toString());
-          yield AnonymousUser();
         }
       }
     }
-    // if (event is Register) {
-    //   yield AuthLoading();
-    //   var user = await _fireBaseAuthRepository.registerWithEmail(
-    //       event.email, event.password);
-    //   if (user != null) {
-    //     yield LoggeddUser(user: user);
-    //   } else
-    //     yield AnonymousUser();
-    // }
     if (event is Logout) {
       _fireBaseAuthRepository.signOut();
       FirebaseDataProvider.uid = '';

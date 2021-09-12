@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/global/decoration/button_decoration.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
-import 'package:todo_app/logic/blocs/auth/auth_bloc.dart';
-import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/logic/models/user.dart';
 import 'package:todo_app/logic/repositories/user_repository.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
@@ -24,20 +21,13 @@ class _MemberListPickerState extends State<MemberListPicker> {
   late Stream<List<UserModel>> userStreamList;
   late Future<List<UserModel>> memberFutureList;
   TextEditingController _textEditingController = TextEditingController();
-  late AuthState authState;
   List<UserModel> memberList = [];
 
   @override
   void initState() {
     memberFutureList = FirebaseUserRepository()
         .convertListStringToListUserModel(widget.memberList);
-    authState = BlocProvider.of<AuthBloc>(context).state;
-    if (authState is LoggeddUser) {
-      userStreamList =
-          (authState as LoggeddUser).firebaseDataProvider.cache.allUserList;
-    } else {
-      throw ("access denied ${authState.toString()}");
-    }
+    userStreamList = FirebaseUserRepository().getStreamUserList();
     super.initState();
   }
 

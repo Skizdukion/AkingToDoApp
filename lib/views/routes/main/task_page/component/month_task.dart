@@ -24,9 +24,10 @@ class _MonthPageState extends State<MonthPage> {
   void initState() {
     taskBloc = BlocProvider.of<TaskBloc>(context);
     authState = BlocProvider.of<AuthBloc>(context).state;
+    // print(authState.toString());
     if (authState is LoggeddUser) {
       allTaskList =
-          (authState as LoggeddUser).firebaseDataProvider.cache.allTaskList;
+          (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.allTaskList;
     } else {
       throw ("access denied ${authState.toString()}");
     }
@@ -37,10 +38,10 @@ class _MonthPageState extends State<MonthPage> {
   Widget build(BuildContext context) {
     return BlocListener<TaskBloc, TaskState>(
       listener: (BuildContext context, state) {
-        (authState as LoggeddUser).firebaseDataProvider.cache.allTaskList =
+        (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.allTaskList =
             taskBloc.state.firebaseTaskRepository.getStreamAllTask();
         allTaskList =
-            (authState as LoggeddUser).firebaseDataProvider.cache.allTaskList;
+            (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.allTaskList;
       },
       child: StreamBuilder<List<TaskModel>>(
           stream: allTaskList,

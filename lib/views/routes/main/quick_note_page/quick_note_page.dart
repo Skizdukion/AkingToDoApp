@@ -43,12 +43,13 @@ class _QuickNoteBodyState extends State<QuickNoteBody> {
   late AuthState authState;
 
   @override
-  void initState() {
+  void initState() {    
     authState = BlocProvider.of<AuthBloc>(context).state;
+    // print(authState.toString());
     if (authState is LoggeddUser) {
       quickNoteList = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .allQuickNoteList;
     } else {
       throw ("access denied ${authState.toString()}");

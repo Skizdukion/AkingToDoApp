@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/global/decoration/button_decoration.dart';
 import 'package:todo_app/global/decoration/text_decoration.dart';
-import 'package:todo_app/logic/blocs/auth/auth_bloc.dart';
-import 'package:todo_app/logic/blocs/auth/auth_state.dart';
 import 'package:todo_app/logic/models/project.dart';
 import 'package:todo_app/logic/repositories/project_repository.dart';
 import 'package:todo_app/views/widgets/stretch_button.dart';
@@ -22,20 +19,13 @@ class _ProjectListPickerState extends State<ProjectListPicker> {
   late Stream<List<ProjectModel>> projectStreamList;
   late Future<List<ProjectModel>> projectFutureList;
   TextEditingController _textEditingController = TextEditingController();
-  late AuthState authState;
   List<ProjectModel> projectList = [];
 
   @override
   void initState() {
     projectFutureList = FirebaseProjectRepository()
         .convertListStringToListProjectModel(widget.projectList);
-    authState = BlocProvider.of<AuthBloc>(context).state;
-    if (authState is LoggeddUser) {
-      projectStreamList =
-          (authState as LoggeddUser).firebaseDataProvider.cache.allProjectList;
-    } else {
-      throw ("access denied ${authState.toString()}");
-    }
+    projectStreamList = FirebaseProjectRepository().getStreamProjectList();
     super.initState();
   }
 

@@ -58,31 +58,32 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   void initState() {
     authState = BlocProvider.of<AuthBloc>(context).state;
+    // print(authState.toString());
     if (authState is LoggeddUser) {
-      user = (authState as LoggeddUser).firebaseDataProvider.cache.userLogged;
+      user = (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.userLogged;
       totalEventCount =
-          (authState as LoggeddUser).firebaseDataProvider.cache.totalEventCount;
+          (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.totalEventCount;
       totalEventDoneCount = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .totalEventDoneCount;
       totalNoDueDateTaskCount = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .totalNoDueDateTaskCount;
       totalNoDueDateTaskDoneCount = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .totalNoDueDateTaskDoneCount;
       totalTaskCount =
-          (authState as LoggeddUser).firebaseDataProvider.cache.totalTaskCount;
+          (authState as LoggeddUser).firebaseDataProvider.streamFromFirebase.totalTaskCount;
       totalTaskDoneCount = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .totalTaskDoneCount;
       totalQuickNoteCount = (authState as LoggeddUser)
           .firebaseDataProvider
-          .cache
+          .streamFromFirebase
           .totalQuickNoteCount;
     } else {
       throw ("access denied ${authState.toString()}");

@@ -140,4 +140,14 @@ class FirebaseProjectRepository {
     }
     return returnList;
   }
+
+  Future changeProjectTitle(String title, String projectId) {
+    return FirebaseFirestore.instance
+        .collection('project')
+        .doc(projectId)
+        .update({
+          'title': title,
+        });
+  }
+
 }
