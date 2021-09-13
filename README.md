@@ -8,11 +8,20 @@
 - [About the author](#about)
 ## Feature <a name = "feature"></a>
 ### Authenticate
-<b>I just implement log in, but no register. You could log in the app by email like sample@gmail.com, sample1@gmail.com, sample2@gmail.com,... with password: 123456. I would create register function if you request me to do so.</b> 
+<b>I just implement log in, but no register.I would create register function if you request me to do so.</b> 
 - Onboarding Page <br />
 ![alt text](https://drive.google.com/uc?export=view&id=1XOWZHh3op7DsOcOrzaDE_Y36N6uK5m_o)<br />
 - Login Page<br />
 ![alt text](https://drive.google.com/uc?export=view&id=1vmik8jTo7CqHNSPnggkg6IH7D4VlB4cU)<br />
+
+| User        | Username            | Password |
+| ------------- |:------------------------:| -----:|
+| Long Pham     | sample@gmail.com | 123456|
+| Hieu Vo      | sample1@gmail.com     | 123456 |
+| Khang Le | sample2@gmail.com    |   123456|
+| Truong Vo | sample3@gmail.com    |   123456|
+| Nhan Phan | sample4@gmail.com    |   123456|
+| Lam Trong | sample5@gmail.com    |   123456|
 ### Project
 <b>The core idea of this app was manage, classify task to project. You couldn't create task without project, so keep in mind that the first thing you want to do in the app is initialize a project.</b>
 You could create a project, change name of it or delete it. But in order to delete it, you must clear all the task which belong to the project.
@@ -54,7 +63,7 @@ You could create a project, change name of it or delete it. But in order to dele
 - About the routing. I was create bloc and ui before i implement routing services so i just navigate screen back and forth through Navigator.push, Navigator.pop. However i could create routing services if i have more time because there are plenty of bug of bloc if i use Navigator.pushNamed instead of Navigator.push.
 ## Some bugs <a name = "bugs"></a>
 - There are some bugs about the display of project's total task numbers when you use change tag in task.
-- <s>The ui was original create in 1080:2240 with 440 dpi. I just test it could work on many different size like: 900x1600, 320 dpi. However, it still get overflowed with size like: 720x1280 with 320dpi. I could fix this if i with screen utils package later on.</s>
+- <s>The ui was original create in 1080:2240 with 440 dpi. I just test it could work on many different size like: 900x1600, 320 dpi. However, it still get overflowed with size like: 720x1280 with 320dpi. I could fix this if i with screen utils package later on.</s> Fixed
 - I will fix these bugs and build splash and onboarding screen as soon as possible
 ## Introduce videos and file apk release <a name = "videos"></a>
 [Drive Link](https://drive.google.com/drive/folders/1Zu3mayz9B3f-dgkc_Bi7XKL2y7MjtwxY?usp=sharing)
