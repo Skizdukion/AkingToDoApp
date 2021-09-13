@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/logic/blocs/auth/auth_bloc.dart';
 import 'package:todo_app/logic/blocs/auth/auth_state.dart';
-import 'package:todo_app/views/routes/introduction/introduction_page.dart';
+import 'package:todo_app/views/routes/walkthrough/introduction_page.dart';
 import 'main/main_page.dart';
 
 class Wrapper extends StatefulWidget {
